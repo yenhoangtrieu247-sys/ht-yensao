@@ -117,6 +117,7 @@ src="https://www.facebook.com/tr?id=1032364466110468&ev=PageView&noscript=1"
   /* Spacing */
   --page-pad:clamp(18px,5vw,24px);
   --section-y:clamp(56px,13vw,76px);
+  --section-y-tight:clamp(17px,4vw,23px);
 
   /* Shadows — chỉ sticky bar và modal */
   --ht-sh-sticky:0 -6px 24px rgba(22,24,35,.08);
@@ -218,14 +219,14 @@ a{color:inherit;text-decoration:none;}
 /* Hai section trắng liền kề (không có tint phân tách) cộng dồn padding 2 lần
    thành khoảng trắng quá lớn, mất nhịp so với chỗ có tint — giảm padding nối
    tiếp để khoảng cách đều nhau trực quan trên toàn trang. */
-.ht-sec + .ht-sec{padding-top:0;margin-top:calc(var(--section-y) * 0.3);}
+.ht-sec + .ht-sec{padding-top:0;margin-top:var(--section-y-tight);}
 .ht-sec-tint{padding:var(--section-y) var(--page-pad);margin:0;border-radius:0;background:var(--ht-bg-soft);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-a{background:var(--ht-accent-soft);border-top:1px solid var(--ht-accent-border);border-bottom:1px solid var(--ht-accent-border);}
 .ht-tint-b{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
 .ht-tint-c{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
 .ht-eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ht-accent);margin-bottom:9px;}
 .ht-eyebrow::before,.ht-eyebrow::after{content:'';width:20px;height:1px;background:var(--ht-accent-border);}
-.ht-title{font-family:var(--font-body);font-size:26px;font-weight:700;color:var(--ht-ink);text-align:center;line-height:1.3;margin-bottom:10px;}
+.ht-title{font-family:var(--font-display);font-size:27px;font-weight:600;color:var(--ht-ink);text-align:center;line-height:1.3;margin-bottom:10px;}
 .ht-sub{font-size:16px;color:var(--ht-secondary);text-align:center;line-height:1.6;margin-bottom:24px;max-width:380px;margin-left:auto;margin-right:auto;}
 
 /* Trust strip (dải bằng chứng nhanh) */
@@ -253,7 +254,7 @@ a{color:inherit;text-decoration:none;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
 .ht-pcard-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
 .ht-pcard-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tier-color,var(--ht-accent));margin-right:2px;}
-.ht-pcard-name{font-family:var(--font-body);font-size:22px;font-weight:700;color:var(--ht-ink);}
+.ht-pcard-name{font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--ht-ink);}
 .ht-pcard-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .ht-pcard-chip{padding:5px 12px;border-radius:var(--ht-r-xs);background:var(--ht-bg-soft);border:1px solid var(--ht-border);font-size:14.5px;font-weight:600;color:var(--ht-text);}
 .ht-pcard-price{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
@@ -270,7 +271,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Flavor guide cards */
 .ht-fguide{display:flex;flex-direction:column;gap:11px;}
-.ht-fgcard{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;border-left:3px solid var(--ht-accent-border);}
+.ht-fgcard{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;}
 .ht-fgcard-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;}
 .ht-fgcard-name{font-size:18px;font-weight:700;color:var(--ht-ink);}
 .ht-fgcard-sub{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ht-accent);white-space:nowrap;}
@@ -285,7 +286,7 @@ a{color:inherit;text-decoration:none;}
 /* Countdown tư vấn trong ngày */
 .ht-countdown{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;padding:12px var(--page-pad);background:var(--ht-bg);}
 .ht-countdown-t{font-size:14.5px;font-weight:600;color:var(--ht-secondary);}
-.ht-countdown-clock{font-weight:700;font-size:15px;color:var(--ht-accent);background:var(--ht-accent-soft);border:1px solid var(--ht-accent-border);padding:4px 10px;border-radius:var(--ht-r-xs);min-width:64px;text-align:center;}
+.ht-countdown-clock{font-weight:700;font-size:15px;color:var(--ht-accent);background:var(--ht-accent-soft);border:1px solid var(--ht-accent-border);padding:4px 10px;border-radius:var(--ht-r-sm);min-width:64px;text-align:center;}
 
 /* Toast gợi ý xem feedback thật */
 .ht-toast{position:fixed;left:50%;bottom:78px;transform:translate(-50%,20px);width:calc(100% - 32px);max-width:calc(var(--ht-container) - 32px);z-index:70;background:#fff;border-radius:var(--ht-r-md);border:1px solid var(--ht-border-strong);box-shadow:var(--ht-sh-modal);padding:13px 14px;display:flex;align-items:center;gap:11px;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;}
@@ -297,15 +298,6 @@ a{color:inherit;text-decoration:none;}
 .ht-toast-close{width:26px;height:26px;border-radius:50%;background:var(--ht-bg-soft);color:var(--ht-muted);font-size:14px;flex-shrink:0;}
 
 /* ---- Popup selectors (dùng chung) ---- */
-.ht-step-label{font-size:16.5px;font-weight:700;color:var(--ht-ink);margin:18px 0 9px;}
-.ht-offer-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
-.ht-offer-chip{flex:1 1 30%;padding:12px 6px;border-radius:var(--ht-r-sm);background:#fff;border:1px solid var(--ht-border-strong);text-align:center;font-size:14.5px;color:var(--ht-text);min-height:44px;}
-.ht-offer-chip b{display:block;font-size:16.5px;color:var(--ht-ink);font-weight:700;}
-.ht-offer-chip small{display:block;font-size:12.5px;color:var(--ht-muted);margin-top:2px;}
-.ht-offer-chip.active{border:2px solid var(--ht-accent);background:var(--ht-accent-soft);}
-.ht-bonus-note{margin-top:10px;padding:12px 14px;background:var(--ht-success-soft);border:1px solid var(--ht-success);border-radius:var(--ht-r-sm);font-size:14.5px;color:var(--ht-success);line-height:1.55;}
-.ht-bonus-note b{display:block;font-size:16px;color:var(--ht-success);margin-bottom:2px;}
-
 .ht-flavor-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
 .ht-flavor-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-radius:var(--ht-r-sm);box-shadow:var(--ht-sh-card-sm);}
 .ht-flavor-thumb{width:52px;height:52px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#fff;border:1px solid var(--ht-border);}
@@ -316,8 +308,6 @@ a{color:inherit;text-decoration:none;}
 .ht-stepper button:active{transform:scale(.92);background:var(--ht-accent-soft);border-color:var(--ht-accent);}
 .ht-stepper span{min-width:20px;text-align:center;font-weight:700;font-size:16px;color:var(--ht-ink);}
 .ht-flavor-fill{font-size:13px;color:var(--ht-accent);font-weight:700;padding:6px 8px;border-radius:6px;background:var(--ht-accent-soft);min-height:32px;display:flex;align-items:center;}
-.ht-manual-tools{display:flex;justify-content:flex-end;margin-bottom:8px;}
-.ht-manual-tools button{font-size:14px;font-weight:700;color:var(--ht-accent);text-decoration:underline;padding:6px;min-height:32px;}
 
 .ht-chip-select-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .ht-chip-select{padding:11px 15px;border-radius:var(--ht-r-sm);background:#fff;border:1px solid var(--ht-border-strong);font-size:15px;font-weight:600;color:var(--ht-text);min-height:44px;}
@@ -327,29 +317,9 @@ a{color:inherit;text-decoration:none;}
 .ht-breakdown-status.ok{background:var(--ht-success-soft);color:var(--ht-success);border:1px solid var(--ht-success);}
 .ht-breakdown-status.warn{background:var(--ht-danger-soft);color:var(--ht-danger);border:1px solid var(--ht-danger);}
 
-.ht-add-line-btn{width:100%;padding:15px;border-radius:var(--ht-r-sm);background:var(--ht-accent);color:var(--ht-on-accent);font-weight:600;font-size:17px;opacity:1;transition:opacity .15s,background .15s;min-height:52px;}
-.ht-add-line-btn:disabled{background:var(--ht-disabled-bg);color:var(--ht-disabled-text);cursor:not-allowed;}
-
-.ht-summary-card{margin-bottom:14px;padding:14px 16px;background:#fff;border-radius:var(--ht-r-sm);box-shadow:var(--ht-sh-card-sm);}
-.ht-summary-line1{font-size:16.5px;font-weight:700;color:var(--ht-ink);}
-.ht-summary-line2{font-size:14.5px;color:var(--ht-secondary);margin-top:4px;line-height:1.5;}
-.ht-summary-line3{font-size:18px;font-weight:700;color:var(--ht-accent);margin-top:6px;}
-
-.ht-cart-box{margin-top:18px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;}
-.ht-cart-empty{text-align:center;font-size:15px;color:var(--ht-muted);padding:10px 0;}
-.ht-cart-line{padding:12px 0;border-bottom:1px solid var(--ht-border);}
-.ht-cart-line:last-of-type{border-bottom:none;}
-.ht-cart-line-top{display:flex;align-items:center;gap:10px;}
-.ht-cart-line-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;background:var(--ht-accent);}
-.ht-cart-line-info{flex:1;min-width:0;}
-.ht-cart-line-title{font-size:15px;font-weight:700;color:var(--ht-ink);}
-.ht-cart-line-detail{font-size:13.5px;color:var(--ht-secondary);margin-top:2px;line-height:1.5;}
-.ht-cart-line-price{font-size:16.5px;font-weight:700;color:var(--ht-accent);white-space:nowrap;}
-.ht-cart-line-remove{width:26px;height:26px;border-radius:50%;background:var(--ht-bg-soft);color:var(--ht-muted);font-size:16px;flex-shrink:0;}
 .ht-cart-total-row{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;margin-top:6px;border-top:1px dashed var(--ht-border-strong);}
 .ht-cart-total-label{font-size:15.5px;color:var(--ht-secondary);}
 .ht-cart-total-val{font-size:22px;font-weight:700;color:var(--ht-accent);}
-.ht-cart-actions{display:flex;gap:10px;margin-top:14px;}
 
 /* Steps (cách dùng) */
 .ht-steps{display:flex;flex-direction:column;gap:9px;}
@@ -364,7 +334,7 @@ a{color:inherit;text-decoration:none;}
 .ht-origin-card{display:flex;gap:13px;padding:16px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);}
 .ht-origin-ic{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--ht-mint-soft);}
 .ht-origin-card:nth-child(odd) .ht-origin-ic{background:var(--ht-accent-soft);}
-.ht-origin-ic svg{width:23px;height:23px;stroke:var(--ht-mint);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.ht-origin-ic svg{width:23px;height:23px;stroke:var(--ht-mint);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 .ht-origin-card:nth-child(odd) .ht-origin-ic svg{stroke:var(--ht-accent);}
 .ht-origin-t{font-size:17.5px;font-weight:700;color:var(--ht-ink);margin-bottom:4px;}
 .ht-origin-d{font-size:15px;color:var(--ht-secondary);line-height:1.55;}
@@ -376,7 +346,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Cert gallery — ISO nổi bật + danh mục */
 .ht-cert-hero{margin:16px 0 12px;}
-.ht-cert-hero img{width:220px;margin:0 auto;display:block;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);cursor:zoom-in;background:#fff;}
+.ht-cert-hero img{width:220px;aspect-ratio:0.707;object-fit:cover;margin:0 auto;display:block;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);cursor:zoom-in;background:#fff;}
 .ht-cert-hero-cap{font-size:14.5px;color:var(--ht-secondary);line-height:1.5;margin-top:10px;text-align:center;}
 .ht-cert-hero-cap b{color:var(--ht-ink);}
 .ht-cert-list{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);overflow:hidden;margin-top:12px;}
@@ -395,7 +365,7 @@ a{color:inherit;text-decoration:none;}
 
 /* CTA block */
 .ht-ctablock{text-align:center;padding:4px 0;}
-.ht-ctablock-t{font-family:var(--font-body);font-size:21px;font-weight:700;color:var(--ht-ink);margin-bottom:7px;line-height:1.38;}
+.ht-ctablock-t{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--ht-ink);margin-bottom:7px;line-height:1.38;}
 .ht-ctablock-s{font-size:15px;color:var(--ht-secondary);margin-bottom:16px;}
 .ht-ctablock-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 34px;background:var(--ht-accent);color:var(--ht-on-accent);font-size:16.5px;font-weight:600;border-radius:var(--ht-r-sm);min-height:52px;}
 .ht-ctablock-btn:active{background:var(--ht-accent-active);}
@@ -431,7 +401,7 @@ a{color:inherit;text-decoration:none;}
 .ht-sticky-order{flex:1;padding:14px 12px;background:var(--ht-accent);color:var(--ht-on-accent);font-size:16.5px;font-weight:600;border-radius:var(--ht-r-sm);box-shadow:0 6px 16px rgba(157,31,52,.3);min-height:52px;}
 .ht-sticky-order:active{background:var(--ht-accent-active);}
 .ht-sticky-ic{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:#fff;border:1px solid var(--ht-border-strong);display:flex;align-items:center;justify-content:center;}
-.ht-sticky-ic svg{width:21px;height:21px;stroke:var(--ht-ink);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.ht-sticky-ic svg{width:21px;height:21px;stroke:var(--ht-ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
 /* Buy popup / bottom sheet */
 .ht-popup-overlay{position:fixed;inset:0;background:var(--ht-overlay);z-index:100;display:none;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s ease;}
@@ -588,9 +558,9 @@ a{color:inherit;text-decoration:none;}
     <h2 class="ht-title">Dùng Ngay, Tiện Lợi Mỗi Ngày</h2>
     <p class="ht-sub">Không cần chưng lại — mở nắp là dùng được ngay.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:18px;">
-      <img class="ht-zoom" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-lachu.jpg" alt="Lắc nhẹ hũ yến trước khi dùng">
-      <img class="ht-zoom" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-monap.jpg" alt="Bảo quản lạnh yến hũ Hoàng Triều">
-      <img class="ht-zoom" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-rotly.jpg" alt="Dùng trực tiếp yến hũ Hoàng Triều">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-lachu.jpg" alt="Lắc nhẹ hũ yến trước khi dùng">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-monap.jpg" alt="Bảo quản lạnh yến hũ Hoàng Triều">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-rotly.jpg" alt="Dùng trực tiếp yến hũ Hoàng Triều">
     </div>
     <div class="ht-steps">
       <div class="ht-step"><div class="ht-step-num">1</div><div><div class="ht-step-t">Lắc nhẹ hũ trước khi dùng</div></div></div>
@@ -638,7 +608,7 @@ a{color:inherit;text-decoration:none;}
       </div>
     </div>
     <div class="ht-cert-hero">
-      <img class="ht-zoom" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm">
+      <img class="ht-zoom" loading="lazy" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm">
       <div class="ht-cert-hero-cap"><b>ISO 22000:2018</b> — Chứng nhận hệ thống quản lý an toàn thực phẩm cho quy trình sơ chế, chế biến.</div>
     </div>
     <div class="ht-cert-list">
@@ -662,11 +632,11 @@ a{color:inherit;text-decoration:none;}
     <h2 class="ht-title">Nguyên Liệu Tự Nhiên,<br>Tuyển Chọn Kỹ Càng</h2>
     <p class="ht-sub">Mỗi hương vị Hoàng Triều bắt đầu từ nguyên liệu thật, không hương liệu giả.</p>
     <div class="ht-feed-grid">
-      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" src="assets/images/nguyenlieu-yensoi.jpg" alt="Sợi yến trắng nguyên chất"></div>
-      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" src="assets/images/nguyenlieu-duongphen.jpg" alt="Đường phèn tự nhiên"></div>
-      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" src="assets/images/nguyenlieu-nhansam.jpg" alt="Nhân sâm củ tươi"></div>
-      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" src="assets/images/nguyenlieu-dongtrunghathao.jpg" alt="Đông trùng hạ thảo"></div>
-      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" src="assets/images/nguyenlieu-taodokytu.jpg" alt="Táo đỏ và kỷ tử"></div>
+      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" loading="lazy" src="assets/images/nguyenlieu-yensoi.jpg" alt="Sợi yến trắng nguyên chất"></div>
+      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" loading="lazy" src="assets/images/nguyenlieu-duongphen.jpg" alt="Đường phèn tự nhiên"></div>
+      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" loading="lazy" src="assets/images/nguyenlieu-nhansam.jpg" alt="Nhân sâm củ tươi"></div>
+      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" loading="lazy" src="assets/images/nguyenlieu-dongtrunghathao.jpg" alt="Đông trùng hạ thảo"></div>
+      <div class="ht-feed-card" style="flex:0 0 58%;aspect-ratio:1/1;"><img class="ht-zoom" loading="lazy" src="assets/images/nguyenlieu-taodokytu.jpg" alt="Táo đỏ và kỷ tử"></div>
     </div>
     <p class="ht-feed-hint">← Vuốt để xem nguyên liệu →</p>
   </div>
@@ -685,10 +655,10 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-eyebrow">Khách hàng nói gì</div>
     <h2 class="ht-title">Khách Hàng Đã Chọn Hoàng Triều<br>Để Gửi Lời Chăm Sóc</h2>
     <div class="ht-feed-grid">
-      <div class="ht-feed-card"><img class="ht-zoom" src="assets/images/feedback-01.jpeg" alt="Khách hàng phản hồi thật về yến chưng Hoàng Triều qua tin nhắn"></div>
-      <div class="ht-feed-card"><img class="ht-zoom" src="assets/images/feedback-02.jpeg" alt="Khách hàng đặt mua yến chưng Hoàng Triều qua tin nhắn"></div>
-      <div class="ht-feed-card"><img class="ht-zoom" src="assets/images/feedback-03.jpeg" alt="Khách hàng nhận quà yến chưng Hoàng Triều tại cửa hàng"></div>
-      <div class="ht-feed-card"><img class="ht-zoom" src="assets/images/feedback-04.jpeg" alt="Xác nhận đặt hàng và giao dịch yến chưng Hoàng Triều"></div>
+      <div class="ht-feed-card"><img class="ht-zoom" loading="lazy" src="assets/images/feedback-01.jpeg" alt="Khách hàng phản hồi thật về yến chưng Hoàng Triều qua tin nhắn"></div>
+      <div class="ht-feed-card"><img class="ht-zoom" loading="lazy" src="assets/images/feedback-02.jpeg" alt="Khách hàng đặt mua yến chưng Hoàng Triều qua tin nhắn"></div>
+      <div class="ht-feed-card"><img class="ht-zoom" loading="lazy" src="assets/images/feedback-03.jpeg" alt="Khách hàng nhận quà yến chưng Hoàng Triều tại cửa hàng"></div>
+      <div class="ht-feed-card"><img class="ht-zoom" loading="lazy" src="assets/images/feedback-04.jpeg" alt="Xác nhận đặt hàng và giao dịch yến chưng Hoàng Triều"></div>
     </div>
     <p class="ht-feed-hint">← Vuốt để xem thêm →</p>
   </div>
