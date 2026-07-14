@@ -19,7 +19,7 @@
   file phần "PLACEHOLDER NHÃN/CÔNG BỐ — DEV ONLY".
   ============================================================
 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yến Hũ Hoàng Triều — Saving · Plus · Cao Cấp | Quà Tặng Sức Khỏe</title>
 <meta name="description" content="Yến chưng sẵn Hoàng Triều — 3 dòng Saving, Plus, Cao Cấp với hàm lượng yến tươi minh bạch 2g / 6g / 10,2g mỗi hũ. Đa dạng hương vị, đặt hàng theo hũ lẻ hoặc combo tiết kiệm.">
 
@@ -961,7 +961,7 @@ a{color:inherit;text-decoration:none;}
     wrap.innerHTML = TIER_ORDER.map(function(key){
       var t = TIERS[key];
       var singleUnit = t.offers[0]; // hũ lẻ, dùng làm giá gốc tham chiếu
-      var bestOffer = t.offers[t.offers.length - 1]; // combo lớn nhất = giá/hũ tốt nhất
+      var bestOffer = t.offers[3]; // combo 10+1 — mức phổ biến, không lấy combo 30 (bulk hiếm gặp) làm mốc "tiết kiệm"
       var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
       var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
       var minCombo = t.offers[1];
