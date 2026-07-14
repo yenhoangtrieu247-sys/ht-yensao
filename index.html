@@ -262,8 +262,8 @@ a{color:inherit;text-decoration:none;}
 
 .ht-flavor-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
 .ht-flavor-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
-.ht-flavor-thumb{width:40px;height:40px;border-radius:9px;overflow:hidden;flex-shrink:0;background:var(--ht-line-soft);}
-.ht-flavor-thumb img{width:100%;height:100%;object-fit:cover;}
+.ht-flavor-thumb{width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#fff;border:1px solid var(--ht-line-soft);}
+.ht-flavor-thumb img{width:100%;height:100%;object-fit:contain;cursor:zoom-in;}
 .ht-flavor-name{flex:1;font-size:16px;font-weight:600;color:var(--ht-ink);}
 .ht-stepper{display:flex;align-items:center;gap:8px;}
 .ht-stepper button{width:30px;height:30px;border-radius:9px;background:var(--ht-line-soft);color:var(--ht-brown);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;min-height:30px;}
@@ -924,7 +924,7 @@ a{color:inherit;text-decoration:none;}
       ],
       shipFeeSingle:19000,
       flavorKeys:['duongphen','tamvi','nhansam','duongkieng','kids'],
-      flavorImg:{duongkieng:'jar-saving-duongkieng.svg', tamvi:'jar-saving-tamvi.svg', nhansam:'jar-saving-nhansam.svg', duongphen:'jar-saving-duongphen.svg', kids:'jar-saving-kids.svg'}
+      flavorImg:{duongkieng:'jar-saving-duongkieng.jpg', tamvi:'jar-saving-tamvi.jpg', nhansam:'jar-saving-nhansam.jpg', duongphen:'jar-saving-duongphen.jpg', kids:'jar-saving-kids.jpg'}
     },
     plus: {
       key:'plus', label:'Plus', gram:'6g', sub:'6g yến/hũ', color:'var(--ht-plus)', colorHex:'#B6383F',
@@ -938,7 +938,7 @@ a{color:inherit;text-decoration:none;}
       ],
       shipFeeSingle:19000,
       flavorKeys:['duongphen','tamvi','nhansam','duongkieng','kids'],
-      flavorImg:{duongkieng:'jar-plus-duongkieng.svg', tamvi:'jar-plus-tamvi.svg', nhansam:'jar-plus-nhansam.svg', duongphen:'jar-plus-duongphen.svg', kids:'jar-plus-kids.svg'}
+      flavorImg:{duongkieng:'jar-plus-duongkieng.jpg', tamvi:'jar-plus-tamvi.jpg', nhansam:'jar-plus-nhansam.jpg', duongphen:'jar-plus-duongphen.jpg', kids:'jar-plus-kids.jpg'}
     },
     caocap: {
       key:'caocap', label:'Cao Cấp', gram:'10,2g', sub:'10,2g yến/hũ', color:'var(--ht-caocap)', colorHex:'#1F7A5A',
@@ -952,7 +952,7 @@ a{color:inherit;text-decoration:none;}
       ],
       shipFeeSingle:0,
       flavorKeys:['duongkieng','duongphen','nhansam'],
-      flavorImg:{duongkieng:'jar-caocap-duongkieng.svg', duongphen:'jar-caocap-duongphen.svg', nhansam:'jar-caocap-nhansam.svg'}
+      flavorImg:{duongkieng:'jar-caocap-duongkieng.jpg', duongphen:'jar-caocap-duongphen.jpg', nhansam:'jar-caocap-nhansam.jpg'}
     }
   };
   var TIER_ORDER = ['saving','plus','caocap'];
@@ -1175,7 +1175,7 @@ a{color:inherit;text-decoration:none;}
       var img = tier.flavorImg[k];
       var qty = popupState.flavorQty[k] || 0;
       return '<div class="ht-flavor-row">' +
-        '<div class="ht-flavor-thumb"><img src="assets/images/' + img + '" alt="' + f.label + '"></div>' +
+        '<div class="ht-flavor-thumb"><img class="ht-zoom" src="assets/images/' + img + '" alt="Hũ yến chưng vị ' + f.label + '"></div>' +
         '<span class="ht-flavor-name">' + f.label + '</span>' +
         '<div class="ht-stepper">' +
           '<button type="button" data-fminus="' + k + '" aria-label="Giảm ' + f.label + '">−</button>' +
