@@ -1,9 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
-  <rect width="100%" height="100%" fill="#F7EFDD"/>
-  <rect x="14" y="14" width="772" height="772" fill="none" stroke="#D8BE87" stroke-width="3" stroke-dasharray="10 8" rx="18"/>
-  <circle cx="400" cy="310" r="34" fill="none" stroke="#C9971F" stroke-width="4"/>
-  <text x="50%" y="318" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#C9971F">🖼</text>
-  <text x="50%" y="386" text-anchor="middle" font-family="'Be Vietnam Pro',Arial,sans-serif" font-size="28" font-weight="700" fill="#8a6d3b">Đóng gói</text>
-  <text x="50%" y="430" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#b79a63">Hộp quà hoàn chỉnh</text>
-  <text x="50%" y="770" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#c8b58a">PLACEHOLDER — thay ảnh thật sau</text>
+  <defs>
+    <linearGradient id="gdonggoihopqua1bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF0D2"/>
+      <stop offset="45%" stop-color="#F6E0AE"/>
+      <stop offset="100%" stop-color="#E9C87E"/>
+    </linearGradient>
+    <radialGradient id="gdonggoihopqua1glow" cx="50%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gdonggoihopqua1ic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DE9C13"/>
+      <stop offset="100%" stop-color="#9A6B14"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#gdonggoihopqua1bg)"/>
+  <rect width="100%" height="100%" fill="url(#gdonggoihopqua1glow)"/>
+  <circle cx="64" cy="80" r="224.00000000000003" fill="#C23B3B" opacity="0.08"/>
+  <circle cx="760" cy="736" r="256" fill="#1F8A63" opacity="0.10"/>
+  <rect x="16" y="16" width="768" height="768" fill="none" stroke="#C9971F" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round" rx="20" opacity="0.6"/>
+  <circle cx="400" cy="340" r="38" fill="url(#gdonggoihopqua1ic)"/>
+  <text x="50%" y="352" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#fff">🖼</text>
+  <circle cx="378" cy="730" r="7" fill="#E0A928"/>
+  <circle cx="400" cy="730" r="7" fill="#C23B3B"/>
+  <circle cx="422" cy="730" r="7" fill="#1F8A63"/>
+  <text x="50%" y="416" text-anchor="middle" font-family="'Be Vietnam Pro',Arial,sans-serif" font-size="30" font-weight="700" fill="#5B4222">Đóng gói</text>
+  <text x="50%" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#A87F3B">Hộp quà hoàn chỉnh</text>
+  <text x="50%" y="766" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="600" fill="#8a6633">PLACEHOLDER — thay ảnh thật sau</text>
 </svg>

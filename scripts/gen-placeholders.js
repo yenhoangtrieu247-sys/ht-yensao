@@ -31,22 +31,46 @@ function wrapLines(text, maxChars) {
   return lines;
 }
 
-function makeSVG(w, h, label, sub) {
+function makeSVG(w, h, label, sub, seed) {
   const lines = wrapLines(label, 22);
   const lineHeight = 34;
-  const startY = h / 2 - ((lines.length - 1) * lineHeight) / 2 - (sub ? 14 : 0);
+  const startY = h / 2 - ((lines.length - 1) * lineHeight) / 2 - (sub ? 14 : 0) + 30;
   const textEls = lines.map((l, i) =>
-    `<text x="50%" y="${startY + i * lineHeight}" text-anchor="middle" font-family="'Be Vietnam Pro',Arial,sans-serif" font-size="28" font-weight="700" fill="#8a6d3b">${esc(l)}</text>`
+    `<text x="50%" y="${startY + i * lineHeight}" text-anchor="middle" font-family="'Be Vietnam Pro',Arial,sans-serif" font-size="30" font-weight="700" fill="#5B4222">${esc(l)}</text>`
   ).join('\n');
-  const subEl = sub ? `<text x="50%" y="${startY + lines.length * lineHeight + 10}" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#b79a63">${esc(sub)}</text>` : '';
+  const subEl = sub ? `<text x="50%" y="${startY + lines.length * lineHeight + 12}" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#A87F3B">${esc(sub)}</text>` : '';
+  const gid = 'g' + (seed || Math.random().toString(36).slice(2, 8));
+  const dotY = h - 70;
+  const dotCx = w / 2;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <rect width="100%" height="100%" fill="#F7EFDD"/>
-  <rect x="14" y="14" width="${w - 28}" height="${h - 28}" fill="none" stroke="#D8BE87" stroke-width="3" stroke-dasharray="10 8" rx="18"/>
-  <circle cx="${w/2}" cy="${h/2 - 90}" r="34" fill="none" stroke="#C9971F" stroke-width="4"/>
-  <text x="50%" y="${h/2 - 82}" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#C9971F">🖼</text>
+  <defs>
+    <linearGradient id="${gid}bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF0D2"/>
+      <stop offset="45%" stop-color="#F6E0AE"/>
+      <stop offset="100%" stop-color="#E9C87E"/>
+    </linearGradient>
+    <radialGradient id="${gid}glow" cx="50%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="${gid}ic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DE9C13"/>
+      <stop offset="100%" stop-color="#9A6B14"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#${gid}bg)"/>
+  <rect width="100%" height="100%" fill="url(#${gid}glow)"/>
+  <circle cx="${w * 0.08}" cy="${h * 0.1}" r="${w * 0.28}" fill="#C23B3B" opacity="0.08"/>
+  <circle cx="${w * 0.95}" cy="${h * 0.92}" r="${w * 0.32}" fill="#1F8A63" opacity="0.10"/>
+  <rect x="16" y="16" width="${w - 32}" height="${h - 32}" fill="none" stroke="#C9971F" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round" rx="20" opacity="0.6"/>
+  <circle cx="${w/2}" cy="${h/2 - 60}" r="38" fill="url(#${gid}ic)"/>
+  <text x="50%" y="${h/2 - 48}" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#fff">🖼</text>
+  <circle cx="${dotCx - 22}" cy="${dotY}" r="7" fill="#E0A928"/>
+  <circle cx="${dotCx}" cy="${dotY}" r="7" fill="#C23B3B"/>
+  <circle cx="${dotCx + 22}" cy="${dotY}" r="7" fill="#1F8A63"/>
   ${textEls}
   ${subEl}
-  <text x="50%" y="${h - 30}" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#c8b58a">PLACEHOLDER — thay ảnh thật sau</text>
+  <text x="50%" y="${h - 34}" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="600" fill="#8a6633">PLACEHOLDER — thay ảnh thật sau</text>
 </svg>`;
 }
 
@@ -97,7 +121,7 @@ const items = [
 
 for (const [name, size, label, sub] of items) {
   const [w, h] = sizes[size];
-  fs.writeFileSync(path.join(outDir, name + '.svg'), makeSVG(w, h, label, sub));
+  fs.writeFileSync(path.join(outDir, name + '.svg'), makeSVG(w, h, label, sub, name.replace(/[^a-z0-9]/gi, '')));
 }
 
 console.log(`Generated ${items.length} placeholder SVGs into ${outDir}`);
