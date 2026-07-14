@@ -185,7 +185,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Scroll reveal */
 .ht-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
-.ht-reveal.in{opacity:1;transform:translateY(0);}
+.ht-reveal.in{opacity:1 !important;transform:translateY(0) !important;}
 
 /* ---- HERO — trắng, ảnh trên plate xám nhạt ---- */
 .ht-hero{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--ht-bg-soft);}
@@ -215,6 +215,10 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Common section ---- */
 .ht-sec{padding:var(--section-y) var(--page-pad);position:relative;background:var(--ht-bg);}
+/* Hai section trắng liền kề (không có tint phân tách) cộng dồn padding 2 lần
+   thành khoảng trắng quá lớn, mất nhịp so với chỗ có tint — giảm padding nối
+   tiếp để khoảng cách đều nhau trực quan trên toàn trang. */
+.ht-sec + .ht-sec{padding-top:0;margin-top:calc(var(--section-y) * 0.3);}
 .ht-sec-tint{padding:var(--section-y) var(--page-pad);margin:0;border-radius:0;background:var(--ht-bg-soft);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-a{background:var(--ht-accent-soft);border-top:1px solid var(--ht-accent-border);border-bottom:1px solid var(--ht-accent-border);}
 .ht-tint-b{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
@@ -851,16 +855,25 @@ a{color:inherit;text-decoration:none;}
   window.addEventListener('resize', updateProgress);
   updateProgress();
 
-  /* ---------------- Scroll reveal ---------------- */
+  /* ---------------- Scroll reveal ----------------
+     Ghi chú: chỉ toggle class 'in' đôi khi bị "kẹt" ở trạng thái opacity:0/
+     translateY(20px) trên một số phần tử xa cuối trang dù class đã đúng
+     (transition/computed-style không tự cập nhật lại) — nên set thẳng inline
+     style làm lưới an toàn thay vì chỉ dựa vào class. */
   var revealEls = qsa('.ht-reveal');
+  function revealNow(el){
+    el.classList.add('in');
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(function(e){ if (e.isIntersecting) { revealNow(e.target); io.unobserve(e.target); } });
     }, {threshold:.1});
     revealEls.forEach(function(el){ io.observe(el); });
-    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in'); }); }, 4000);
+    setTimeout(function(){ revealEls.forEach(revealNow); }, 4000);
   } else {
-    revealEls.forEach(function(el){ el.classList.add('in'); });
+    revealEls.forEach(revealNow);
   }
 
   /* ---------------- Lightbox ---------------- */
