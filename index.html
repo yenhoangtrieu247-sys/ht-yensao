@@ -354,6 +354,24 @@ a{color:inherit;text-decoration:none;}
 .ht-field input:focus,.ht-field textarea:focus{outline:none;border-color:var(--ht-gold);}
 .ht-field-err{font-size:11.5px;color:var(--ht-plus);margin-top:4px;min-height:15px;}
 .ht-honeypot{position:absolute;left:-9999px;top:-9999px;}
+
+/* Popup đặt hàng đơn giản */
+.ht-buypop-head{display:flex;gap:14px;align-items:flex-start;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--ht-line-soft);}
+.ht-buypop-img{width:76px;height:76px;border-radius:16px;object-fit:cover;flex-shrink:0;box-shadow:var(--ht-sh-sm);cursor:zoom-in;}
+.ht-buypop-price{font-family:'Cormorant Garamond';font-size:25px;font-weight:700;color:var(--ht-gold-deep);line-height:1.2;}
+.ht-buypop-meta{font-size:12.5px;color:var(--ht-muted);margin-top:5px;}
+.ht-buypop-section-label{font-family:'Cormorant Garamond';font-size:14.5px;font-weight:700;color:var(--ht-brown);margin:16px 0 9px;}
+.ht-buypop-tier-row{display:flex;gap:8px;margin-bottom:4px;}
+.ht-buypop-tier-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:var(--ht-r-md);background:#fff;border:2px solid var(--ht-line-soft);min-height:64px;}
+.ht-buypop-tier-btn img{width:36px;height:36px;border-radius:9px;object-fit:cover;}
+.ht-buypop-tier-btn.active{border-color:var(--ht-gold);background:#FBF2DD;}
+.ht-buypop-tier-btn span{font-size:11.5px;font-weight:700;color:var(--ht-brown);}
+.ht-buypop-pkg-list{display:flex;flex-direction:column;gap:9px;margin-bottom:4px;}
+.ht-buypop-pkg-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;border-radius:var(--ht-r-md);border:2px solid var(--ht-line-soft);background:#fff;text-align:left;min-height:48px;width:100%;}
+.ht-buypop-pkg-row.active{border-color:var(--ht-gold-deep);background:#FBF2DD;box-shadow:var(--ht-sh-sm);}
+.ht-buypop-pkg-main{font-size:14px;font-weight:600;color:var(--ht-ink);}
+.ht-buypop-pkg-main b{font-family:'Cormorant Garamond';color:var(--ht-brown);font-weight:700;font-size:15.5px;}
+.ht-buypop-pkg-tag{font-size:11px;font-weight:700;color:#1E7A5A;background:#EAF3EC;padding:4px 9px;border-radius:var(--ht-r-pill);white-space:nowrap;flex-shrink:0;}
 .ht-error-banner{background:#FBEAEA;color:#8F2A30;padding:12px 14px;border-radius:var(--ht-r-md);font-size:13px;margin-bottom:13px;text-align:center;}
 .ht-submit-btn{width:100%;padding:15px;border-radius:var(--ht-r-pill);background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Cormorant Garamond';font-weight:700;font-size:16px;box-shadow:var(--ht-sh-gold);min-height:48px;}
 .ht-submit-btn:disabled{opacity:.55;}
@@ -456,41 +474,6 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-fguide" id="htFlavorGuide"></div>
   </div>
 
-  <!-- ============ 6. BỘ CHỌN DÒNG / COMBO / VỊ (LÕI) ============ -->
-  <div class="ht-sec-tint ht-tint-b ht-reveal" id="chondong">
-    <div class="ht-eyebrow">Đặt hàng</div>
-    <h2 class="ht-title">Chọn Dòng, Combo<br>Và Vị Yêu Thích</h2>
-    <p class="ht-sub">Có thể thêm nhiều dòng vào cùng một đơn hàng.</p>
-
-    <div class="ht-step-label">Bước 1 — Chọn dòng</div>
-    <div class="ht-tier-row" id="htTierRow"></div>
-
-    <div class="ht-step-label">Bước 2 — Chọn hũ lẻ hoặc combo</div>
-    <div class="ht-offer-row" id="htOfferRow"></div>
-    <div id="htBonusNote"></div>
-
-    <div class="ht-step-label">Bước 3 — Chọn cách phối vị</div>
-    <div class="ht-mode-row" id="htModeRow"></div>
-    <div id="htFlavorArea"></div>
-    <div class="ht-breakdown-status" id="htBreakdownStatus"></div>
-
-    <button class="ht-add-line-btn" id="htAddLineBtn" type="button" disabled>Thêm vào đơn</button>
-
-    <div class="ht-summary-card ht-reveal in" id="htSummaryCard" style="display:none;"></div>
-
-    <div class="ht-cart-box">
-      <div id="htCartLines"><p class="ht-cart-empty">Chưa có dòng nào trong đơn — chọn dòng, combo và vị ở trên rồi bấm "Thêm vào đơn".</p></div>
-      <div class="ht-cart-total-row" id="htCartTotalRow" style="display:none;">
-        <span class="ht-cart-total-label">Tổng cộng</span>
-        <span class="ht-cart-total-val" id="htCartTotalVal">0đ</span>
-      </div>
-      <div class="ht-cart-actions" id="htCartActions" style="display:none;">
-        <button class="ht-btn ghost" type="button" id="htCartClearBtn" style="flex:.8;">Xoá đơn</button>
-        <button class="ht-btn solid" type="button" id="htCartCheckoutBtn" style="flex:1.3;">Đặt hàng ngay</button>
-      </div>
-    </div>
-  </div>
-
   <!-- ============ CÁCH DÙNG ============ -->
   <div class="ht-sec ht-reveal">
     <div class="ht-eyebrow">Cách dùng</div>
@@ -510,7 +493,7 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-note">Không dùng khi sản phẩm hết hạn, nắp/niêm phong hở hoặc hũ có mùi, màu sắc bất thường. Hạn dùng cụ thể xem trên nắp từng hũ.</div>
   </div>
 
-  <!-- ============ 7. GIỎ HÀNG — đã gộp vào phần 6 (id=chondong), popup đặt hàng nằm cuối trang ============ -->
+  <!-- ============ ĐẶT HÀNG: mọi nút CTA mở popup "Đặt hàng" (chọn dòng + gói ngay trong popup), xem script cuối trang ============ -->
 
   <!-- ============ 8. NGUỒN GỐC VÀ CHỨNG NHẬN ============ -->
   <div class="ht-sec-tint ht-tint-c ht-reveal" id="nguongoc">
@@ -856,14 +839,14 @@ a{color:inherit;text-decoration:none;}
     }).join('');
     qsa('.ht-pcard-btn', wrap).forEach(function(btn){
       btn.addEventListener('click', function(){
-        selectTier(btn.getAttribute('data-tier'));
-        track('line_selected', {tier: btn.getAttribute('data-tier'), source:'compare_card'});
-        document.getElementById('chondong').scrollIntoView({behavior:'smooth', block:'start'});
+        var key = btn.getAttribute('data-tier');
+        track('line_selected', {tier: key, source:'compare_card'});
+        openBuyPopup(key);
       });
     });
   })();
 
-  /* ---------------- Hướng dẫn chọn vị ---------------- */
+  /* ---------------- Hướng dẫn chọn vị (nội dung tham khảo, khách tự ghi vào ô ghi chú khi đặt hàng) ---------------- */
   (function renderFlavorGuide(){
     var wrap = qs('#htFlavorGuide');
     var keys = ['duongphen','tamvi','nhansam','duongkieng','kids'];
@@ -874,451 +857,47 @@ a{color:inherit;text-decoration:none;}
       return '<div class="ht-fgcard">' +
         '<div class="ht-fgcard-head"><span class="ht-fgcard-name">' + f.label + '</span><span class="ht-fgcard-sub">' + f.sub + '</span></div>' +
         '<div class="ht-fgcard-desc">' + f.desc + '</div>' +
-        '<div class="ht-fgcard-foot"><span class="ht-fgcard-avail">Có ở: ' + availLabel + '</span><a href="#chondong" class="ht-fgcard-link" data-flavor="' + k + '">Chọn vị này →</a></div>' +
+        '<div class="ht-fgcard-foot"><span class="ht-fgcard-avail">Có ở: ' + availLabel + '</span></div>' +
       '</div>';
     }).join('');
-    qsa('.ht-fgcard-link', wrap).forEach(function(a){
-      a.addEventListener('click', function(e){
-        e.preventDefault();
-        var k = a.getAttribute('data-flavor');
-        var tier = TIERS[selector.tierKey];
-        if (tier.flavorKeys.indexOf(k) === -1) {
-          var firstTier = TIER_ORDER.filter(function(tk){ return TIERS[tk].flavorKeys.indexOf(k) !== -1; })[0];
-          if (firstTier) selectTier(firstTier);
-        }
-        setFlavorMode('same');
-        state().singleFlavor = k;
-        renderFlavorArea();
-        renderBreakdownStatus();
-        document.getElementById('chondong').scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
   })();
 
   /* ============================================================
-     BỘ CHỌN DÒNG / COMBO / VỊ — state riêng theo từng dòng
+     ĐẶT HÀNG — popup đơn giản: Chọn gói → Chọn dòng → Ghi chú vị → Thông tin nhận hàng
      ============================================================ */
-  var selector = { tierKey:'saving', offerIndex:0 };
-  var stateByTier = {};
-  TIER_ORDER.forEach(function(tk){
-    var tier = TIERS[tk];
-    stateByTier[tk] = {
-      offerIndex:0,
-      flavorMode:'same',
-      singleFlavor: tier.flavorKeys[0],
-      evenFlavors:[],
-      manualBreakdown:{}
-    };
-    tier.flavorKeys.forEach(function(f){ stateByTier[tk].manualBreakdown[f] = 0; });
-  });
-  var cart = [];
-
-  function state(){ return stateByTier[selector.tierKey]; }
-  function currentTier(){ return TIERS[selector.tierKey]; }
-  function currentOffer(){ return currentTier().offers[selector.offerIndex]; }
-
-  function selectTier(key){
-    selector.tierKey = key;
-    selector.offerIndex = stateByTier[key].offerIndex;
-    renderAll();
-  }
-  function setFlavorMode(mode){
-    state().flavorMode = mode;
-    renderModeRow();
-    renderFlavorArea();
-    renderBreakdownStatus();
-  }
-
-  function renderTierRow(){
-    var row = qs('#htTierRow');
-    row.innerHTML = '';
-    TIER_ORDER.forEach(function(key){
-      var tier = TIERS[key];
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'ht-tier-btn' + (selector.tierKey === key ? ' active' : '');
-      btn.style.setProperty('--tier-color', tier.color);
-      btn.innerHTML = '<span class="ht-tier-dot"></span><span class="ht-tier-name">' + tier.label + '</span><span class="ht-tier-sub">' + tier.sub + ' · ' + tier.flavorKeys.length + ' vị</span>';
-      btn.addEventListener('click', function(){
-        selectTier(key);
-        track('line_selected', {tier:key, source:'selector'});
-      });
-      row.appendChild(btn);
-    });
-  }
-
-  function renderOfferRow(){
-    var tier = currentTier();
-    var row = qs('#htOfferRow');
-    row.innerHTML = '';
-    tier.offers.forEach(function(o, idx){
-      var chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'ht-offer-chip' + (selector.offerIndex === idx ? ' active' : '');
-      chip.style.setProperty('--tier-color', tier.color);
-      var qtyLabel = o.bonusQty ? (o.paidQty + '+' + o.bonusQty + ' hũ') : (o.paidQty + ' hũ');
-      chip.innerHTML = '<b>' + qtyLabel + '</b>' + fmtVnd(o.price) + (o.note ? '<small>' + o.note + '</small>' : '');
-      chip.addEventListener('click', function(){
-        selector.offerIndex = idx;
-        state().offerIndex = idx;
-        onOfferChanged();
-        track('offer_selected', {tier:selector.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty});
-      });
-      row.appendChild(chip);
-    });
-    renderBonusNote();
-  }
-
-  function renderBonusNote(){
-    var el = qs('#htBonusNote');
-    var o = currentOffer();
-    if (o.bonusQty > 0) {
-      el.innerHTML = '<div class="ht-bonus-note"><b>Thanh toán ' + o.paidQty + ' hũ — nhận tổng ' + (o.paidQty + o.bonusQty) + ' hũ</b>Bạn chọn vị cho ' + o.paidQty + ' hũ thanh toán. Hũ tặng cùng dòng, vị ngẫu nhiên và được thêm tự động — không cần chọn vị cho hũ này.</div>';
-    } else {
-      el.innerHTML = '';
-    }
-  }
-
-  /* Khi đổi combo: giữ cấu hình theo từng chế độ, không reset về 0 */
-  function onOfferChanged(){
-    var st = state();
-    var tier = currentTier();
-    var paidQty = currentOffer().paidQty;
-    if (st.flavorMode === 'manual') {
-      var sum = tier.flavorKeys.reduce(function(s,k){ return s + (st.manualBreakdown[k]||0); }, 0);
-      // giữ nguyên số đã chọn; chênh lệch sẽ hiển thị ở trạng thái, khách tự cân lại bằng nút hỗ trợ
-    }
-    renderAll();
-  }
-
-  function renderModeRow(){
-    var st = state();
-    var tier = currentTier();
-    var row = qs('#htModeRow');
-    var modes = [
-      {key:'same', label:'Cùng 1 vị'},
-      {key:'even', label:'Chia đều các vị đã chọn'},
-      {key:'manual', label:'Tự phân bổ'}
-    ];
-    row.innerHTML = '';
-    modes.forEach(function(m){
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'ht-mode-btn' + (st.flavorMode === m.key ? ' active' : '');
-      btn.style.setProperty('--tier-color', tier.color);
-      btn.textContent = m.label;
-      btn.addEventListener('click', function(){
-        setFlavorMode(m.key);
-        track('flavor_mode_selected', {tier:selector.tierKey, mode:m.key});
-      });
-      row.appendChild(btn);
-    });
-  }
-
-  function renderFlavorArea(){
-    var st = state();
-    var tier = currentTier();
-    var area = qs('#htFlavorArea');
-    if (st.flavorMode === 'same') {
-      area.innerHTML = '<div class="ht-chip-select-row" id="htSameRow"></div>';
-      var rowEl = qs('#htSameRow');
-      tier.flavorKeys.forEach(function(k){
-        var chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'ht-chip-select' + (st.singleFlavor === k ? ' active' : '');
-        chip.style.setProperty('--tier-color', tier.color);
-        chip.textContent = FLAVOR_GUIDE[k].label;
-        chip.addEventListener('click', function(){
-          st.singleFlavor = k;
-          renderFlavorArea();
-          renderBreakdownStatus();
-        });
-        rowEl.appendChild(chip);
-      });
-    } else if (st.flavorMode === 'even') {
-      area.innerHTML = '<div class="ht-chip-select-row" id="htEvenRow"></div><div class="ht-summary-line2" id="htEvenPreview" style="margin-bottom:10px;"></div>';
-      var evenRow = qs('#htEvenRow');
-      tier.flavorKeys.forEach(function(k){
-        var active = st.evenFlavors.indexOf(k) !== -1;
-        var chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'ht-chip-select' + (active ? ' active' : '');
-        chip.style.setProperty('--tier-color', tier.color);
-        chip.textContent = FLAVOR_GUIDE[k].label;
-        chip.addEventListener('click', function(){
-          var i = st.evenFlavors.indexOf(k);
-          if (i === -1) st.evenFlavors.push(k); else st.evenFlavors.splice(i,1);
-          renderFlavorArea();
-          renderBreakdownStatus();
-        });
-        evenRow.appendChild(chip);
-      });
-      var breakdown = computeEvenBreakdown();
-      var preview = tier.flavorKeys.filter(function(k){ return breakdown[k]; }).map(function(k){ return breakdown[k] + ' ' + FLAVOR_GUIDE[k].label; }).join(', ');
-      qs('#htEvenPreview').textContent = preview ? ('Kết quả chia: ' + preview) : 'Chọn ít nhất 1 vị để hệ thống tự chia đều.';
-    } else {
-      area.innerHTML =
-        '<div class="ht-manual-tools"><button type="button" id="htManualRedistribute">Chia đều lại</button></div>' +
-        '<div class="ht-flavor-list" id="htManualList"></div>';
-      var list = qs('#htManualList');
-      tier.flavorKeys.forEach(function(k){
-        var row = document.createElement('div');
-        row.className = 'ht-flavor-row';
-        row.innerHTML =
-          '<div class="ht-flavor-thumb"><img src="assets/images/' + tier.flavorImg[k] + '" alt="' + FLAVOR_GUIDE[k].label + '"></div>' +
-          '<span class="ht-flavor-name">' + FLAVOR_GUIDE[k].label + '</span>' +
-          '<div class="ht-stepper">' +
-            '<button type="button" data-act="dec" data-k="' + k + '">−</button>' +
-            '<span id="htManualQty-' + k + '">' + (st.manualBreakdown[k]||0) + '</span>' +
-            '<button type="button" data-act="inc" data-k="' + k + '">+</button>' +
-          '</div>' +
-          '<button type="button" class="ht-flavor-fill" data-fill="' + k + '">Dùng hết số còn lại</button>';
-        list.appendChild(row);
-      });
-      qsa('.ht-stepper button', list).forEach(function(btn){
-        btn.addEventListener('click', function(){
-          var k = btn.getAttribute('data-k');
-          var act = btn.getAttribute('data-act');
-          var cur = st.manualBreakdown[k] || 0;
-          if (act === 'inc') cur++; else cur = Math.max(0, cur - 1);
-          st.manualBreakdown[k] = cur;
-          qs('#htManualQty-' + k).textContent = cur;
-          renderBreakdownStatus();
-        });
-      });
-      qsa('[data-fill]', list).forEach(function(btn){
-        btn.addEventListener('click', function(){
-          var k = btn.getAttribute('data-fill');
-          var paidQty = currentOffer().paidQty;
-          var sum = tier.flavorKeys.reduce(function(s,fk){ return s + (fk===k ? 0 : (st.manualBreakdown[fk]||0)); }, 0);
-          st.manualBreakdown[k] = Math.max(0, paidQty - sum);
-          renderFlavorArea();
-          renderBreakdownStatus();
-        });
-      });
-      qs('#htManualRedistribute').addEventListener('click', function(){
-        var paidQty = currentOffer().paidQty;
-        var active = tier.flavorKeys.filter(function(k){ return (st.manualBreakdown[k]||0) > 0; });
-        if (active.length === 0) active = tier.flavorKeys.slice();
-        var base = Math.floor(paidQty / active.length);
-        var rem = paidQty - base * active.length;
-        tier.flavorKeys.forEach(function(k){ st.manualBreakdown[k] = 0; });
-        active.forEach(function(k, i){ st.manualBreakdown[k] = base + (i < rem ? 1 : 0); });
-        renderFlavorArea();
-        renderBreakdownStatus();
-      });
-    }
-  }
-
-  function computeEvenBreakdown(){
-    var st = state();
-    var paidQty = currentOffer().paidQty;
-    var flavors = st.evenFlavors;
-    var out = {};
-    if (flavors.length === 0) return out;
-    var base = Math.floor(paidQty / flavors.length);
-    var rem = paidQty - base * flavors.length;
-    flavors.forEach(function(k, i){ out[k] = base + (i < rem ? 1 : 0); });
-    return out;
-  }
-
-  function currentBreakdown(){
-    var st = state();
-    if (st.flavorMode === 'same') {
-      var o = {}; o[st.singleFlavor] = currentOffer().paidQty; return o;
-    }
-    if (st.flavorMode === 'even') { return computeEvenBreakdown(); }
-    return state().manualBreakdown;
-  }
-  function breakdownSum(bd){ return Object.keys(bd).reduce(function(s,k){ return s + (bd[k]||0); }, 0); }
-
-  function renderBreakdownStatus(){
-    var st = state();
-    var paidQty = currentOffer().paidQty;
-    var bd = currentBreakdown();
-    var sum = breakdownSum(bd);
-    var status = qs('#htBreakdownStatus');
-    var addBtn = qs('#htAddLineBtn');
-    var valid;
-    if (st.flavorMode === 'same') {
-      valid = !!st.singleFlavor;
-      status.className = 'ht-breakdown-status ' + (valid ? 'ok' : 'warn');
-      status.textContent = valid ? ('✓ Đã chọn đủ ' + paidQty + ' hũ') : 'Chọn một vị để tiếp tục';
-    } else if (st.flavorMode === 'even') {
-      valid = st.evenFlavors.length > 0;
-      status.className = 'ht-breakdown-status ' + (valid ? 'ok' : 'warn');
-      status.textContent = valid ? ('✓ Đã chọn đủ ' + paidQty + ' hũ') : 'Chọn ít nhất 1 vị để chia đều';
-    } else {
-      if (sum === paidQty) {
-        valid = true;
-        status.className = 'ht-breakdown-status ok';
-        status.textContent = '✓ Đã chọn đủ ' + paidQty + ' hũ';
-      } else if (sum < paidQty) {
-        valid = false;
-        status.className = 'ht-breakdown-status warn';
-        status.textContent = '⚠ Còn ' + (paidQty - sum) + ' hũ chưa chọn vị';
-      } else {
-        valid = false;
-        status.className = 'ht-breakdown-status warn';
-        status.textContent = '⚠ Bạn đang chọn dư ' + (sum - paidQty) + ' hũ';
-      }
-    }
-    addBtn.disabled = !valid;
-    if (valid) track('flavor_allocation_completed', {tier:selector.tierKey, mode:st.flavorMode});
-    renderSummaryCard(valid, bd);
-  }
-
-  function renderSummaryCard(valid, bd){
-    var card = qs('#htSummaryCard');
-    if (!valid) { card.style.display = 'none'; return; }
-    var tier = currentTier();
-    var o = currentOffer();
-    var received = o.paidQty + o.bonusQty;
-    var flavorText = tier.flavorKeys.filter(function(k){ return bd[k] > 0; }).map(function(k){ return bd[k] + ' ' + FLAVOR_GUIDE[k].label; }).join(', ');
-    card.style.display = 'block';
-    card.innerHTML =
-      '<div class="ht-summary-line1">' + tier.label + ' · ' + o.paidQty + (o.bonusQty ? '+' + o.bonusQty : '') + ' hũ</div>' +
-      '<div class="ht-summary-line2">' + flavorText + (o.bonusQty ? (' · +' + o.bonusQty + ' hũ tặng vị ngẫu nhiên') : '') + '</div>' +
-      '<div class="ht-summary-line2">Tổng nhận: ' + received + ' hũ</div>' +
-      '<div class="ht-summary-line3">Thành tiền: ' + fmtVnd(o.price) + '</div>';
-  }
-
-  function renderAll(){
-    renderTierRow();
-    renderOfferRow();
-    renderModeRow();
-    renderFlavorArea();
-    renderBreakdownStatus();
-  }
-  renderAll();
-
-  function shipFeeFor(tierKey, offer){
-    if (offer.paidQty !== 1) return 0;
-    return TIERS[tierKey].shipFeeSingle;
-  }
-
-  qs('#htAddLineBtn').addEventListener('click', function(){
-    var tier = currentTier();
-    var o = currentOffer();
-    var bd = currentBreakdown();
-    var breakdown = {};
-    Object.keys(bd).forEach(function(k){ if (bd[k] > 0) breakdown[k] = bd[k]; });
-    var ship = shipFeeFor(selector.tierKey, o);
-    cart.push({
-      lineId: 'L' + Date.now() + Math.floor(Math.random()*1000),
-      tierKey: selector.tierKey,
-      tierLabel: tier.label,
-      colorHex: tier.colorHex,
-      paidQty: o.paidQty,
-      bonusQty: o.bonusQty,
-      receivedQty: o.paidQty + o.bonusQty,
-      breakdown: breakdown,
-      price: o.price,
-      ship: ship
-    });
-    track('add_to_order', {tier:selector.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty, price:o.price});
-    renderCart();
-    qs('.ht-cart-box').scrollIntoView({behavior:'smooth', block:'nearest'});
-  });
-
-  function flavorLabel(flavorKey){ return FLAVOR_GUIDE[flavorKey] ? FLAVOR_GUIDE[flavorKey].label : flavorKey; }
-
-  function cartTotals(){
-    var total = 0, ship = 0;
-    cart.forEach(function(line){ total += line.price; ship += line.ship; });
-    return {subtotal: total, ship: ship, grand: total + ship};
-  }
-
-  function renderCart(){
-    var wrap = qs('#htCartLines');
-    var totalRow = qs('#htCartTotalRow');
-    var actions = qs('#htCartActions');
-    if (cart.length === 0) {
-      wrap.innerHTML = '<p class="ht-cart-empty">Chưa có dòng nào trong đơn — chọn dòng, combo và vị ở trên rồi bấm "Thêm vào đơn".</p>';
-      totalRow.style.display = 'none';
-      actions.style.display = 'none';
-      return;
-    }
-    wrap.innerHTML = '';
-    cart.forEach(function(line, idx){
-      var detail = Object.keys(line.breakdown).map(function(k){ return line.breakdown[k] + ' ' + flavorLabel(k); }).join(', ');
-      var bonusText = line.bonusQty ? (' · +' + line.bonusQty + ' hũ tặng (vị ngẫu nhiên)') : '';
-      var row = document.createElement('div');
-      row.className = 'ht-cart-line';
-      row.innerHTML =
-        '<div class="ht-cart-line-top">' +
-          '<span class="ht-cart-line-dot" style="background:' + line.colorHex + '"></span>' +
-          '<div class="ht-cart-line-info"><div class="ht-cart-line-title">' + line.tierLabel + ' · ' + line.paidQty + (line.bonusQty ? '+'+line.bonusQty : '') + ' hũ (nhận ' + line.receivedQty + ' hũ)</div>' +
-          '<div class="ht-cart-line-detail">' + detail + bonusText + (line.ship ? ' · +' + fmtVnd(line.ship) + ' ship' : '') + '</div></div>' +
-          '<span class="ht-cart-line-price">' + fmtVnd(line.price + line.ship) + '</span>' +
-          '<button type="button" class="ht-cart-line-remove" data-idx="' + idx + '">✕</button>' +
-        '</div>';
-      wrap.appendChild(row);
-    });
-    qsa('.ht-cart-line-remove', wrap).forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var idx = parseInt(btn.getAttribute('data-idx'), 10);
-        track('order_item_removed', {index: idx});
-        cart.splice(idx, 1);
-        renderCart();
-      });
-    });
-    var totals = cartTotals();
-    qs('#htCartTotalVal').textContent = fmtVnd(totals.grand);
-    totalRow.style.display = 'flex';
-    actions.style.display = 'flex';
-    updateStickyOrderLabel();
-  }
-
-  qs('#htCartClearBtn').addEventListener('click', function(){
-    if (cart.length && !confirm('Xoá toàn bộ đơn hàng đang chọn?')) return;
-    cart = [];
-    renderCart();
-  });
-
-  /* Scroll shortcuts to package selector */
-  ['htHeaderCta','htHeroCta','htInlineCta'].forEach(function(id){
-    var el = qs('#' + id);
-    if (el) el.addEventListener('click', function(){
-      track('hero_cta_click', {source:id});
-      document.getElementById('chondong').scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
-
-  function updateStickyOrderLabel(){
-    var btn = qs('#htStickyOrder');
-    var totals = cartTotals();
-    var totalJars = cart.reduce(function(s,l){ return s + l.receivedQty; }, 0);
-    if (cart.length > 0) {
-      btn.textContent = 'Hoàn tất đơn — ' + totalJars + ' hũ';
-    } else {
-      btn.textContent = 'Chọn dòng & combo';
-    }
-  }
-  qs('#htStickyOrder').addEventListener('click', function(){
-    if (cart.length > 0) { openPopup(); }
-    else { document.getElementById('chondong').scrollIntoView({behavior:'smooth', block:'start'}); }
-  });
-  updateStickyOrderLabel();
-
-  /* ============================================================
-     CHECKOUT POPUP
-     ============================================================ */
-  var popupOverlay = qs('#htPopupOverlay');
-  var popupBody = qs('#htPopupBody');
-  var popupTitle = qs('#htPopupTitle');
-  var popupLastFocus = null;
+  var TIER_IMG = { saving:'macro-saving.jpg', plus:'macro-plus.jpg', caocap:'macro-caocap.jpg' };
+  var popupState = { tierKey:'saving', offerIndex:0 };
   var formValues = {fullname:'', phone:'', address:'', note:''};
   var submitting = false;
   var errorMsg = '';
 
-  function openPopup(){
-    if (cart.length === 0) { alert('Vui lòng chọn ít nhất 1 dòng sản phẩm trước khi đặt hàng.'); return; }
+  function currentTier(){ return TIERS[popupState.tierKey]; }
+  function currentOffer(){ return currentTier().offers[popupState.offerIndex]; }
+  function shipFeeFor(tierKey, offer){
+    if (offer.paidQty !== 1) return 0;
+    return TIERS[tierKey].shipFeeSingle;
+  }
+  function orderTotal(){
+    var o = currentOffer();
+    return o.price + shipFeeFor(popupState.tierKey, o);
+  }
+
+  var popupOverlay = qs('#htPopupOverlay');
+  var popupBody = qs('#htPopupBody');
+  var popupTitle = qs('#htPopupTitle');
+  var popupLastFocus = null;
+
+  function openBuyPopup(tierKey){
+    popupState.tierKey = tierKey || popupState.tierKey || 'saving';
+    popupState.offerIndex = 0;
+    errorMsg = '';
+    submitting = false;
     popupLastFocus = document.activeElement;
+    popupTitle.textContent = 'Đặt hàng';
     popupOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    track('order_form_started', {});
-    renderCheckoutForm();
+    track('order_form_started', {tier: popupState.tierKey});
+    renderBuyPopup();
   }
   function closePopup(){
     popupOverlay.classList.remove('open');
@@ -1327,7 +906,6 @@ a{color:inherit;text-decoration:none;}
   }
   qs('#htPopupClose').addEventListener('click', closePopup);
   popupOverlay.addEventListener('click', function(e){ if (e.target === popupOverlay) closePopup(); });
-  qs('#htCartCheckoutBtn').addEventListener('click', openPopup);
 
   function captureFormValues(){
     var f = qs('#htFieldFullname'); var p = qs('#htFieldPhone'); var a = qs('#htFieldAddress'); var n = qs('#htFieldNote');
@@ -1337,32 +915,86 @@ a{color:inherit;text-decoration:none;}
     if (n) formValues.note = n.value;
   }
 
-  function renderCheckoutForm(){
-    popupTitle.textContent = 'Xác nhận đặt hàng';
-    var totals = cartTotals();
-    var linesHtml = cart.map(function(line){
-      var detail = Object.keys(line.breakdown).map(function(k){ return line.breakdown[k] + ' ' + flavorLabel(k); }).join(', ');
-      var bonusText = line.bonusQty ? (' · +' + line.bonusQty + ' tặng') : '';
-      return '<div class="ht-cart-line"><div class="ht-cart-line-top"><span class="ht-cart-line-dot" style="background:' + line.colorHex + '"></span><div class="ht-cart-line-info"><div class="ht-cart-line-title">' + line.tierLabel + ' · ' + line.receivedQty + ' hũ</div><div class="ht-cart-line-detail">' + detail + bonusText + '</div></div><span class="ht-cart-line-price">' + fmtVnd(line.price + line.ship) + '</span></div></div>';
+  function renderBuyPopup(){
+    var tier = currentTier();
+    var offer = currentOffer();
+    var total = orderTotal();
+    var ship = shipFeeFor(popupState.tierKey, offer);
+
+    var tierBtns = TIER_ORDER.map(function(key){
+      var t = TIERS[key];
+      return '<button type="button" class="ht-buypop-tier-btn' + (popupState.tierKey===key?' active':'') + '" data-tier="' + key + '">' +
+        '<img src="assets/images/' + TIER_IMG[key] + '" alt="' + t.label + '">' +
+        '<span>' + t.label + '</span>' +
+      '</button>';
+    }).join('');
+
+    var pkgRows = tier.offers.map(function(o, idx){
+      var qtyLabel = o.bonusQty ? (o.paidQty + '+' + o.bonusQty + ' hũ') : (o.paidQty + ' hũ');
+      var tag = o.bonusQty ? ('Tặng ' + o.bonusQty + ' hũ') : (o.note || '');
+      return '<button type="button" class="ht-buypop-pkg-row' + (popupState.offerIndex===idx?' active':'') + '" data-offer="' + idx + '">' +
+        '<span class="ht-buypop-pkg-main"><b>' + qtyLabel + '</b> · ' + fmtVnd(o.price) + '</span>' +
+        (tag ? '<span class="ht-buypop-pkg-tag">' + tag + '</span>' : '') +
+      '</button>';
     }).join('');
 
     popupBody.innerHTML =
       (errorMsg ? '<div class="ht-error-banner">' + errorMsg + '</div>' : '') +
-      '<div style="margin-bottom:14px;">' + linesHtml + '</div>' +
-      '<div class="ht-cart-total-row" style="margin-bottom:16px;"><span class="ht-cart-total-label">Tổng cộng (đã gồm ship nếu có)</span><span class="ht-cart-total-val">' + fmtVnd(totals.grand) + '</span></div>' +
-      '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
-      '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" inputmode="tel" id="htFieldPhone" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
-      '<div class="ht-field"><label>Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" rows="2">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
-      '<div class="ht-field"><label>Ghi chú (không bắt buộc)</label><textarea id="htFieldNote" rows="2">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
+      '<div class="ht-buypop-head">' +
+        '<img class="ht-buypop-img ht-zoom" src="assets/images/' + TIER_IMG[popupState.tierKey] + '" alt="' + tier.label + '">' +
+        '<div><div class="ht-buypop-price">' + fmtVnd(total) + '</div>' +
+        '<div class="ht-buypop-meta">' + tier.label + ' · ' + tier.gram + ' yến/hũ' + (ship ? ' · +' + fmtVnd(ship) + ' ship' : ' · Miễn ship') + '</div></div>' +
+      '</div>' +
+      '<div class="ht-buypop-section-label">Chọn gói</div>' +
+      '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
+      '<div class="ht-buypop-section-label">Chọn dòng</div>' +
+      '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
+      '<div class="ht-field" style="margin-top:16px;"><label>Số lượng &amp; vị bạn muốn (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: 6 hũ Đường phèn, 4 hũ Nhân sâm">' + formValues.note.replace(/</g,'&lt;') + '</textarea>' +
+      '<div class="ht-summary-line2" style="margin-top:4px;">Để trống nếu muốn Hoàng Triều gọi điện tư vấn vị phù hợp.</div></div>' +
+      '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" placeholder="Nguyễn Thị A" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
+      '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" inputmode="tel" id="htFieldPhone" placeholder="0901234567 hoặc +84901234567" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
+      '<div class="ht-field"><label>Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" rows="2" placeholder="Số nhà, đường, phường/xã, tỉnh/thành">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
       '<input type="text" class="ht-honeypot" id="htHoneypot" tabindex="-1" autocomplete="off">' +
-      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Xác nhận đặt hàng') + '</button>';
+      '<div class="ht-cart-total-row" style="margin:4px 0 16px;"><span class="ht-cart-total-label">Tổng cộng</span><span class="ht-cart-total-val">' + fmtVnd(total) + '</span></div>' +
+      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
 
+    qsa('.ht-buypop-tier-btn', popupBody).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        captureFormValues();
+        popupState.tierKey = btn.getAttribute('data-tier');
+        popupState.offerIndex = 0;
+        track('line_selected', {tier: popupState.tierKey, source:'popup'});
+        renderBuyPopup();
+      });
+    });
+    qsa('.ht-buypop-pkg-row', popupBody).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        captureFormValues();
+        popupState.offerIndex = parseInt(btn.getAttribute('data-offer'), 10);
+        var o = currentOffer();
+        track('offer_selected', {tier: popupState.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty});
+        renderBuyPopup();
+      });
+    });
     ['htFieldFullname','htFieldPhone','htFieldAddress','htFieldNote'].forEach(function(id){
       var el = document.getElementById(id);
       if (el) el.addEventListener('input', captureFormValues);
     });
     qs('#htSubmitBtn').addEventListener('click', submitOrder);
   }
+
+  /* Mọi CTA mở thẳng popup đặt hàng, không cuộn trang */
+  ['htHeaderCta','htHeroCta','htInlineCta'].forEach(function(id){
+    var el = qs('#' + id);
+    if (el) el.addEventListener('click', function(){
+      track('hero_cta_click', {source:id});
+      openBuyPopup();
+    });
+  });
+  qs('#htStickyOrder').addEventListener('click', function(){
+    track('hero_cta_click', {source:'sticky'});
+    openBuyPopup();
+  });
 
   function validatePhone(v){
     v = v.replace(/\s+/g,'');
@@ -1395,9 +1027,12 @@ a{color:inherit;text-decoration:none;}
 
     submitting = true;
     errorMsg = '';
-    renderCheckoutForm();
+    renderBuyPopup();
 
-    var totals = cartTotals();
+    var tier = currentTier();
+    var offer = currentOffer();
+    var ship = shipFeeFor(popupState.tierKey, offer);
+    var total = offer.price + ship;
     var utm = getUtm();
     var payload = {
       order_code: genOrderCode(),
@@ -1406,25 +1041,17 @@ a{color:inherit;text-decoration:none;}
       phone: formValues.phone.replace(/\s+/g,''),
       address: formValues.address.trim(),
       note: formValues.note.trim(),
-      items: cart.map(function(line){
-        return {
-          lineId: line.lineId,
-          lineName: line.tierLabel,
-          offerId: line.tierKey + '-' + line.paidQty,
-          paidQty: line.paidQty,
-          bonusQty: line.bonusQty,
-          receivedQty: line.receivedQty,
-          price: line.price,
-          ship: line.ship,
-          allocations: Object.keys(line.breakdown).map(function(k){
-            return { skuId: line.tierKey + '-' + k, flavorId:k, flavorName: flavorLabel(k), qty: line.breakdown[k] };
-          }),
-          bonus: line.bonusQty ? { qty: line.bonusQty, sameLine:true, flavorPolicy:'random' } : null
-        };
-      }),
-      subtotal: totals.subtotal,
-      shipping_fee: totals.ship,
-      grand_total: totals.grand,
+      product: {
+        tier: tier.label,
+        offerId: popupState.tierKey + '-' + offer.paidQty,
+        paidQty: offer.paidQty,
+        bonusQty: offer.bonusQty,
+        receivedQty: offer.paidQty + offer.bonusQty,
+        price: offer.price
+      },
+      subtotal: offer.price,
+      shipping_fee: ship,
+      grand_total: total,
       currency: 'VND',
       utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign, utm_content: utm.utm_content, utm_term: utm.utm_term,
       page_url: window.location.href,
@@ -1455,7 +1082,7 @@ a{color:inherit;text-decoration:none;}
       submitting = false;
       track('order_submit_error', {});
       errorMsg = 'Có lỗi kết nối mạng. Vui lòng thử lại — thông tin bạn đã nhập vẫn được giữ nguyên, hoặc nhắn Zalo để được hỗ trợ ngay.';
-      renderCheckoutForm();
+      renderBuyPopup();
     });
   }
 
@@ -1468,8 +1095,6 @@ a{color:inherit;text-decoration:none;}
         '<div class="ht-success-s">Hoàng Triều đã nhận đơn, đội ngũ sẽ liên hệ xác nhận sớm.</div>' +
         '<div class="ht-success-code">Mã đơn: ' + payload.order_code + ' · Tổng: ' + fmtVnd(payload.grand_total) + '</div>' +
       '</div>';
-    cart = [];
-    renderCart();
     formValues = {fullname:'', phone:'', address:'', note:''};
   }
 
