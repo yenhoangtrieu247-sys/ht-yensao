@@ -863,7 +863,7 @@ a{color:inherit;text-decoration:none;}
   })();
 
   /* ============================================================
-     ĐẶT HÀNG — popup đơn giản: Chọn gói → Chọn dòng → Ghi chú vị → Thông tin nhận hàng
+     ĐẶT HÀNG — popup đơn giản: Chọn dòng → Chọn số lượng → Ghi chú vị → Thông tin nhận hàng
      ============================================================ */
   var TIER_IMG = { saving:'macro-saving.jpg', plus:'macro-plus.jpg', caocap:'macro-caocap.jpg' };
   var popupState = { tierKey:'saving', offerIndex:0 };
@@ -945,10 +945,10 @@ a{color:inherit;text-decoration:none;}
         '<div><div class="ht-buypop-price">' + fmtVnd(total) + '</div>' +
         '<div class="ht-buypop-meta">' + tier.label + ' · ' + tier.gram + ' yến/hũ' + (ship ? ' · +' + fmtVnd(ship) + ' ship' : ' · Miễn ship') + '</div></div>' +
       '</div>' +
-      '<div class="ht-buypop-section-label">Chọn gói</div>' +
-      '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
       '<div class="ht-buypop-section-label">Chọn dòng</div>' +
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
+      '<div class="ht-buypop-section-label">Chọn số lượng</div>' +
+      '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
       '<div class="ht-field" style="margin-top:16px;"><label>Số lượng &amp; vị bạn muốn (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: 6 hũ Đường phèn, 4 hũ Nhân sâm">' + formValues.note.replace(/</g,'&lt;') + '</textarea>' +
       '<div class="ht-summary-line2" style="margin-top:4px;">Để trống nếu muốn Hoàng Triều gọi điện tư vấn vị phù hợp.</div></div>' +
       '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" placeholder="Nguyễn Thị A" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
