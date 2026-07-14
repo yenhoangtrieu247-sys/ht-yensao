@@ -2,7 +2,35 @@
 
 Dán toàn bộ file này làm tin nhắn đầu tiên cho phiên Claude mới. Đọc hết trước khi làm gì.
 
-## 0. Việc cần làm (đúng trọng tâm, không lòng vòng)
+## ĐÃ CẬP NHẬT — việc mô tả ở mục 0 bên dưới ĐÃ XONG, đọc phần này trước
+
+Sau khi viết file này, phát hiện ra: một tài khoản Claude khác ĐÃ redesign
+toàn trang trong lúc phiên này đang chạy (commit `e282bb4` — "Redesign toàn
+trang theo hệ TRẮNG hiện đại"), và kết quả đúng là bị chê "quá trắng, không
+khối màu, không khối nổi, nhìn chìm" như mô tả ở mục 0. Phiên này đã:
+1. `git pull` hợp nhất bản redesign đó vào local.
+2. Tự mở landing mẫu rejuvella3 kiểm chứng — xác nhận mẫu KHÔNG hề phẳng
+   (có banner giá đỏ, khối đếm ngược đen, icon tròn nhiều màu, nền pastel
+   xen kẽ, shadow thật) — bản redesign trước hiểu sai/làm quá tay.
+3. Sửa: thêm hệ shadow 2 cấp, thêm tint pastel hồng/mint xen kẽ, khôi phục
+   3 màu riêng cho từng dòng (Saving xanh rêu #5B7A63, Plus burgundy
+   #9D1F34, Cao Cấp navy #2C3A5C — KHÔNG vàng/nâu), card nổi trở lại, icon
+   tròn có màu. Giữ nguyên nền trắng/accent burgundy/typography phẳng của
+   bản trước — chỉ sửa phần thực thi bị quá tay, không đảo ngược hướng.
+4. Đã hỏi nhanh ChatGPT 1 lượt (không phải phiên đầy đủ) để xác nhận hướng
+   sửa — đồng ý, chỉ lưu ý giữ tint thật nhạt + màu 3 dòng thật kiềm chế.
+5. Commit `9a55790`, đã push lên `main`.
+
+**Nếu chủ trang xem lại và vẫn chưa ưng ý**, đây là điểm tiếp theo cần làm,
+không phải làm lại từ đầu. Đọc kỹ mục 0-6 bên dưới để hiểu bối cảnh gốc,
+nhưng bỏ qua phần "một tài khoản khác làm sai" vì đã sửa — thay vào đó hỏi
+chủ trang cụ thể chỗ nào còn chưa ổn rồi tinh chỉnh tiếp từ trạng thái hiện
+tại (không phải patch lại kiểu vàng/nâu cũ, không phải giữ lại bản trắng
+phẳng cũ — sửa tiếp từ bản đã có shadow+màu này).
+
+---
+
+## 0. Bối cảnh gốc của yêu cầu (để hiểu lý do, không phải to-do list nữa)
 
 Redesign LẠI GIAO DIỆN (màu sắc, khối, spacing, elevation, typography) của
 `index.html` theo phong cách landing page mẫu:
@@ -42,22 +70,29 @@ elevation/contrast, không giống bản mẫu chỉ giống nền trắng trơn
   `script.google.com/home/projects/1czLMGYFY3SRO-_x_68fFLG0SJbWSl3_6zQxXLAOgNPeMcL33aaaVMEMH/edit`.
 - Local static server để QA: `node scripts/serve.js 8777` → http://localhost:8777
 
-## 2. Trạng thái thiết kế hiện tại (cái cần thay)
+## 2. Trạng thái thiết kế hiện tại — ĐÃ ĐỔI, đây là bản MỚI NHẤT (commit 9a55790)
 
-- Design tokens ở đầu `<style>` (`:root{...}`): `--ht-gold:#DE9C13`,
-  `--ht-gold-deep:#B87A0A`, `--ht-brown:#4A3417`, `--ht-ink:#3A2E1C`,
-  `--ht-muted:#5C4D33`, nền kem `--ht-cream/--ht-ivory`. Màu theo dòng sản phẩm:
-  Saving vàng `#E0A928`, Plus đỏ `#C23B3B`, Cao Cấp xanh `#1F8A63`.
-- Font: tiêu đề `Lora` (serif đậm), phần đọc/UI `Be Vietnam Pro` (sans). Có thể
-  giữ hoặc đổi nếu hợp bản mẫu hơn — nhưng đây không phải trọng tâm chính,
-  trọng tâm là MÀU + KHỐI + ELEVATION.
+(Phần dưới đây đã lỗi thời so với lúc viết ban đầu — giữ lại để biết lịch sử,
+nhưng đọc kỹ phần "ĐÃ CẬP NHẬT" ở đầu file để biết trạng thái thật.)
+
+- Design tokens hiện tại (KHÔNG còn vàng/nâu): nền trắng `--ht-bg:#FFFFFF`,
+  chữ đen than `--ht-ink:#161823`, accent chính burgundy `--ht-accent:#9D1F34`.
+  3 màu riêng theo dòng (mới khôi phục): Saving xanh rêu `--ht-saving:#5B7A63`,
+  Plus burgundy `--ht-plus:#9D1F34` (= accent chính, dòng chủ lực), Cao Cấp
+  navy đậm `--ht-caocap:#2C3A5C`. Tint xen kẽ theo section: hồng nhạt
+  `--ht-accent-soft:#FFF0F3` và mint nhạt `--ht-mint-soft:#EEF6F1`. Có hệ
+  shadow 2 cấp `--ht-sh-card` (card chính) / `--ht-sh-card-sm` (hàng danh sách,
+  chip) — mọi card đều có shadow thật, không còn border phẳng 1px như bản
+  redesign trắng thuần trước đó.
+- Font: tiêu đề `Lora` (serif), phần đọc/UI `Be Vietnam Pro` (sans) — giữ
+  nguyên qua các lần sửa, không phải trọng tâm.
 - Layout: **chỉ mobile** (480px card canh giữa màn hình, kể cả trên desktop —
   KHÔNG làm layout desktop riêng, chủ trang đã yêu cầu bỏ việc này một lần rồi).
 - Các section chính (giữ nguyên cấu trúc, chỉ đổi style): Header sticky → Hero
   (ảnh + tiêu đề + giá + CTA) → Trust strip → Countdown → So sánh 3 dòng
   (carousel `.ht-pcards`, có dots) → Hướng dẫn chọn vị (`.ht-fguide`) → Cách dùng
-  (`.ht-steps`) → Nguồn gốc & chứng nhận (`.ht-origin-list` + cert gallery
-  `.ht-cert-grid`) → Nguyên liệu (`.ht-feed-grid`) → CTA giữa trang → Feedback
+  (`.ht-steps`) → Nguồn gốc & chứng nhận (`.ht-origin-list` + `.ht-cert-hero`
+  + `.ht-cert-list`, ĐÃ đổi từ `.ht-cert-grid` cũ) → Nguyên liệu (`.ht-feed-grid`) → CTA giữa trang → Feedback
   khách hàng thật (`.ht-feed-grid`) → Closing CTA → Footer → Sticky CTA bar →
   Popup đặt hàng (`.ht-popup`, có tier chọn + package chọn + flavor stepper).
 - Ảnh thật đã có đủ: hero, 3 ảnh macro theo dòng, 13 ảnh jar theo từng vị
