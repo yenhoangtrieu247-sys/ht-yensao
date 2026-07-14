@@ -67,7 +67,7 @@ src="https://www.facebook.com/tr?id=1032364466110468&ev=PageView&noscript=1"
   --ht-ink:#161823;
   --ht-text:#36373B;
   --ht-secondary:#555555;
-  --ht-muted:#8A8B91;
+  --ht-muted:#6B6C72;
   --ht-on-accent:#FFFFFF;
 
   /* Brand accent — burgundy */
@@ -163,7 +163,7 @@ a{color:inherit;text-decoration:none;}
 .ht-brandbar{
   position:sticky;top:3px;z-index:55;display:flex;align-items:center;justify-content:space-between;
   padding:11px 16px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--ht-border);gap:10px;
+  box-shadow:0 2px 12px rgba(22,24,35,.06);gap:10px;
 }
 .ht-brand{display:flex;align-items:center;gap:9px;min-width:0;}
 .ht-brand-dot{
@@ -207,7 +207,7 @@ a{color:inherit;text-decoration:none;}
 .ht-hero-cta{display:flex;gap:10px;}
 .ht-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:14px;border-radius:var(--ht-r-sm);font-size:16px;font-weight:600;transition:background .15s,transform .05s;min-height:52px;}
 .ht-btn svg{width:17px;height:17px;flex-shrink:0;}
-.ht-btn.ghost{flex:.9;background:#fff;color:var(--ht-ink);border:1px solid var(--ht-border-strong);}
+.ht-btn.ghost{flex:.9;background:#fff;color:var(--ht-ink);border:1.5px solid var(--ht-ink);box-shadow:var(--ht-sh-card-sm);}
 .ht-btn.solid{flex:1.25;background:var(--ht-accent);color:var(--ht-on-accent);border:1px solid var(--ht-accent);box-shadow:0 8px 20px rgba(157,31,52,.28);}
 .ht-btn.solid:active{background:var(--ht-accent-active);}
 .ht-btn:active{transform:translateY(1px);}
