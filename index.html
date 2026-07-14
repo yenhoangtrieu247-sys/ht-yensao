@@ -11,7 +11,7 @@
   TRẠNG THÁI (cập nhật): ảnh sản phẩm/nguyên liệu/cách dùng/nhãn là ẢNH THẬT.
   Webhook Google Apps Script THẬT (đã hoạt động, không còn demo mode).
   Facebook/TikTok Pixel CHƯA gắn (theo yêu cầu, thêm sau khi cần chạy ads).
-  Kênh liên hệ ưu tiên: form đặt hàng > gọi điện (hotline thật) > Zalo OA thật.
+  Kênh liên hệ ưu tiên: form đặt hàng > gọi điện (hotline thật) > nhắn tin Fanpage Facebook thật.
   Định vị bán: hũ lẻ + combo số lượng — KHÔNG có hộp/set quà đóng gói riêng,
   nên không dùng ngôn ngữ/hình ảnh "hộp quà" giả.
   PENDING: mục hướng dẫn liều dùng/độ tuổi theo từng SKU đang ẩn (hidden),
@@ -494,7 +494,7 @@ a{color:inherit;text-decoration:none;}
 
   <!-- ============ COUNTDOWN TƯ VẤN TRONG NGÀY (thật, không phải giảm giá ảo) ============ -->
   <div class="ht-countdown ht-reveal" id="htCountdownWrap">
-    <span class="ht-countdown-t">💬 Nhắn Zalo trước</span>
+    <span class="ht-countdown-t">💬 Nhắn tin Fanpage trước</span>
     <span class="ht-countdown-clock" id="htCountdownClock">--:--:--</span>
     <span class="ht-countdown-t" id="htCountdownSuffix">hôm nay để được tư vấn ngay</span>
   </div>
@@ -629,8 +629,8 @@ a{color:inherit;text-decoration:none;}
   <div class="ht-sec ht-reveal">
     <div class="ht-ctablock">
       <div class="ht-ctablock-t">Chưa Chắc Chọn Dòng Nào?</div>
-      <div class="ht-ctablock-s">Nhắn Zalo — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
-      <a class="ht-ctablock-btn" href="#" id="htMidCta">Nhắn Zalo tư vấn</a>
+      <div class="ht-ctablock-s">Nhắn tin Fanpage — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
+      <a class="ht-ctablock-btn" href="#" id="htMidCta">Nhắn tin tư vấn</a>
     </div>
   </div>
 
@@ -664,7 +664,7 @@ a{color:inherit;text-decoration:none;}
   <div class="ht-closing ht-reveal">
     <div class="ht-closing-t">Sẵn Sàng Chọn Đúng <b>Món Quà Sức Khỏe?</b></div>
     <div class="ht-closing-s">Hoàng Triều đồng hành cùng bạn chọn đúng dòng yến cho từng người thân.</div>
-    <a class="ht-closing-btn" href="#" id="htClosingCta">Nhắn Zalo đặt hàng</a>
+    <a class="ht-closing-btn" href="#" id="htClosingCta">Nhắn tin đặt hàng</a>
   </div>
 
   <!-- ============ 12. FOOTER ============ -->
@@ -697,7 +697,7 @@ a{color:inherit;text-decoration:none;}
 <div class="ht-sticky">
   <a class="ht-sticky-ic" href="tel:+84989249686" id="htStickyPhone" aria-label="Gọi điện đặt hàng"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
   <button class="ht-sticky-order" id="htStickyOrder" type="button">Chọn dòng &amp; combo</button>
-  <a class="ht-sticky-ic" href="#" id="htStickyZalo" aria-label="Nhắn Zalo đặt hàng" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10c-1.6 0-3.1-.4-4.4-1L2 22l1-5.6C2.4 15.1 2 13.6 2 12z"/></svg></a>
+  <a class="ht-sticky-ic" href="#" id="htStickyMsg" aria-label="Nhắn tin đặt hàng" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10c-1.6 0-3.1-.4-4.4-1L2 22l1-5.6C2.4 15.1 2 13.6 2 12z"/></svg></a>
 </div>
 
 <!-- ============ TRUST DRAWER ============ -->
@@ -777,7 +777,7 @@ a{color:inherit;text-decoration:none;}
   /* ---------------- Config ---------------- */
   var CONFIG = {
     webhookUrl: 'https://script.google.com/macros/s/AKfycbwrRIuIVwM9GJbWd_GVa-RaCAYJALbIJp6HQgLSqAwx_2BPBLm7KwLXtGNB4HF7maHJ/exec',
-    zaloLink: 'https://zalo.me/2636468841093205439',
+    messengerLink: 'https://m.me/hoangtrieu556bn',
     fanpageLink: 'https://www.facebook.com/hoangtrieu556bn/',
     phoneDisplay: '+84 98 924 96 86',
     phoneHref: 'tel:+84989249686',
@@ -785,10 +785,10 @@ a{color:inherit;text-decoration:none;}
   };
   ['htMidCta','htClosingCta'].forEach(function(id){
     var el = document.getElementById(id);
-    if (el) el.addEventListener('click', function(e){ e.preventDefault(); track('zalo_clicked', {source:id}); window.open(CONFIG.zaloLink, '_blank', 'noopener'); });
+    if (el) el.addEventListener('click', function(e){ e.preventDefault(); track('messenger_clicked', {source:id}); window.open(CONFIG.messengerLink, '_blank', 'noopener'); });
   });
-  var stickyZalo = qs('#htStickyZalo');
-  if (stickyZalo){ stickyZalo.href = CONFIG.zaloLink; stickyZalo.addEventListener('click', function(){ track('zalo_clicked', {source:'sticky'}); }); }
+  var stickyMsg = qs('#htStickyMsg');
+  if (stickyMsg){ stickyMsg.href = CONFIG.messengerLink; stickyMsg.addEventListener('click', function(){ track('messenger_clicked', {source:'sticky'}); }); }
   var footFanpage = qs('#htFootFanpage');
   if (footFanpage) footFanpage.href = CONFIG.fanpageLink;
   qsa('#htStickyPhone, #htFootPhone').forEach(function(el){
@@ -864,10 +864,10 @@ a{color:inherit;text-decoration:none;}
       if (now >= cutoff) {
         if (prefixEl) prefixEl.textContent = '💬 Đã qua giờ tư vấn hôm nay —';
         clockEl.style.display = 'none';
-        suffixEl.textContent = 'tin nhắn Zalo sẽ được ưu tiên phản hồi vào sáng mai.';
+        suffixEl.textContent = 'tin nhắn Fanpage sẽ được ưu tiên phản hồi vào sáng mai.';
         return;
       }
-      if (prefixEl) prefixEl.textContent = '💬 Nhắn Zalo trước';
+      if (prefixEl) prefixEl.textContent = '💬 Nhắn tin Fanpage trước';
       clockEl.style.display = '';
       suffixEl.textContent = 'hôm nay (' + CUTOFF_HOUR + ':00) để được tư vấn ngay';
       var diff = cutoff - now;
@@ -1365,7 +1365,7 @@ a{color:inherit;text-decoration:none;}
     }).catch(function(){
       submitting = false;
       track('order_submit_error', {});
-      errorMsg = 'Có lỗi kết nối mạng. Vui lòng thử lại — thông tin bạn đã nhập vẫn được giữ nguyên, hoặc nhắn Zalo để được hỗ trợ ngay.';
+      errorMsg = 'Có lỗi kết nối mạng. Vui lòng thử lại — thông tin bạn đã nhập vẫn được giữ nguyên, hoặc nhắn tin Fanpage để được hỗ trợ ngay.';
       renderBuyPopup();
     });
   }
