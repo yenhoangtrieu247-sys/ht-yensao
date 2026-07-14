@@ -178,6 +178,12 @@ a{color:inherit;text-decoration:none;}
 .ht-tstrip-ic svg{width:20px;height:20px;stroke:var(--ht-brown);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 .ht-tstrip-t{font-family:'Be Vietnam Pro';font-size:15.5px;font-weight:700;color:var(--ht-brown);line-height:1.32;}
 
+/* Persona bridge — "Bạn đang chọn yến cho ai?" */
+.ht-persona-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:18px;}
+.ht-persona-label{width:100%;text-align:center;font-size:15px;font-weight:700;color:var(--ht-brown);margin-bottom:9px;}
+.ht-persona-chip{padding:10px 16px;border-radius:var(--ht-r-pill);background:#fff;box-shadow:var(--ht-sh-sm);font-size:15px;font-weight:600;color:var(--ht-brown);border:1.5px solid var(--ht-line-soft);min-height:44px;display:inline-flex;align-items:center;}
+.ht-persona-chip:active{transform:scale(.96);}
+
 /* Comparison cards (So sánh 3 dòng) — carousel */
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
@@ -201,6 +207,9 @@ a{color:inherit;text-decoration:none;}
 .ht-pcard-combo{font-size:15px;color:var(--ht-muted);margin-bottom:14px;}
 .ht-pcard-btn{width:100%;padding:14px;border-radius:var(--ht-r-pill);background:var(--ht-ivory);color:var(--ht-brown);font-family:'Be Vietnam Pro';font-weight:700;font-size:17px;min-height:48px;}
 .ht-pcard.hl .ht-pcard-btn{background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;box-shadow:var(--ht-sh-gold);}
+.ht-pcards-dots{display:flex;justify-content:center;gap:7px;margin-top:2px;}
+.ht-pcards-dots span{width:7px;height:7px;border-radius:50%;background:var(--ht-line);transition:background .2s,transform .2s;}
+.ht-pcards-dots span.active{background:var(--ht-gold-deep);transform:scale(1.3);}
 
 /* Flavor guide cards */
 .ht-fguide{display:flex;flex-direction:column;gap:11px;}
@@ -428,6 +437,28 @@ a{color:inherit;text-decoration:none;}
 .ht-lightbox.open{display:flex;}
 .ht-lightbox img{max-width:100%;max-height:85vh;border-radius:12px;}
 .ht-lightbox-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:21.5px;}
+
+/* ---- Desktop: layout 2 cột riêng, không phải bản mobile phóng to (đặt cuối file để luôn thắng cascade) ---- */
+@media (min-width:1024px){
+  .ht-page{max-width:1120px;}
+  .ht-toast{max-width:1088px;}
+  .ht-sticky{max-width:1120px;}
+  .ht-hero-wrap{display:flex;align-items:center;gap:40px;padding:36px 40px 4px;}
+  .ht-hero-wrap .ht-hero{flex:0 0 44%;aspect-ratio:1/1;border-radius:var(--ht-r-xl);overflow:hidden;box-shadow:var(--ht-sh-md);}
+  .ht-hero-wrap .ht-hero-head{flex:1;margin:0;padding:0;background:transparent;box-shadow:none;}
+  .ht-hero-title{font-size:38px;}
+  .ht-hero-sub{max-width:520px;}
+  .ht-hero-cta{max-width:440px;}
+  .ht-sec,.ht-sec-tint{padding-left:40px;padding-right:40px;}
+  .ht-sec-tint{margin-left:24px;margin-right:24px;}
+  .ht-pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;overflow:visible;padding:10px 0 4px;}
+  .ht-pcard{flex:none;}
+  .ht-fguide{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .ht-origin-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .ht-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .ht-persona-row{max-width:820px;margin-left:auto;margin-right:auto;}
+  .ht-pcards-dots{display:none;}
+}
 </style>
 </head>
 <body>
@@ -448,6 +479,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ 2. HERO ============ -->
+  <div class="ht-hero-wrap">
   <section class="ht-hero">
     <img class="ht-hero-img ht-zoom" src="assets/images/hero-3tang.jpg" alt="Yến hũ Hoàng Triều 3 dòng Saving Plus Cao Cấp">
     <div class="ht-hero-eyebrow"><i></i> YẾN HŨ HOÀNG TRIỀU</div>
@@ -466,12 +498,13 @@ a{color:inherit;text-decoration:none;}
       <button class="ht-btn solid" id="htHeroCta" type="button">Chọn dòng &amp; combo</button>
     </div>
   </div>
+  </div>
 
   <!-- ============ COUNTDOWN TƯ VẤN TRONG NGÀY (thật, không phải giảm giá ảo) ============ -->
-  <div class="ht-countdown ht-reveal">
+  <div class="ht-countdown ht-reveal" id="htCountdownWrap">
     <span class="ht-countdown-t">💬 Nhắn Zalo trước</span>
     <span class="ht-countdown-clock" id="htCountdownClock">--:--:--</span>
-    <span class="ht-countdown-t">hôm nay để được tư vấn ngay</span>
+    <span class="ht-countdown-t" id="htCountdownSuffix">hôm nay để được tư vấn ngay</span>
   </div>
 
   <!-- ============ 3. TRUST STRIP (dải bằng chứng nhanh) ============ -->
@@ -499,7 +532,9 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-eyebrow">So sánh</div>
     <h2 class="ht-title">Chọn Dòng Phù Hợp<br>Với Nhu Cầu</h2>
     <p class="ht-sub">Không có dòng nào "tốt nhất" — chỉ có dòng phù hợp nhất với người bạn muốn chăm sóc.</p>
+    <div class="ht-persona-row" id="htPersonaRow"></div>
     <div class="ht-pcards" id="htPcards"></div>
+    <div class="ht-pcards-dots" id="htPcardsDots"></div>
     <p class="ht-feed-hint">← Vuốt để xem cả 3 dòng →</p>
   </div>
 
@@ -567,11 +602,12 @@ a{color:inherit;text-decoration:none;}
       </div>
     </div>
     <div class="ht-cert-grid">
-      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm"><div class="ht-cert-cap">ISO 22000:2018<br>An toàn thực phẩm</div></div>
-      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-nhanhieu.jpg" alt="Giấy chứng nhận đăng ký nhãn hiệu Hoàng Triều"><div class="ht-cert-cap">Đăng ký nhãn hiệu<br>Cục Sở hữu trí tuệ</div></div>
-      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-dkkd.jpg" alt="Giấy chứng nhận đăng ký doanh nghiệp Hoàng Triều"><div class="ht-cert-cap">Đăng ký doanh nghiệp<br>Sở KH&amp;ĐT Bắc Ninh</div></div>
-      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-congbo.jpg" alt="Thông báo tiếp nhận công bố sản phẩm thực phẩm"><div class="ht-cert-cap">Tiếp nhận công bố SP<br>Sở NN&amp;MT Bắc Ninh</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm"><div class="ht-cert-cap"><b>ISO 22000:2018</b><br>Chứng nhận hệ thống quản lý an toàn thực phẩm cho quy trình sơ chế, chế biến.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-nhanhieu.jpg" alt="Giấy chứng nhận đăng ký nhãn hiệu Hoàng Triều"><div class="ht-cert-cap"><b>Đăng ký nhãn hiệu</b><br>Xác nhận quyền sở hữu thương hiệu, cấp bởi Cục Sở hữu trí tuệ.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-dkkd.jpg" alt="Giấy chứng nhận đăng ký doanh nghiệp Hoàng Triều"><div class="ht-cert-cap"><b>Đăng ký doanh nghiệp</b><br>Xác nhận đơn vị kinh doanh hợp pháp, có mã số thuế rõ ràng.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-congbo.jpg" alt="Thông báo tiếp nhận công bố sản phẩm thực phẩm"><div class="ht-cert-cap"><b>Tiếp nhận công bố SP</b><br>Xác nhận đã hoàn tất thủ tục tự công bố sản phẩm với cơ quan quản lý.</div></div>
     </div>
+    <p class="ht-feed-hint" style="margin-top:8px;font-size:13.5px;">Các giấy tờ trên chứng minh tư cách pháp lý và quy trình — không thay thế tư vấn y tế hay cam kết công dụng điều trị.</p>
     <p class="ht-feed-hint">← Vuốt để xem đầy đủ giấy tờ →</p>
     <div class="ht-spec">
       <div class="ht-spec-row"><div class="ht-spec-l">Thể tích</div><div class="ht-spec-v">70ml/hũ</div></div>
@@ -819,16 +855,28 @@ a{color:inherit;text-decoration:none;}
 
   /* ---------------- Countdown tư vấn trong ngày (giờ thật của khách, tự lặp lại mỗi ngày) ---------------- */
   (function countdown(){
+    var CUTOFF_HOUR = 21; // 21:00 — giờ chốt tư vấn trong ngày, không phải giờ hết khuyến mãi
     var clockEl = qs('#htCountdownClock');
+    var suffixEl = qs('#htCountdownSuffix');
+    var prefixEl = qs('#htCountdownWrap') ? qs('#htCountdownWrap').children[0] : null;
     if (!clockEl) return;
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
     function tick(){
       var now = new Date();
-      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-      var diff = Math.max(0, end - now);
+      var cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate(), CUTOFF_HOUR, 0, 0);
+      if (now >= cutoff) {
+        if (prefixEl) prefixEl.textContent = '💬 Đã qua giờ tư vấn hôm nay —';
+        clockEl.style.display = 'none';
+        suffixEl.textContent = 'tin nhắn Zalo sẽ được ưu tiên phản hồi vào sáng mai.';
+        return;
+      }
+      if (prefixEl) prefixEl.textContent = '💬 Nhắn Zalo trước';
+      clockEl.style.display = '';
+      suffixEl.textContent = 'hôm nay (' + CUTOFF_HOUR + ':00) để được tư vấn ngay';
+      var diff = cutoff - now;
       var h = Math.floor(diff / 3600000);
       var m = Math.floor((diff % 3600000) / 60000);
       var s = Math.floor((diff % 60000) / 1000);
-      function pad(n){ return (n < 10 ? '0' : '') + n; }
       clockEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
     }
     tick();
@@ -940,6 +988,24 @@ a{color:inherit;text-decoration:none;}
         openBuyPopup(key);
       });
     });
+
+    var dotsWrap = qs('#htPcardsDots');
+    if (dotsWrap) {
+      dotsWrap.innerHTML = TIER_ORDER.map(function(_, i){ return '<span' + (i===0?' class="active"':'') + '></span>'; }).join('');
+      var dots = qsa('span', dotsWrap);
+      var cards = qsa('.ht-pcard', wrap);
+      if ('IntersectionObserver' in window && cards.length) {
+        var dotsObs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if (e.isIntersecting) {
+              var idx = cards.indexOf(e.target);
+              dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+            }
+          });
+        }, {root: wrap, threshold: .6});
+        cards.forEach(function(c){ dotsObs.observe(c); });
+      }
+    }
   })();
 
   /* ---------------- Hướng dẫn chọn vị (nội dung tham khảo, khách tự ghi vào ô ghi chú khi đặt hàng) ---------------- */
@@ -956,6 +1022,32 @@ a{color:inherit;text-decoration:none;}
         '<div class="ht-fgcard-foot"><span class="ht-fgcard-avail">Có ở: ' + availLabel + '</span></div>' +
       '</div>';
     }).join('');
+  })();
+
+  /* ---------------- Persona bridge: "Bạn đang chọn yến cho ai?" — gợi ý nhanh, không thay thế điều hướng theo dòng ---------------- */
+  var PERSONA = [
+    {label:'Bố mẹ, người lớn tuổi', tier:'plus', flavor:'tamvi'},
+    {label:'Trẻ nhỏ', tier:'saving', flavor:'kids'},
+    {label:'Dùng hằng ngày', tier:'saving', flavor:'duongphen'},
+    {label:'Cần hạn chế đường', tier:'plus', flavor:'duongkieng'},
+    {label:'Biếu tặng trang trọng', tier:'caocap', flavor:'nhansam'}
+  ];
+  (function renderPersonaRow(){
+    var wrap = qs('#htPersonaRow');
+    if (!wrap) return;
+    wrap.innerHTML = '<div class="ht-persona-label">Bạn đang chọn yến cho ai?</div>' +
+      PERSONA.map(function(p, i){
+        return '<button type="button" class="ht-persona-chip" data-persona="' + i + '">' + p.label + '</button>';
+      }).join('');
+    qsa('.ht-persona-chip', wrap).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var p = PERSONA[parseInt(btn.getAttribute('data-persona'), 10)];
+        track('persona_selected', {label: p.label, tier: p.tier, flavor: p.flavor});
+        openBuyPopup(p.tier);
+        quickFillFlavor(p.flavor);
+        renderBuyPopup();
+      });
+    });
   })();
 
   /* ============================================================
