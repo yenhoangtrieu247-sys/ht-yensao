@@ -13,7 +13,8 @@ const mime = {
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.png': 'image/png',
-  '.json': 'application/json'
+  '.json': 'application/json',
+  '.pdf': 'application/pdf'
 };
 
 http.createServer((req, res) => {
