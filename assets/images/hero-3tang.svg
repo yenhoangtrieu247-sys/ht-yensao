@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect width="100%" height="100%" fill="#F7EFDD"/>
+  <rect x="14" y="14" width="772" height="772" fill="none" stroke="#D8BE87" stroke-width="3" stroke-dasharray="10 8" rx="18"/>
+  <circle cx="400" cy="310" r="34" fill="none" stroke="#C9971F" stroke-width="4"/>
+  <text x="50%" y="318" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#C9971F">🖼</text>
+  <text x="50%" y="386" text-anchor="middle" font-family="'Be Vietnam Pro',Arial,sans-serif" font-size="28" font-weight="700" fill="#8a6d3b">HERO</text>
+  <text x="50%" y="430" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#b79a63">3 hũ 3 tầng cạnh nhau</text>
+  <text x="50%" y="770" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#c8b58a">PLACEHOLDER — thay ảnh thật sau</text>
+</svg>

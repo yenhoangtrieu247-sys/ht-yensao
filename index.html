@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<!--
+  ============================================================
+  LANDING PAGE — YẾN HŨ HOÀNG TRIỀU (Saving / Plus / Cao Cấp)
+  Kiến trúc tham chiếu: clone cấu trúc/kỹ thuật từ seohal-dew-thuythanhnguyen.vercel.app
+  (single-file, mobile-first 480px, design tokens CSS variables), viết lại 100%
+  nội dung + theme + thêm module GIỎ HÀNG 3 bước (chọn tầng → số lượng → phân bổ vị)
+  vì đây là 13 SKU chứ không phải 1 sản phẩm như bản gốc.
+
+  TRẠNG THÁI: ảnh đang dùng PLACEHOLDER (SVG trong assets/images/) — sẽ thay bằng
+  ảnh thật sau. Facebook/TikTok Pixel CHƯA gắn (theo yêu cầu, thêm sau khi cần chạy ads).
+  Webhook Google Apps Script CHƯA có (đang chờ tạo) — nút đặt hàng hiện chạy chế độ demo
+  (log console + hiện màn hình thành công) cho tới khi có webhookUrl thật.
+  ============================================================
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Yến Hũ Hoàng Triều — Saving · Plus · Cao Cấp | Quà Tặng Sức Khỏe</title>
+<meta name="description" content="Yến chưng sẵn Hoàng Triều — 3 dòng Saving, Plus, Cao Cấp với hàm lượng yến tươi minh bạch 2.000mg / 6,0g / 10,2g mỗi hũ. Đa dạng hương vị, tư vấn đúng dòng cho từng nhu cầu chăm sóc và quà biếu.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Facebook Pixel: chưa gắn theo yêu cầu hiện tại. Khi cần chạy ads, thêm snippet chuẩn +
+     fbq('track','PageView') ngay sau <head>, ViewContent khi load xong,
+     InitiateCheckout khi bấm "Đặt hàng", CompleteRegistration khi đặt hàng thành công. -->
+
+<style>
+/* ==========================================================================
+   HOÀNG TRIỀU — design tokens (prefix ht-*)
+   ========================================================================== */
+:root{
+  --ht-cream:#FFFBF3;
+  --ht-ivory:#FBF3E1;
+  --ht-paper:#FFFFFF;
+  --ht-gold:#C9971F;
+  --ht-gold-deep:#A97A12;
+  --ht-brown:#4A3417;
+  --ht-ink:#3A2E1C;
+  --ht-muted:#8C7B5E;
+  --ht-line:#EFE1BE;
+  --ht-line-soft:#F5EDDA;
+  --ht-saving:#D9A62A;
+  --ht-saving-deep:#B6851B;
+  --ht-plus:#B6383F;
+  --ht-plus-deep:#8F2A30;
+  --ht-caocap:#1F7A5A;
+  --ht-caocap-deep:#15573F;
+  --ht-r-sm:10px;
+  --ht-r-md:16px;
+  --ht-r-lg:24px;
+  --ht-r-xl:30px;
+  --ht-r-pill:999px;
+  --ht-sh-sm:0 2px 10px rgba(74,52,23,.08);
+  --ht-sh-md:0 12px 30px rgba(74,52,23,.14);
+  --ht-sh-gold:0 10px 24px rgba(201,151,31,.35);
+  --ht-container:480px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;}
+body{
+  font-family:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:15.5px;line-height:1.6;color:var(--ht-ink);
+  background:#F1E6C8;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  padding-bottom:88px;
+}
+h1,h2,h3,.ht-display{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:0;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+a{color:inherit;text-decoration:none;}
+@media (max-width:767px){ input,select,textarea{font-size:16px !important;} }
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+}
+
+.ht-page{
+  max-width:var(--ht-container);margin:0 auto;position:relative;overflow-x:hidden;
+  min-height:100vh;
+  background:
+    radial-gradient(120% 60% at 15% 0%, var(--ht-ivory) 0%, rgba(251,243,225,0) 46%),
+    radial-gradient(120% 55% at 100% 12%, #FDF0DB 0%, rgba(253,240,219,0) 50%),
+    var(--ht-cream);
+}
+@media (min-width:768px){
+  body{padding:22px 0 88px;}
+  .ht-page{border-radius:26px;box-shadow:0 24px 60px rgba(74,52,23,.22);overflow:hidden;}
+}
+
+/* Reading progress */
+.ht-progress-track{position:sticky;top:0;z-index:60;height:3px;background:rgba(239,225,190,.7);}
+.ht-progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--ht-gold),var(--ht-saving));transition:width .1s linear;}
+
+/* Brand bar */
+.ht-brandbar{
+  position:sticky;top:3px;z-index:55;display:flex;align-items:center;justify-content:space-between;
+  padding:11px 16px;background:rgba(255,251,243,.86);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--ht-line-soft);
+}
+.ht-brand{display:flex;align-items:center;gap:9px;}
+.ht-brand-dot{
+  width:36px;height:36px;border-radius:12px;flex-shrink:0;overflow:hidden;
+  background:linear-gradient(135deg,var(--ht-brown),#6B4A22);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(74,52,23,.3);
+}
+.ht-brand-dot img{width:100%;height:100%;object-fit:cover;}
+.ht-brand-txt{display:flex;flex-direction:column;line-height:1.2;}
+.ht-brand-name{font-family:'Cormorant Garamond';font-size:15px;font-weight:700;color:var(--ht-brown);letter-spacing:.02em;}
+.ht-brand-sub{font-size:10px;color:var(--ht-muted);}
+.ht-follow-btn{
+  padding:7px 15px;border:1.5px solid var(--ht-gold);color:var(--ht-gold-deep);
+  font-size:11.5px;font-weight:700;border-radius:var(--ht-r-pill);transition:all .15s;
+}
+.ht-follow-btn.following{background:var(--ht-gold);color:#fff;border-color:var(--ht-gold);}
+
+/* Scroll reveal */
+.ht-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.ht-reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---- HERO ---- */
+.ht-hero{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;}
+.ht-hero-img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;}
+.ht-hero-head{position:relative;z-index:2;margin:-30px 12px 0;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);padding:20px 18px 18px;}
+.ht-hero-eyebrow{
+  position:absolute;top:16px;left:16px;z-index:3;display:inline-flex;align-items:center;gap:6px;
+  padding:6px 13px;background:rgba(255,255,255,.78);backdrop-filter:blur(6px);
+  border-radius:var(--ht-r-pill);font-family:'Cormorant Garamond';font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ht-brown);box-shadow:var(--ht-sh-sm);
+}
+.ht-hero-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--ht-gold);display:inline-block;}
+.ht-hero-title{font-size:27px;font-weight:700;line-height:1.22;color:var(--ht-brown);margin-bottom:8px;}
+.ht-hero-title b{color:var(--ht-gold-deep);}
+.ht-hero-sub{font-size:13px;color:var(--ht-ink);opacity:.85;margin-bottom:14px;line-height:1.55;}
+.ht-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ht-price-label{font-size:11.5px;color:var(--ht-muted);}
+.ht-price-now{font-family:'Cormorant Garamond';font-size:25px;font-weight:700;color:var(--ht-gold-deep);line-height:1;}
+.ht-hero-cta{display:flex;gap:10px;}
+.ht-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:13px 14px;border-radius:var(--ht-r-pill);font-size:13.5px;font-weight:700;transition:filter .15s,transform .05s;}
+.ht-btn svg{width:16px;height:16px;flex-shrink:0;}
+.ht-btn.ghost{flex:.9;background:rgba(255,255,255,.75);color:var(--ht-brown);border:1.5px solid rgba(74,52,23,.16);}
+.ht-btn.solid{flex:1.25;background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;box-shadow:var(--ht-sh-gold);position:relative;overflow:hidden;}
+.ht-btn.solid::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 45%,rgba(255,255,255,.65) 50%,transparent 55%);background-size:250% 100%;background-position:150% 0;animation:ht-btn-sweep 3.6s ease-in-out infinite;pointer-events:none;}
+.ht-btn:active{transform:translateY(1px);}
+@keyframes ht-btn-sweep{0%,60%{background-position:150% 0;}82%,100%{background-position:-60% 0;}}
+.ht-hero-link{display:block;text-align:center;margin-top:12px;font-size:12px;color:var(--ht-gold-deep);font-weight:600;text-decoration:underline;}
+
+/* ---- Common section ---- */
+.ht-sec{padding:30px 16px;position:relative;}
+.ht-sec-tint{border-radius:var(--ht-r-xl);margin:14px 10px;padding:28px 18px;}
+.ht-tint-a{background:linear-gradient(180deg,#FBF2DD,#F5E6C4);}
+.ht-tint-b{background:linear-gradient(180deg,#FDF6EA,#F8ECD3);}
+.ht-eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Cormorant Garamond';font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ht-gold-deep);margin-bottom:8px;}
+.ht-eyebrow::before,.ht-eyebrow::after{content:'';width:16px;height:1.5px;background:linear-gradient(90deg,transparent,var(--ht-gold));}
+.ht-eyebrow::before{transform:scaleX(-1);}
+.ht-title{font-size:23px;font-weight:700;color:var(--ht-brown);text-align:center;line-height:1.3;margin-bottom:9px;}
+.ht-sub{font-size:13px;color:var(--ht-muted);text-align:center;line-height:1.55;margin-bottom:20px;max-width:360px;margin-left:auto;margin-right:auto;}
+
+/* Product intro card */
+.ht-intro{margin:14px 12px 0;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);overflow:hidden;}
+.ht-intro-body{padding:18px 16px 16px;}
+.ht-tag{display:inline-block;padding:4px 11px;margin-bottom:9px;background:#EAF3EC;color:#1E7A5A;font-family:'Cormorant Garamond';font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--ht-r-pill);}
+.ht-intro-title{font-size:20px;font-weight:700;color:var(--ht-brown);line-height:1.3;margin-bottom:6px;}
+.ht-intro-desc{font-size:13px;color:var(--ht-muted);line-height:1.55;margin-bottom:12px;}
+.ht-meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:11.5px;color:var(--ht-muted);}
+.ht-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ht-line);}
+.ht-product-photo{width:100%;height:auto;display:block;cursor:zoom-in;}
+
+/* Trust chips */
+.ht-trust{display:flex;gap:8px;padding:14px 12px 0;}
+.ht-trust-chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:14px 8px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
+.ht-trust-ic{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#F5EAD0;}
+.ht-trust-ic svg{width:20px;height:20px;stroke:var(--ht-brown);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.ht-trust-t{font-family:'Cormorant Garamond';font-size:12.5px;font-weight:700;color:var(--ht-brown);line-height:1.3;}
+
+/* Inline CTA */
+.ht-inline-cta{display:flex;gap:10px;padding:16px 12px 4px;}
+
+/* Situation list (thay pain points) */
+.ht-situ{display:flex;flex-direction:column;gap:9px;margin-bottom:6px;}
+.ht-situ-row{display:flex;align-items:center;gap:11px;padding:13px 15px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);font-size:13.5px;font-weight:500;color:var(--ht-ink);}
+.ht-situ-row i{width:27px;height:27px;border-radius:9px;flex-shrink:0;background:#F5EAD0;display:flex;align-items:center;justify-content:center;color:var(--ht-gold-deep);font-weight:700;font-size:13px;font-style:normal;}
+
+/* Benefit cards */
+.ht-benefits{display:flex;flex-direction:column;gap:11px;}
+.ht-benefit{display:flex;gap:13px;padding:15px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
+.ht-benefit-ic{width:44px;height:44px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F5EAD0,#FBF2DD);}
+.ht-benefit-ic svg{width:23px;height:23px;stroke:var(--ht-brown);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.ht-benefit-t{font-family:'Cormorant Garamond';font-size:16px;font-weight:700;color:var(--ht-brown);margin-bottom:3px;}
+.ht-benefit-d{font-size:12.5px;color:var(--ht-muted);line-height:1.5;}
+
+/* Editorial ingredient list (hàm lượng theo dòng) */
+.ht-ing{display:flex;flex-direction:column;gap:10px;}
+.ht-ing-row{display:flex;gap:14px;align-items:center;padding:14px 16px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
+.ht-ing-num{font-family:'Cormorant Garamond';font-size:24px;font-weight:700;flex-shrink:0;width:34px;}
+.ht-ing-name{font-family:'Cormorant Garamond';font-size:15px;font-weight:700;color:var(--ht-brown);margin-bottom:2px;}
+.ht-ing-desc{font-size:12px;color:var(--ht-muted);line-height:1.5;}
+.ht-ing-swatch{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;}
+
+/* Spec chips inline */
+.ht-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px;}
+.ht-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-sm);font-family:'Cormorant Garamond';font-size:12.5px;font-weight:700;color:var(--ht-brown);}
+
+/* Feedback scroller */
+.ht-fb-scroll{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 6px;scrollbar-width:none;}
+.ht-fb-scroll::-webkit-scrollbar{display:none;}
+.ht-fb-card{position:relative;flex:0 0 62%;scroll-snap-align:start;aspect-ratio:3/4;border-radius:var(--ht-r-lg);overflow:hidden;box-shadow:var(--ht-sh-md);cursor:zoom-in;}
+.ht-fb-card img{width:100%;height:100%;object-fit:cover;}
+.ht-fb-hint{text-align:center;font-size:11px;color:var(--ht-muted);margin-top:10px;}
+
+/* Compare table (nội bộ 3 dòng) */
+.ht-compare{border-radius:var(--ht-r-lg);overflow:hidden;box-shadow:var(--ht-sh-md);background:#fff;}
+.ht-cmp-head{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;}
+.ht-cmp-hl{padding:12px 4px;font-family:'Cormorant Garamond';font-size:12px;font-weight:700;text-align:center;}
+.ht-cmp-hl.muted{color:var(--ht-muted);background:var(--ht-line-soft);}
+.ht-cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border-top:1px solid var(--ht-line-soft);}
+.ht-cmp-cell{display:flex;align-items:center;justify-content:center;text-align:center;gap:4px;padding:11px 4px;font-size:11px;line-height:1.35;}
+.ht-cmp-cell.label{justify-content:flex-start;text-align:left;color:var(--ht-muted);font-weight:600;padding-left:12px;}
+
+/* ---- Chọn dòng / giỏ hàng (phần lõi) ---- */
+.ht-tier-row{display:flex;gap:8px;margin-bottom:16px;}
+.ht-tier-btn{flex:1;padding:14px 6px;border-radius:var(--ht-r-md);background:#fff;box-shadow:var(--ht-sh-sm);text-align:center;border:2px solid transparent;transition:all .15s;}
+.ht-tier-btn.active{border-color:var(--tier-color,var(--ht-gold));box-shadow:0 8px 20px rgba(74,52,23,.16);}
+.ht-tier-dot{width:14px;height:14px;border-radius:50%;margin:0 auto 6px;background:var(--tier-color,var(--ht-gold));}
+.ht-tier-name{font-family:'Cormorant Garamond';font-size:15px;font-weight:700;color:var(--ht-brown);}
+.ht-tier-sub{font-size:10.5px;color:var(--ht-muted);margin-top:1px;}
+
+.ht-step-label{font-family:'Cormorant Garamond';font-size:14px;font-weight:700;color:var(--ht-brown);margin:16px 0 8px;}
+.ht-qty-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+.ht-qty-chip{flex:1 1 30%;padding:11px 6px;border-radius:var(--ht-r-md);background:#fff;box-shadow:var(--ht-sh-sm);text-align:center;border:2px solid transparent;font-size:12px;color:var(--ht-ink);}
+.ht-qty-chip b{display:block;font-family:'Cormorant Garamond';font-size:15px;color:var(--ht-brown);}
+.ht-qty-chip small{display:block;font-size:9.5px;color:var(--ht-muted);margin-top:2px;}
+.ht-qty-chip.active{border-color:var(--tier-color,var(--ht-gold));background:#FBF2DD;}
+
+.ht-flavor-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.ht-flavor-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
+.ht-flavor-thumb{width:40px;height:40px;border-radius:9px;overflow:hidden;flex-shrink:0;background:var(--ht-line-soft);}
+.ht-flavor-thumb img{width:100%;height:100%;object-fit:cover;}
+.ht-flavor-name{flex:1;font-size:13px;font-weight:600;color:var(--ht-ink);}
+.ht-stepper{display:flex;align-items:center;gap:8px;}
+.ht-stepper button{width:26px;height:26px;border-radius:8px;background:var(--ht-line-soft);color:var(--ht-brown);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.ht-stepper button:active{transform:scale(.92);}
+.ht-stepper span{min-width:18px;text-align:center;font-weight:700;font-size:13px;}
+
+.ht-breakdown-status{padding:10px 14px;border-radius:var(--ht-r-md);text-align:center;font-size:12.5px;font-weight:600;margin-bottom:12px;}
+.ht-breakdown-status.ok{background:#EAF3EC;color:#1E7A5A;}
+.ht-breakdown-status.warn{background:#FBEAEA;color:#B6383F;}
+
+.ht-add-line-btn{width:100%;padding:14px;border-radius:var(--ht-r-pill);background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Cormorant Garamond';font-weight:700;font-size:15px;box-shadow:var(--ht-sh-gold);opacity:1;transition:opacity .15s;}
+.ht-add-line-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+.ht-cart-box{margin-top:18px;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);padding:16px;}
+.ht-cart-empty{text-align:center;font-size:12.5px;color:var(--ht-muted);padding:10px 0;}
+.ht-cart-line{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--ht-line-soft);}
+.ht-cart-line:last-of-type{border-bottom:none;}
+.ht-cart-line-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.ht-cart-line-info{flex:1;min-width:0;}
+.ht-cart-line-title{font-size:12.5px;font-weight:700;color:var(--ht-brown);}
+.ht-cart-line-detail{font-size:11px;color:var(--ht-muted);margin-top:1px;}
+.ht-cart-line-price{font-family:'Cormorant Garamond';font-size:14px;font-weight:700;color:var(--ht-gold-deep);white-space:nowrap;}
+.ht-cart-line-remove{width:22px;height:22px;border-radius:50%;background:var(--ht-line-soft);color:var(--ht-muted);font-size:13px;flex-shrink:0;}
+.ht-cart-total-row{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;margin-top:6px;border-top:1.5px dashed var(--ht-line);}
+.ht-cart-total-label{font-size:13px;color:var(--ht-muted);}
+.ht-cart-total-val{font-family:'Cormorant Garamond';font-size:20px;font-weight:700;color:var(--ht-gold-deep);}
+.ht-cart-actions{display:flex;gap:10px;margin-top:14px;}
+
+/* Steps */
+.ht-steps{display:flex;flex-direction:column;gap:9px;}
+.ht-step{display:flex;gap:13px;align-items:center;padding:13px 15px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);}
+.ht-step-num{width:30px;height:30px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#F5EAD0;color:var(--ht-brown);font-family:'Cormorant Garamond';font-weight:700;font-size:14px;}
+.ht-step-t{font-family:'Cormorant Garamond';font-size:14.5px;font-weight:700;color:var(--ht-brown);}
+.ht-step-d{font-size:11.5px;color:var(--ht-muted);margin-top:2px;}
+.ht-note{margin-top:14px;padding:12px 14px;background:#fff;border:1px dashed var(--ht-gold);border-radius:var(--ht-r-md);font-size:12px;color:var(--ht-ink);text-align:center;line-height:1.5;}
+.ht-note b{color:var(--ht-gold-deep);}
+
+/* Spec table */
+.ht-spec{background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);overflow:hidden;}
+.ht-spec-row{display:flex;padding:13px 16px;border-bottom:1px solid var(--ht-line-soft);font-size:12.5px;}
+.ht-spec-row:last-child{border-bottom:none;}
+.ht-spec-l{flex:0 0 120px;font-family:'Cormorant Garamond';font-weight:700;color:var(--ht-muted);}
+.ht-spec-v{flex:1;color:var(--ht-ink);font-weight:500;}
+
+/* Full-bleed emotional band */
+.ht-fb{position:relative;border-radius:var(--ht-r-lg);overflow:hidden;box-shadow:var(--ht-sh-md);}
+.ht-fb img{width:100%;aspect-ratio:1/1;object-fit:cover;}
+.ht-fb-cap{position:absolute;inset:auto 0 0 0;padding:26px 16px 16px;background:linear-gradient(0deg,rgba(58,46,28,.85),rgba(58,46,28,0));color:#fff;}
+.ht-fb-cap b{font-family:'Cormorant Garamond';font-size:17px;font-weight:700;display:block;}
+
+/* CTA block */
+.ht-ctablock{text-align:center;padding:4px 0;}
+.ht-ctablock-t{font-family:'Cormorant Garamond';font-size:18px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;line-height:1.35;}
+.ht-ctablock-s{font-size:12px;color:var(--ht-muted);margin-bottom:15px;}
+.ht-ctablock-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 34px;background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Cormorant Garamond';font-size:15px;font-weight:700;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-gold);}
+
+/* Reviews */
+.ht-rev-empty{text-align:center;font-size:12.5px;color:var(--ht-muted);padding:24px 0;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-sm);}
+
+/* FAQ */
+.ht-faq{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-sm);overflow:hidden;margin-bottom:9px;}
+.ht-faq-q{padding:15px 16px;font-family:'Cormorant Garamond';font-size:14.5px;font-weight:700;color:var(--ht-brown);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.ht-faq-q::-webkit-details-marker{display:none;}
+.ht-faq-q::after{content:'+';font-size:20px;font-weight:700;color:var(--ht-gold-deep);transition:transform .2s;flex-shrink:0;}
+.ht-faq[open] .ht-faq-q::after{transform:rotate(45deg);}
+.ht-faq-a{padding:0 16px 15px;font-size:12.5px;color:var(--ht-muted);line-height:1.6;}
+
+/* Closing band */
+.ht-closing{margin:16px 10px;border-radius:var(--ht-r-xl);background:linear-gradient(150deg,var(--ht-brown),#6B4A22);padding:30px 18px;text-align:center;position:relative;overflow:hidden;}
+.ht-closing::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(201,151,31,.4),transparent 70%);top:-60px;right:-40px;}
+.ht-closing-t{font-family:'Cormorant Garamond';font-size:19px;font-weight:700;color:#fff;margin-bottom:7px;position:relative;line-height:1.35;}
+.ht-closing-t b{color:#F3D48A;}
+.ht-closing-s{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:18px;position:relative;}
+.ht-closing-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 30px;background:#fff;color:var(--ht-brown);font-family:'Cormorant Garamond';font-size:14.5px;font-weight:700;border-radius:var(--ht-r-pill);position:relative;}
+
+/* Footer */
+.ht-foot{padding:26px 16px;text-align:center;}
+.ht-foot-name{font-family:'Cormorant Garamond';font-size:20px;font-weight:700;color:var(--ht-brown);margin-bottom:5px;}
+.ht-foot-tag{font-family:'Cormorant Garamond';font-size:11px;font-weight:700;color:var(--ht-gold-deep);text-transform:uppercase;letter-spacing:.14em;margin-bottom:12px;}
+.ht-foot-text{font-size:12.5px;color:var(--ht-muted);line-height:1.6;max-width:380px;margin:0 auto 14px;}
+.ht-foot-certs{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;}
+.ht-cert{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:#fff;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-sm);font-size:11px;font-weight:600;color:var(--ht-muted);}
+.ht-legal{padding:18px 16px 24px;text-align:center;border-top:1px solid var(--ht-line-soft);margin-top:8px;}
+.ht-legal-l{font-size:11px;color:var(--ht-muted);margin-bottom:3px;}
+.ht-legal-co{font-family:'Cormorant Garamond';font-size:14px;font-weight:700;color:var(--ht-brown);margin-bottom:10px;}
+.ht-legal-links{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.ht-legal-link{font-size:12px;color:var(--ht-gold-deep);font-weight:700;}
+.ht-legal-sep{color:var(--ht-line);}
+.ht-legal-copy{font-size:10.5px;color:var(--ht-muted);line-height:1.4;}
+
+/* Sticky CTA */
+.ht-sticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--ht-container);z-index:45;background:rgba(255,251,243,.94);backdrop-filter:blur(12px);border-top:1px solid var(--ht-line);padding:10px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 -6px 20px rgba(74,52,23,.1);}
+@media (min-width:768px){.ht-sticky{border-radius:0 0 26px 26px;}}
+.ht-sticky-side{display:flex;gap:14px;padding-right:10px;border-right:1px solid var(--ht-line);}
+.ht-sticky-ic{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px;color:var(--ht-muted);font-size:9.5px;font-weight:600;}
+.ht-sticky-ic svg{width:21px;height:21px;fill:var(--ht-muted);}
+.ht-sticky-buy{flex:1;display:flex;gap:9px;}
+.ht-sticky-cart{flex:1;padding:13px 8px;background:#fff;border:1.5px solid var(--ht-brown);color:var(--ht-brown);font-family:'Cormorant Garamond';font-size:13px;font-weight:700;border-radius:var(--ht-r-pill);white-space:nowrap;}
+.ht-sticky-order{flex:1.35;padding:13px 12px;background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Cormorant Garamond';font-size:15px;font-weight:700;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-gold);white-space:nowrap;}
+
+/* Buy popup / cart modal */
+.ht-popup-overlay{position:fixed;inset:0;background:rgba(58,46,28,.5);z-index:100;display:none;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s ease;}
+.ht-popup-overlay.open{display:flex;opacity:1;}
+.ht-popup{width:100%;max-width:480px;max-height:90vh;background:var(--ht-cream);border-radius:var(--ht-r-xl) var(--ht-r-xl) 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;}
+.ht-popup-overlay.open .ht-popup{transform:translateY(0);}
+@media (min-width:768px){.ht-popup-overlay{align-items:center;}.ht-popup{border-radius:var(--ht-r-xl);max-height:85vh;}}
+.ht-popup-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border-bottom:1px solid var(--ht-line-soft);}
+.ht-popup-title{font-family:'Cormorant Garamond';font-size:17px;font-weight:700;color:var(--ht-brown);}
+.ht-popup-close{width:30px;height:30px;border-radius:50%;background:var(--ht-line-soft);color:var(--ht-brown);font-size:16px;flex-shrink:0;}
+.ht-popup-body{padding:16px;overflow-y:auto;flex:1;}
+.ht-popup-footer{padding:14px 16px;border-top:1px solid var(--ht-line-soft);}
+.ht-field{margin-bottom:12px;}
+.ht-field label{display:block;font-size:12px;font-weight:700;color:var(--ht-brown);margin-bottom:5px;}
+.ht-field input,.ht-field textarea{width:100%;padding:12px 13px;border:1.5px solid var(--ht-line);border-radius:var(--ht-r-md);font-family:inherit;font-size:14px;color:var(--ht-ink);background:#fff;}
+.ht-field input:focus,.ht-field textarea:focus{outline:none;border-color:var(--ht-gold);}
+.ht-field-err{font-size:11px;color:var(--ht-plus);margin-top:4px;min-height:14px;}
+.ht-honeypot{position:absolute;left:-9999px;top:-9999px;}
+.ht-error-banner{background:#FBEAEA;color:#8F2A30;padding:11px 14px;border-radius:var(--ht-r-md);font-size:12.5px;margin-bottom:12px;text-align:center;}
+.ht-submit-btn{width:100%;padding:15px;border-radius:var(--ht-r-pill);background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Cormorant Garamond';font-weight:700;font-size:16px;box-shadow:var(--ht-sh-gold);}
+.ht-submit-btn:disabled{opacity:.55;}
+.ht-success{text-align:center;padding:30px 20px;}
+.ht-success-ic{width:60px;height:60px;border-radius:50%;background:#EAF3EC;color:#1E7A5A;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;}
+.ht-success-t{font-family:'Cormorant Garamond';font-size:19px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;}
+.ht-success-s{font-size:13px;color:var(--ht-muted);margin-bottom:4px;}
+.ht-success-code{font-size:12px;color:var(--ht-muted);}
+
+/* Trust drawer */
+.ht-drawer-overlay{position:fixed;inset:0;background:rgba(58,46,28,.5);z-index:99;display:none;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s;}
+.ht-drawer-overlay.open{display:flex;opacity:1;}
+.ht-drawer{width:100%;max-width:480px;max-height:70vh;background:#fff;border-radius:var(--ht-r-xl) var(--ht-r-xl) 0 0;padding:20px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.ht-drawer-overlay.open .ht-drawer{transform:translateY(0);}
+.ht-drawer-title{font-family:'Cormorant Garamond';font-size:18px;font-weight:700;color:var(--ht-brown);margin-bottom:14px;}
+.ht-drawer-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--ht-line-soft);}
+.ht-drawer-item:last-child{border-bottom:none;}
+.ht-drawer-ic{width:34px;height:34px;border-radius:10px;background:#F5EAD0;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ht-brown);font-weight:700;}
+.ht-drawer-t{font-size:13.5px;font-weight:700;color:var(--ht-brown);}
+.ht-drawer-d{font-size:12px;color:var(--ht-muted);margin-top:2px;line-height:1.5;}
+.ht-drawer-close{width:100%;margin-top:16px;padding:13px;border-radius:var(--ht-r-pill);background:var(--ht-line-soft);color:var(--ht-brown);font-weight:700;font-size:13.5px;}
+
+/* Lightbox */
+.ht-lightbox{position:fixed;inset:0;background:rgba(20,15,8,.92);z-index:120;display:none;align-items:center;justify-content:center;padding:20px;}
+.ht-lightbox.open{display:flex;}
+.ht-lightbox img{max-width:100%;max-height:85vh;border-radius:12px;}
+.ht-lightbox-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:20px;}
+</style>
+</head>
+<body>
+<div class="ht-page" id="htPage">
+
+  <div class="ht-progress-track"><div class="ht-progress-bar" id="htProgress"></div></div>
+
+  <div class="ht-brandbar">
+    <div class="ht-brand">
+      <div class="ht-brand-dot"><img src="assets/images/logo-hoangtrieu.svg" alt="Hoàng Triều"></div>
+      <div class="ht-brand-txt">
+        <span class="ht-brand-name">Hoàng Triều Nest Gift</span>
+        <span class="ht-brand-sub">Quà tặng sức khỏe cao cấp</span>
+      </div>
+    </div>
+    <button class="ht-follow-btn" id="htFollowBtn" type="button">+ Theo dõi</button>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="ht-hero">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-3tang.svg" alt="Yến hũ Hoàng Triều 3 dòng Saving Plus Cao Cấp">
+    <div class="ht-hero-eyebrow"><i></i> YẾN CHƯNG SẴN · 70ML</div>
+  </section>
+  <div class="ht-hero-head ht-reveal">
+    <h1 class="ht-hero-title">Chọn Đúng <b>Dòng Yến</b> Cho Từng Nhu Cầu Chăm Sóc</h1>
+    <p class="ht-hero-sub">Yến chưng sẵn Hoàng Triều — 3 dòng Saving, Plus, Cao Cấp với hàm lượng yến tươi minh bạch, đa dạng hương vị cho từng người thân và từng dịp biếu tặng.</p>
+    <div class="ht-price-row">
+      <span class="ht-price-label">Từ</span>
+      <span class="ht-price-now">69.000đ</span>
+      <span class="ht-price-label">/ hũ</span>
+    </div>
+    <div class="ht-hero-cta">
+      <a class="ht-btn ghost" href="#" id="htHeroChat">Nhắn tin tư vấn</a>
+      <button class="ht-btn solid" id="htHeroCta" type="button">Chọn dòng phù hợp</button>
+    </div>
+    <a class="ht-hero-link" id="htTrustLink" href="#">Vì sao yên tâm chọn Hoàng Triều?</a>
+  </div>
+
+  <!-- ============ INTRO ============ -->
+  <div class="ht-intro ht-reveal">
+    <img class="ht-product-photo ht-zoom" src="assets/images/sosanh-3tang.svg" alt="3 dòng yến hũ Hoàng Triều">
+    <div class="ht-intro-body">
+      <span class="ht-tag">Yến chưng sẵn 70ml</span>
+      <h2 class="ht-intro-title">Yến Hũ Hoàng Triều — Saving · Plus · Cao Cấp</h2>
+      <p class="ht-intro-desc">Ba dòng yến chưng sẵn phân theo hàm lượng yến tươi thật trong từng hũ — từ dùng thử, dùng hằng ngày đến biếu tặng trang trọng. Mỗi dòng đều minh bạch số gram yến ngay trên nhãn.</p>
+      <div class="ht-meta">
+        <span>Chính hãng</span><span class="ht-meta-dot"></span>
+        <span>Có nhà yến riêng</span><span class="ht-meta-dot"></span>
+        <span>Dùng ngay không cần chưng lại</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ht-trust ht-reveal">
+    <div class="ht-trust-chip">
+      <div class="ht-trust-ic"><svg viewBox="0 0 24 24"><path d="M3 12l2-8h14l2 8M5 12v8h14v-8M9 21v-5h6v5"/></svg></div>
+      <span class="ht-trust-t">Nhà yến riêng<br>Khánh Hòa, Ninh Thuận</span>
+    </div>
+    <div class="ht-trust-chip">
+      <div class="ht-trust-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <span class="ht-trust-t">Minh bạch<br>hàm lượng yến</span>
+    </div>
+    <div class="ht-trust-chip">
+      <div class="ht-trust-ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-11.4 8L3 21l1.5-6.6A8.5 8.5 0 1121 11.5z"/></svg></div>
+      <span class="ht-trust-t">Tư vấn tận tâm<br>không ép mua</span>
+    </div>
+  </div>
+
+  <div class="ht-inline-cta ht-reveal">
+    <a class="ht-btn outline" href="#" id="htInlineChat" style="flex:.85;background:#fff;border:1.5px solid var(--ht-brown);color:var(--ht-brown);display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:14px 10px;font-size:13.5px;font-weight:700;border-radius:var(--ht-r-pill);">Nhắn tin hỏi</a>
+    <button class="ht-btn solid" id="htInlineCta" type="button" style="padding:14px 10px;">Chọn dòng — Từ 69.000đ</button>
+  </div>
+
+  <!-- ============ TÌNH HUỐNG (thay pain points) ============ -->
+  <div class="ht-sec-tint ht-tint-a ht-reveal">
+    <div class="ht-eyebrow">Vì sao cần tư vấn đúng dòng</div>
+    <h2 class="ht-title">Mỗi Người Nhận,<br>Một Nhu Cầu Khác Nhau</h2>
+    <p class="ht-sub">Hoàng Triều có sẵn dòng phù hợp cho từng tình huống dưới đây.</p>
+    <div class="ht-situ">
+      <div class="ht-situ-row"><i>1</i> Muốn dùng thử yến hũ lần đầu, chưa biết chọn dòng nào</div>
+      <div class="ht-situ-row"><i>2</i> Gia đình muốn dùng đều hằng ngày, cần ngân sách hợp lý</div>
+      <div class="ht-situ-row"><i>3</i> Mua biếu cha mẹ, người lớn tuổi — muốn dòng "tốt hơn" một chút</div>
+      <div class="ht-situ-row"><i>4</i> Mua cho bé — cần dòng có vị phù hợp trẻ em</div>
+      <div class="ht-situ-row"><i>5</i> Biếu sếp, đối tác — cần món quà trang trọng, hàm lượng yến cao</div>
+    </div>
+  </div>
+
+  <!-- ============ 5 LÝ DO ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-eyebrow">Công dụng</div>
+    <h2 class="ht-title">Vì Sao Chọn Hoàng Triều?</h2>
+    <p class="ht-sub">5 lý do khách hàng tin chọn Hoàng Triều làm quà tặng sức khỏe.</p>
+    <div class="ht-benefits">
+      <div class="ht-benefit"><div class="ht-benefit-ic"><svg viewBox="0 0 24 24"><path d="M3 21l6-6M14 3l7 7-8 8-7-7 8-8z"/></svg></div><div><div class="ht-benefit-t">Nhà yến riêng, kiểm soát từ gốc</div><div class="ht-benefit-d">Khai thác trực tiếp tại Khánh Hòa, Ninh Thuận, Bình Thuận.</div></div></div>
+      <div class="ht-benefit"><div class="ht-benefit-ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M2 12a10 10 0 1020 0 10 10 0 00-20 0z"/></svg></div><div><div class="ht-benefit-t">Hàm lượng yến rõ ràng theo dòng</div><div class="ht-benefit-d">2.000mg (Saving) → 6,0g (Plus) → 10,2g (Cao Cấp) mỗi hũ.</div></div></div>
+      <div class="ht-benefit"><div class="ht-benefit-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><div class="ht-benefit-t">5 hương vị cho nhiều nhu cầu</div><div class="ht-benefit-d">Đường phèn, đường ăn kiêng, nhân sâm, tam vị thảo mộc, Kids.</div></div></div>
+      <div class="ht-benefit"><div class="ht-benefit-ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></div><div><div class="ht-benefit-t">Dùng ngay, không cần chưng lại</div><div class="ht-benefit-d">Tiện cho gia đình bận rộn, mang đi làm, đi học.</div></div></div>
+      <div class="ht-benefit"><div class="ht-benefit-ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 01-11.4 8L3 21l1.5-6.6A8.5 8.5 0 1121 11.5z"/></svg></div><div><div class="ht-benefit-t">Tư vấn đúng người, đúng dịp</div><div class="ht-benefit-d">Không chỉ bán — giúp bạn chọn đúng dòng phù hợp người nhận.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ============ HÀM LƯỢNG THEO DÒNG (editorial) ============ -->
+  <div class="ht-sec-tint ht-tint-b ht-reveal">
+    <div class="ht-eyebrow">03 — Hàm lượng yến</div>
+    <h2 class="ht-title">3 Mức Hàm Lượng —<br>1 Tiêu Chuẩn Minh Bạch</h2>
+    <img class="ht-product-photo ht-zoom" style="border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);margin-bottom:16px;" src="assets/images/macro-plus.svg" alt="Nhãn hũ ghi hàm lượng yến">
+    <div class="ht-ing">
+      <div class="ht-ing-row"><span class="ht-ing-num" style="color:var(--ht-saving)">01</span><div><div class="ht-ing-name"><span class="ht-ing-swatch" style="background:var(--ht-saving)"></span>Saving — Hũ vàng</div><div class="ht-ing-desc">2.000mg yến tươi/hũ 70ml — dùng thử, dùng hằng ngày</div></div></div>
+      <div class="ht-ing-row"><span class="ht-ing-num" style="color:var(--ht-plus)">02</span><div><div class="ht-ing-name"><span class="ht-ing-swatch" style="background:var(--ht-plus)"></span>Plus — Hũ đỏ</div><div class="ht-ing-desc">6,0g yến tươi/hũ 70ml — dùng đều, biếu người thân</div></div></div>
+      <div class="ht-ing-row"><span class="ht-ing-num" style="color:var(--ht-caocap)">03</span><div><div class="ht-ing-name"><span class="ht-ing-swatch" style="background:var(--ht-caocap)"></span>Cao Cấp — Hũ xanh</div><div class="ht-ing-desc">10,2g yến tươi/hũ 70ml — biếu tặng trang trọng</div></div></div>
+    </div>
+  </div>
+
+  <!-- ============ CÁCH DÙNG ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-eyebrow">Cách dùng</div>
+    <h2 class="ht-title">Dùng Ngay, Tiện Lợi Mỗi Ngày</h2>
+    <p class="ht-sub">Không cần chưng lại — mở nắp là dùng được ngay.</p>
+    <img class="ht-product-photo ht-zoom" style="border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);margin-bottom:16px;" src="assets/images/cachdung-rotly.svg" alt="Cách dùng yến hũ Hoàng Triều">
+    <div class="ht-chips">
+      <span class="ht-chip">Dùng trực tiếp</span>
+      <span class="ht-chip">Lắc nhẹ trước khi dùng</span>
+      <span class="ht-chip">Ngon hơn khi uống lạnh</span>
+      <span class="ht-chip">Không cần bảo quản đông</span>
+    </div>
+  </div>
+
+  <!-- ============ FEEDBACK ẢNH THẬT ============ -->
+  <div class="ht-sec-tint ht-tint-a ht-reveal">
+    <div class="ht-eyebrow">Bằng chứng thực tế</div>
+    <h2 class="ht-title">Khách Hàng Nói Gì?</h2>
+    <p class="ht-sub">Phản hồi thực tế từ khách hàng đã dùng yến hũ Hoàng Triều.</p>
+    <div class="ht-fb-scroll">
+      <div class="ht-fb-card ht-zoom-item"><img src="assets/images/feedback-1.svg" alt="Feedback khách hàng"></div>
+      <div class="ht-fb-card ht-zoom-item"><img src="assets/images/feedback-2.svg" alt="Feedback khách hàng"></div>
+      <div class="ht-fb-card ht-zoom-item"><img src="assets/images/feedback-3.svg" alt="Feedback khách hàng"></div>
+      <div class="ht-fb-card ht-zoom-item"><img src="assets/images/feedback-4.svg" alt="Feedback khách hàng"></div>
+      <div class="ht-fb-card ht-zoom-item"><img src="assets/images/feedback-5.svg" alt="Feedback khách hàng"></div>
+    </div>
+    <p class="ht-fb-hint">← Vuốt để xem thêm phản hồi thật →</p>
+  </div>
+
+  <!-- ============ SO SÁNH 3 DÒNG ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-eyebrow">Ưu điểm</div>
+    <h2 class="ht-title">So Sánh 3 Dòng Hoàng Triều</h2>
+    <p class="ht-sub">Không có dòng nào "tốt nhất" — chỉ có dòng phù hợp nhất với nhu cầu của bạn.</p>
+    <div class="ht-compare">
+      <div class="ht-cmp-head">
+        <div class="ht-cmp-hl muted"></div>
+        <div class="ht-cmp-hl" style="background:var(--ht-saving);color:#fff;">Saving</div>
+        <div class="ht-cmp-hl" style="background:var(--ht-plus);color:#fff;">Plus</div>
+        <div class="ht-cmp-hl" style="background:var(--ht-caocap);color:#fff;">Cao Cấp</div>
+      </div>
+      <div class="ht-cmp-row"><div class="ht-cmp-cell label">Yến tươi/hũ</div><div class="ht-cmp-cell">2.000mg</div><div class="ht-cmp-cell">6,0g</div><div class="ht-cmp-cell">10,2g</div></div>
+      <div class="ht-cmp-row"><div class="ht-cmp-cell label">Giá/hũ</div><div class="ht-cmp-cell">69.000đ</div><div class="ht-cmp-cell">89.000đ</div><div class="ht-cmp-cell">139.000đ</div></div>
+      <div class="ht-cmp-row"><div class="ht-cmp-cell label">Số vị</div><div class="ht-cmp-cell">5</div><div class="ht-cmp-cell">5</div><div class="ht-cmp-cell">3</div></div>
+      <div class="ht-cmp-row"><div class="ht-cmp-cell label">Phù hợp</div><div class="ht-cmp-cell">Dùng thử, hằng ngày</div><div class="ht-cmp-cell">Biếu người thân</div><div class="ht-cmp-cell">Biếu trang trọng</div></div>
+    </div>
+  </div>
+
+  <!-- ============ CHỌN DÒNG — GIỎ HÀNG (LÕI) ============ -->
+  <div class="ht-sec-tint ht-tint-b ht-reveal" id="chondong">
+    <div class="ht-eyebrow">Chọn dòng phù hợp</div>
+    <h2 class="ht-title">Chọn Dòng Yến Cho<br>Nhu Cầu Của Bạn</h2>
+    <p class="ht-sub">Chọn tầng, chọn số lượng, tự phối vị theo ý thích — có thể thêm nhiều tầng vào cùng 1 đơn.</p>
+
+    <div class="ht-step-label">Bước 1 — Chọn dòng</div>
+    <div class="ht-tier-row" id="htTierRow"></div>
+
+    <div class="ht-step-label">Bước 2 — Chọn tổng số lượng</div>
+    <div class="ht-qty-row" id="htQtyRow"></div>
+
+    <div class="ht-step-label">Bước 3 — Phân bổ vị (mix tự do)</div>
+    <div class="ht-flavor-list" id="htFlavorList"></div>
+    <div class="ht-breakdown-status" id="htBreakdownStatus"></div>
+
+    <button class="ht-add-line-btn" id="htAddLineBtn" type="button" disabled>Thêm vào đơn</button>
+
+    <div class="ht-cart-box">
+      <div id="htCartLines"><p class="ht-cart-empty">Chưa có dòng nào trong đơn — chọn dòng, số lượng và vị ở trên rồi bấm "Thêm vào đơn".</p></div>
+      <div class="ht-cart-total-row" id="htCartTotalRow" style="display:none;">
+        <span class="ht-cart-total-label">Tổng cộng</span>
+        <span class="ht-cart-total-val" id="htCartTotalVal">0đ</span>
+      </div>
+      <div class="ht-cart-actions" id="htCartActions" style="display:none;">
+        <button class="ht-btn ghost" type="button" id="htCartClearBtn" style="flex:.8;">Xoá đơn</button>
+        <button class="ht-btn solid" type="button" id="htCartCheckoutBtn" style="flex:1.3;">Đặt hàng ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HƯỚNG DẪN SỬ DỤNG ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-eyebrow">Cách dùng</div>
+    <h2 class="ht-title">Hướng Dẫn Sử Dụng — 5 Bước</h2>
+    <div class="ht-steps">
+      <div class="ht-step"><div class="ht-step-num">1</div><div><div class="ht-step-t">Lắc nhẹ hũ trước khi dùng</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">2</div><div><div class="ht-step-t">Mở nắp, dùng trực tiếp</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">3</div><div><div class="ht-step-t">Ngon hơn khi uống lạnh</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">4</div><div><div class="ht-step-t">Mỗi ngày dùng 1–2 lọ</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">5</div><div><div class="ht-step-t">Không dùng sản phẩm hết hạn</div></div></div>
+    </div>
+    <div class="ht-note">Không khuyến nghị cho trẻ dưới 12 tháng. Phụ nữ mang thai 3 tháng đầu hoặc người có cơ địa đặc biệt nên hỏi chuyên gia trước khi dùng.</div>
+  </div>
+
+  <!-- ============ SPEC TABLE ============ -->
+  <div class="ht-sec-tint ht-tint-a ht-reveal">
+    <div class="ht-eyebrow">Thông tin sản phẩm</div>
+    <h2 class="ht-title">Thông Số</h2>
+    <div class="ht-spec">
+      <div class="ht-spec-row"><div class="ht-spec-l">Thể tích</div><div class="ht-spec-v">70ml/hũ</div></div>
+      <div class="ht-spec-row"><div class="ht-spec-l">Hàm lượng yến</div><div class="ht-spec-v">2.000mg / 6,0g / 10,2g tuỳ dòng</div></div>
+      <div class="ht-spec-row"><div class="ht-spec-l">Xuất xứ</div><div class="ht-spec-v">Nhà yến Khánh Hòa, Ninh Thuận</div></div>
+      <div class="ht-spec-row"><div class="ht-spec-l">Bảo quản</div><div class="ht-spec-v">Nơi khô ráo, thoáng mát, tránh nắng trực tiếp</div></div>
+      <div class="ht-spec-row"><div class="ht-spec-l">Hạn sử dụng</div><div class="ht-spec-v">Xem trên nhãn hũ</div></div>
+    </div>
+  </div>
+
+  <!-- ============ FULL-BLEED CẢM XÚC ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-fb">
+      <img class="ht-zoom" src="assets/images/donggoi-hopqua2.svg" alt="Khoảnh khắc trao quà yến sào Hoàng Triều">
+      <div class="ht-fb-cap"><b>Một hũ yến — một lời chăm sóc gửi đến người thân</b></div>
+    </div>
+  </div>
+
+  <!-- ============ CTA GIỮA TRANG ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-ctablock">
+      <div class="ht-ctablock-t">Chưa Chắc Chọn Dòng Nào?</div>
+      <div class="ht-ctablock-s">Nhắn tin — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
+      <a class="ht-ctablock-btn" href="#" id="htMidCta">Nhắn tin tư vấn</a>
+    </div>
+  </div>
+
+  <!-- ============ REVIEWS (chưa có dữ liệu thật) ============ -->
+  <div class="ht-sec-tint ht-tint-b ht-reveal">
+    <div class="ht-eyebrow">Khách hàng nói gì</div>
+    <h2 class="ht-title">Đánh Giá Từ Khách Hàng</h2>
+    <div class="ht-rev-empty">Chưa có đánh giá hiển thị — mục này sẽ cập nhật khi có review thật từ khách hàng.</div>
+  </div>
+
+  <!-- ============ FAQ ============ -->
+  <div class="ht-sec ht-reveal">
+    <div class="ht-eyebrow">Giải đáp</div>
+    <h2 class="ht-title">Câu Hỏi Thường Gặp</h2>
+    <details class="ht-faq"><summary class="ht-faq-q">Có những loại nào?</summary><div class="ht-faq-a">Hoàng Triều có 3 dòng yến hũ 70ml: Saving hũ vàng 2.000mg yến tươi (69.000đ), Plus hũ đỏ 6,0g (89.000đ) và Cao Cấp hũ xanh 10,2g (139.000đ). Mua theo combo càng nhiều càng tiết kiệm.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Saving khác Plus thế nào?</summary><div class="ht-faq-a">Saving có 2.000mg yến tươi/hũ, phù hợp dùng thử hoặc dùng hằng ngày. Plus có 6,0g yến tươi/hũ, phù hợp khi muốn dòng nâng cấp hơn.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Plus khác Cao Cấp thế nào?</summary><div class="ht-faq-a">Plus có 6,0g yến tươi/hũ, Cao Cấp có 10,2g yến tươi/hũ. Nếu biếu tặng trang trọng, nên chọn hũ xanh.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Uống thế nào?</summary><div class="ht-faq-a">Dùng trực tiếp, lắc nhẹ trước khi dùng, ngon hơn khi uống lạnh. Mỗi ngày dùng 1–2 lọ.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Bảo quản thế nào?</summary><div class="ht-faq-a">Bảo quản nơi khô ráo, thoáng mát, tránh nắng trực tiếp và tránh va đập mạnh. Không dùng sản phẩm hết hạn.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Có chữa bệnh không?</summary><div class="ht-faq-a">Yến sào là sản phẩm hỗ trợ bổ sung dưỡng chất, không phải thuốc và không thay thế tư vấn y tế.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Dùng cho trẻ em được không?</summary><div class="ht-faq-a">Có dòng Kids phù hợp trẻ em, nhưng không khuyến nghị cho trẻ dưới 12 tháng. Nếu bé có cơ địa đặc biệt, nên hỏi chuyên gia.</div></details>
+    <details class="ht-faq"><summary class="ht-faq-q">Mua nhiều vị khác nhau trong 1 đơn có được không?</summary><div class="ht-faq-a">Được — khi chọn số lượng ở Bước 2, bạn có thể phân bổ tự do nhiều vị khác nhau trong cùng dòng, và có thể thêm nhiều dòng khác vào cùng 1 đơn hàng.</div></details>
+  </div>
+
+  <!-- ============ CLOSING CTA ============ -->
+  <div class="ht-closing ht-reveal">
+    <div class="ht-closing-t">Sẵn Sàng Chọn Đúng <b>Món Quà Sức Khỏe?</b></div>
+    <div class="ht-closing-s">Hoàng Triều đồng hành cùng bạn chọn đúng dòng yến cho từng người thân.</div>
+    <a class="ht-closing-btn" href="#" id="htClosingCta">Nhắn tin đặt hàng</a>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="ht-foot">
+    <div class="ht-foot-name">Yến Sào – Quà Tặng Hoàng Triều</div>
+    <div class="ht-foot-tag">Quà tặng sức khỏe cao cấp</div>
+    <p class="ht-foot-text">Hoàng Triều chuyên cung cấp yến sào và quà tặng sức khỏe cao cấp, sở hữu hệ thống nhà yến riêng tại Khánh Hòa, Ninh Thuận.</p>
+    <div class="ht-foot-certs">
+      <span class="ht-cert">Nhập trực tiếp nhà yến</span>
+      <span class="ht-cert">Freeship khi mua lẻ 1 hũ Cao Cấp</span>
+      <span class="ht-cert">Tư vấn 24/7</span>
+    </div>
+  </div>
+  <div class="ht-legal">
+    <div class="ht-legal-l">Phân phối bởi</div>
+    <div class="ht-legal-co">Quà Tặng Hoàng Triều</div>
+    <div class="ht-legal-links">
+      <a class="ht-legal-link" href="https://quatanghoangtrieu.com" target="_blank" rel="noopener">Website</a>
+      <span class="ht-legal-sep">·</span>
+      <a class="ht-legal-link" href="#" id="htFootFanpage">Facebook</a>
+      <span class="ht-legal-sep">·</span>
+      <a class="ht-legal-link" href="tel:+84989249686">+84 98 924 96 86</a>
+    </div>
+    <p class="ht-legal-copy">© 2026 Quà Tặng Hoàng Triều · admin@quatanghoangtrieu.com<br>Mua lẻ 1 hũ Saving/Plus tính thêm 19.000đ phí ship. Chính sách ship cho combo từ 3 hũ đang chờ xác nhận.</p>
+  </div>
+
+</div><!-- /.ht-page -->
+
+<!-- ============ STICKY CTA ============ -->
+<div class="ht-sticky">
+  <div class="ht-sticky-side">
+    <a class="ht-sticky-ic" href="#" id="htStickyChat"><svg viewBox="0 0 24 24"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10c-1.6 0-3.1-.4-4.4-1L2 22l1-5.6C2.4 15.1 2 13.6 2 12z"/></svg>Chat</a>
+    <a class="ht-sticky-ic" href="#chondong" id="htStickyStore"><svg viewBox="0 0 24 24"><path d="M3 3h18l-2 9H5L3 3zM5 12l1.5 9h11L19 12M9 21a1 1 0 100-2 1 1 0 000 2zm6 0a1 1 0 100-2 1 1 0 000 2z"/></svg>Cửa hàng</a>
+  </div>
+  <div class="ht-sticky-buy">
+    <a class="ht-sticky-cart" href="#chondong">Thêm giỏ</a>
+    <button class="ht-sticky-order" id="htStickyOrder" type="button">Chọn dòng</button>
+  </div>
+</div>
+
+<!-- ============ TRUST DRAWER ============ -->
+<div class="ht-drawer-overlay" id="htDrawerOverlay">
+  <div class="ht-drawer" role="dialog" aria-modal="true" aria-label="Vì sao yên tâm chọn Hoàng Triều">
+    <div class="ht-drawer-title">Vì Sao Yên Tâm Chọn Hoàng Triều?</div>
+    <div class="ht-drawer-item"><div class="ht-drawer-ic">1</div><div><div class="ht-drawer-t">Nhà yến riêng, nguồn gốc rõ ràng</div><div class="ht-drawer-d">Khai thác trực tiếp tại Khánh Hòa, Ninh Thuận, Bình Thuận — kiểm soát từ gốc.</div></div></div>
+    <div class="ht-drawer-item"><div class="ht-drawer-ic">2</div><div><div class="ht-drawer-t">Minh bạch hàm lượng yến</div><div class="ht-drawer-d">Mỗi dòng ghi rõ số gram yến tươi thật trên nhãn — không mập mờ.</div></div></div>
+    <div class="ht-drawer-item"><div class="ht-drawer-ic">3</div><div><div class="ht-drawer-t">Tư vấn tận tâm, không ép mua</div><div class="ht-drawer-d">Hoàng Triều giúp bạn chọn đúng dòng phù hợp — không chỉ để bán hàng.</div></div></div>
+    <div class="ht-drawer-item"><div class="ht-drawer-ic">4</div><div><div class="ht-drawer-t">Đặt hàng đơn giản, hỗ trợ nhanh</div><div class="ht-drawer-d">Điền thông tin, đội ngũ Hoàng Triều liên hệ xác nhận trong thời gian sớm nhất.</div></div></div>
+    <button class="ht-drawer-close" id="htDrawerClose" type="button">Đóng</button>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="ht-lightbox" id="htLightbox">
+  <button class="ht-lightbox-close" id="htLightboxClose" type="button">✕</button>
+  <img id="htLightboxImg" src="" alt="">
+</div>
+
+<!-- ============ CART / CHECKOUT POPUP ============ -->
+<div class="ht-popup-overlay" id="htPopupOverlay">
+  <div class="ht-popup" id="htPopup" role="dialog" aria-modal="true" aria-label="Đặt hàng">
+    <div class="ht-popup-header">
+      <span class="ht-popup-title" id="htPopupTitle">Đơn hàng của bạn</span>
+      <button class="ht-popup-close" id="htPopupClose" type="button">✕</button>
+    </div>
+    <div class="ht-popup-body" id="htPopupBody"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Session / helpers ---------------- */
+  var sessionStart = Date.now();
+  function qs(sel, ctx){ return (ctx||document).querySelector(sel); }
+  function qsa(sel, ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(sel)); }
+  function fmtVnd(n){ return n.toLocaleString('vi-VN') + 'đ'; }
+  function getUtm(){
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content: params.get('utm_content') || '',
+      utm_term: params.get('utm_term') || ''
+    };
+  }
+  function getCookie(name){
+    var m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return m ? decodeURIComponent(m[2]) : '';
+  }
+
+  /* ---------------- Config (placeholder — thay khi có dữ liệu thật) ---------------- */
+  var CONFIG = {
+    webhookUrl: '', // TODO: dán URL Web App Apps Script sau khi tạo (Task đang chờ)
+    messengerLink: 'https://m.me/hoangtrieu556bn', // đã xác nhận qua Fanpage thật
+    fanpageLink: 'https://www.facebook.com/hoangtrieu556bn/',
+    blockedPhones: []
+  };
+  ['htHeroChat','htInlineChat','htMidCta','htClosingCta','htStickyChat','htFootFanpage'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.href = (id === 'htFootFanpage') ? CONFIG.fanpageLink : CONFIG.messengerLink;
+  });
+
+  /* ---------------- Reading progress ---------------- */
+  var progressBar = qs('#htProgress');
+  function updateProgress(){
+    if (!progressBar) return;
+    var h = document.documentElement;
+    var scrolled = h.scrollTop || document.body.scrollTop;
+    var height = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = height > 0 ? (scrolled / height) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  /* ---------------- Scroll reveal ---------------- */
+  var revealEls = qsa('.ht-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.1});
+    revealEls.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add('in'); }); }, 4000);
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------------- Follow button ---------------- */
+  var followBtn = qs('#htFollowBtn');
+  if (followBtn) followBtn.addEventListener('click', function(){
+    var following = followBtn.classList.toggle('following');
+    followBtn.textContent = following ? '✓ Đang theo dõi' : '+ Theo dõi';
+  });
+
+  /* ---------------- Lightbox ---------------- */
+  var lightbox = qs('#htLightbox');
+  var lightboxImg = qs('#htLightboxImg');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('.ht-zoom') : null;
+    if (t && t.tagName === 'IMG') {
+      lightboxImg.src = t.src;
+      lightboxImg.alt = t.alt || '';
+      lightbox.classList.add('open');
+    }
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+  qs('#htLightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+
+  /* ---------------- Trust drawer ---------------- */
+  var drawerOverlay = qs('#htDrawerOverlay');
+  var drawerLastFocus = null;
+  function openDrawer(){ drawerLastFocus = document.activeElement; drawerOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); document.body.style.overflow=''; if (drawerLastFocus) drawerLastFocus.focus(); }
+  qs('#htTrustLink').addEventListener('click', function(e){ e.preventDefault(); openDrawer(); });
+  qs('#htDrawerClose').addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', function(e){ if (e.target === drawerOverlay) closeDrawer(); });
+
+  /* ---------------- Escape key: close any open overlay ---------------- */
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if (drawerOverlay.classList.contains('open')) closeDrawer();
+    if (lightbox.classList.contains('open')) closeLightbox();
+    if (popupOverlay.classList.contains('open')) closePopup();
+  });
+
+  /* ============================================================
+     GIỎ HÀNG 3 BƯỚC — TIERS DATA
+     ============================================================ */
+  var TIERS = {
+    saving: {
+      key:'saving', label:'Saving', sub:'2.000mg yến tươi', color:'var(--ht-saving)', colorHex:'#D9A62A',
+      combos:[
+        {qty:1, price:69000, note:'+19k ship'},
+        {qty:3, price:169000, note:''},
+        {qty:8, price:439000, note:''},
+        {qty:10, price:569000, note:'Tặng 1 hũ'},
+        {qty:20, price:968000, note:''},
+        {qty:30, price:1399000, note:''}
+      ],
+      shipFeeSingle:19000,
+      flavors:[
+        {key:'duongkieng', label:'Đường Kiêng', img:'jar-saving-duongkieng.svg'},
+        {key:'tamvi', label:'Tam Vị', img:'jar-saving-tamvi.svg'},
+        {key:'nhansam', label:'Nhân Sâm', img:'jar-saving-nhansam.svg'},
+        {key:'duongphen', label:'Đường Phèn', img:'jar-saving-duongphen.svg'},
+        {key:'kids', label:'Kids', img:'jar-saving-kids.svg'}
+      ]
+    },
+    plus: {
+      key:'plus', label:'Plus', sub:'6,0g yến tươi', color:'var(--ht-plus)', colorHex:'#B6383F',
+      combos:[
+        {qty:1, price:89000, note:'+19k ship'},
+        {qty:3, price:249000, note:''},
+        {qty:6, price:479000, note:''},
+        {qty:10, price:829000, note:'Tặng 1 hũ'},
+        {qty:20, price:1449000, note:''},
+        {qty:30, price:2099000, note:''}
+      ],
+      shipFeeSingle:19000,
+      flavors:[
+        {key:'duongkieng', label:'Đường Kiêng', img:'jar-plus-duongkieng.svg'},
+        {key:'tamvi', label:'Tam Vị', img:'jar-plus-tamvi.svg'},
+        {key:'nhansam', label:'Nhân Sâm', img:'jar-plus-nhansam.svg'},
+        {key:'duongphen', label:'Đường Phèn', img:'jar-plus-duongphen.svg'},
+        {key:'kids', label:'Kids', img:'jar-plus-kids.svg'}
+      ]
+    },
+    caocap: {
+      key:'caocap', label:'Cao Cấp', sub:'10,2g yến tươi', color:'var(--ht-caocap)', colorHex:'#1F7A5A',
+      combos:[
+        {qty:1, price:139000, note:'Freeship'},
+        {qty:3, price:389000, note:''},
+        {qty:6, price:749000, note:''},
+        {qty:10, price:1319000, note:'Tặng 1 hũ'},
+        {qty:20, price:2319000, note:''},
+        {qty:30, price:3389000, note:''}
+      ],
+      shipFeeSingle:0,
+      flavors:[
+        {key:'duongkieng', label:'Đường Kiêng', img:'jar-caocap-duongkieng.svg'},
+        {key:'duongphen', label:'Đường Phèn', img:'jar-caocap-duongphen.svg'},
+        {key:'nhansam', label:'Nhân Sâm', img:'jar-caocap-nhansam.svg'}
+      ]
+    }
+  };
+
+  var selector = { tierKey:'saving', qty:1, breakdown:{} };
+  var cart = [];
+
+  function resetBreakdown(){
+    var tier = TIERS[selector.tierKey];
+    selector.breakdown = {};
+    tier.flavors.forEach(function(f){ selector.breakdown[f.key] = 0; });
+  }
+  resetBreakdown();
+
+  function renderTierRow(){
+    var row = qs('#htTierRow');
+    row.innerHTML = '';
+    Object.keys(TIERS).forEach(function(key){
+      var tier = TIERS[key];
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ht-tier-btn' + (selector.tierKey === key ? ' active' : '');
+      btn.style.setProperty('--tier-color', tier.color);
+      btn.innerHTML = '<span class="ht-tier-dot"></span><span class="ht-tier-name">' + tier.label + '</span><span class="ht-tier-sub">' + tier.sub + '</span>';
+      btn.addEventListener('click', function(){
+        selector.tierKey = key;
+        selector.qty = 1;
+        resetBreakdown();
+        renderAll();
+      });
+      row.appendChild(btn);
+    });
+  }
+
+  function renderQtyRow(){
+    var tier = TIERS[selector.tierKey];
+    var row = qs('#htQtyRow');
+    row.innerHTML = '';
+    tier.combos.forEach(function(c){
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'ht-qty-chip' + (selector.qty === c.qty ? ' active' : '');
+      chip.style.setProperty('--tier-color', tier.color);
+      chip.innerHTML = '<b>' + c.qty + ' hũ</b>' + fmtVnd(c.price) + (c.note ? '<small>' + c.note + '</small>' : '');
+      chip.addEventListener('click', function(){
+        selector.qty = c.qty;
+        resetBreakdown();
+        renderAll();
+      });
+      row.appendChild(chip);
+    });
+  }
+
+  function renderFlavorList(){
+    var tier = TIERS[selector.tierKey];
+    var list = qs('#htFlavorList');
+    list.innerHTML = '';
+    tier.flavors.forEach(function(f){
+      var row = document.createElement('div');
+      row.className = 'ht-flavor-row';
+      row.innerHTML =
+        '<div class="ht-flavor-thumb"><img src="assets/images/' + f.img + '" alt="' + f.label + '"></div>' +
+        '<span class="ht-flavor-name">' + f.label + '</span>' +
+        '<div class="ht-stepper">' +
+          '<button type="button" data-act="dec" data-k="' + f.key + '">−</button>' +
+          '<span id="htFlavorQty-' + f.key + '">' + selector.breakdown[f.key] + '</span>' +
+          '<button type="button" data-act="inc" data-k="' + f.key + '">+</button>' +
+        '</div>';
+      list.appendChild(row);
+    });
+    qsa('.ht-stepper button', list).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var k = btn.getAttribute('data-k');
+        var act = btn.getAttribute('data-act');
+        var cur = selector.breakdown[k] || 0;
+        if (act === 'inc') cur++;
+        else cur = Math.max(0, cur - 1);
+        selector.breakdown[k] = cur;
+        qs('#htFlavorQty-' + k).textContent = cur;
+        renderBreakdownStatus();
+      });
+    });
+  }
+
+  function breakdownSum(){
+    return Object.keys(selector.breakdown).reduce(function(s,k){ return s + selector.breakdown[k]; }, 0);
+  }
+
+  function renderBreakdownStatus(){
+    var sum = breakdownSum();
+    var status = qs('#htBreakdownStatus');
+    var addBtn = qs('#htAddLineBtn');
+    if (sum === selector.qty) {
+      status.className = 'ht-breakdown-status ok';
+      status.textContent = '✓ Đã phân bổ đủ ' + selector.qty + ' hũ';
+      addBtn.disabled = false;
+    } else if (sum < selector.qty) {
+      status.className = 'ht-breakdown-status warn';
+      status.textContent = 'Đã chọn ' + sum + '/' + selector.qty + ' hũ — còn ' + (selector.qty - sum) + ' hũ chưa phân vị';
+      addBtn.disabled = true;
+    } else {
+      status.className = 'ht-breakdown-status warn';
+      status.textContent = 'Đã chọn ' + sum + '/' + selector.qty + ' hũ — dư ' + (sum - selector.qty) + ' hũ, giảm bớt để khớp';
+      addBtn.disabled = true;
+    }
+  }
+
+  function comboPriceFor(tierKey, qty){
+    var tier = TIERS[tierKey];
+    var c = tier.combos.filter(function(c){ return c.qty === qty; })[0];
+    return c ? c.price : 0;
+  }
+
+  function shipFeeFor(tierKey, qty){
+    if (qty !== 1) return 0;
+    return TIERS[tierKey].shipFeeSingle;
+  }
+
+  function renderAll(){
+    renderTierRow();
+    renderQtyRow();
+    renderFlavorList();
+    renderBreakdownStatus();
+  }
+  renderAll();
+
+  qs('#htAddLineBtn').addEventListener('click', function(){
+    var tier = TIERS[selector.tierKey];
+    var price = comboPriceFor(selector.tierKey, selector.qty);
+    var ship = shipFeeFor(selector.tierKey, selector.qty);
+    var breakdown = {};
+    Object.keys(selector.breakdown).forEach(function(k){ if (selector.breakdown[k] > 0) breakdown[k] = selector.breakdown[k]; });
+    cart.push({
+      tierKey: selector.tierKey,
+      tierLabel: tier.label,
+      colorHex: tier.colorHex,
+      qty: selector.qty,
+      breakdown: breakdown,
+      price: price,
+      ship: ship
+    });
+    selector.qty = 1;
+    resetBreakdown();
+    renderAll();
+    renderCart();
+  });
+
+  function flavorLabel(tierKey, flavorKey){
+    var f = TIERS[tierKey].flavors.filter(function(f){ return f.key === flavorKey; })[0];
+    return f ? f.label : flavorKey;
+  }
+
+  function cartTotals(){
+    var total = 0, ship = 0;
+    cart.forEach(function(line){ total += line.price; ship += line.ship; });
+    return {subtotal: total, ship: ship, grand: total + ship};
+  }
+
+  function renderCart(){
+    var wrap = qs('#htCartLines');
+    var totalRow = qs('#htCartTotalRow');
+    var actions = qs('#htCartActions');
+    if (cart.length === 0) {
+      wrap.innerHTML = '<p class="ht-cart-empty">Chưa có dòng nào trong đơn — chọn dòng, số lượng và vị ở trên rồi bấm "Thêm vào đơn".</p>';
+      totalRow.style.display = 'none';
+      actions.style.display = 'none';
+      return;
+    }
+    wrap.innerHTML = '';
+    cart.forEach(function(line, idx){
+      var detail = Object.keys(line.breakdown).map(function(k){ return line.breakdown[k] + ' ' + flavorLabel(line.tierKey, k); }).join(', ');
+      var row = document.createElement('div');
+      row.className = 'ht-cart-line';
+      row.innerHTML =
+        '<span class="ht-cart-line-dot" style="background:' + line.colorHex + '"></span>' +
+        '<div class="ht-cart-line-info"><div class="ht-cart-line-title">' + line.tierLabel + ' × ' + line.qty + ' hũ</div><div class="ht-cart-line-detail">' + detail + (line.ship ? ' · +' + fmtVnd(line.ship) + ' ship' : '') + '</div></div>' +
+        '<span class="ht-cart-line-price">' + fmtVnd(line.price + line.ship) + '</span>' +
+        '<button type="button" class="ht-cart-line-remove" data-idx="' + idx + '">✕</button>';
+      wrap.appendChild(row);
+    });
+    qsa('.ht-cart-line-remove', wrap).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        cart.splice(parseInt(btn.getAttribute('data-idx'), 10), 1);
+        renderCart();
+      });
+    });
+    var totals = cartTotals();
+    qs('#htCartTotalVal').textContent = fmtVnd(totals.grand);
+    totalRow.style.display = 'flex';
+    actions.style.display = 'flex';
+  }
+
+  qs('#htCartClearBtn').addEventListener('click', function(){
+    if (cart.length && !confirm('Xoá toàn bộ đơn hàng đang chọn?')) return;
+    cart = [];
+    renderCart();
+  });
+
+  /* Scroll shortcuts to package selector */
+  ['htHeroCta','htInlineCta','htStickyOrder'].forEach(function(id){
+    var el = qs('#' + id);
+    if (el) el.addEventListener('click', function(){
+      document.getElementById('chondong').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  /* ============================================================
+     CHECKOUT POPUP
+     ============================================================ */
+  var popupOverlay = qs('#htPopupOverlay');
+  var popupBody = qs('#htPopupBody');
+  var popupTitle = qs('#htPopupTitle');
+  var popupLastFocus = null;
+  var formValues = {fullname:'', phone:'', address:'', note:''};
+  var submitting = false;
+  var errorMsg = '';
+
+  function openPopup(){
+    if (cart.length === 0) { alert('Vui lòng chọn ít nhất 1 dòng sản phẩm trước khi đặt hàng.'); return; }
+    popupLastFocus = document.activeElement;
+    popupOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderCheckoutForm();
+  }
+  function closePopup(){
+    popupOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (popupLastFocus) popupLastFocus.focus();
+  }
+  qs('#htPopupClose').addEventListener('click', closePopup);
+  popupOverlay.addEventListener('click', function(e){ if (e.target === popupOverlay) closePopup(); });
+  qs('#htCartCheckoutBtn').addEventListener('click', openPopup);
+
+  function captureFormValues(){
+    var f = qs('#htFieldFullname'); var p = qs('#htFieldPhone'); var a = qs('#htFieldAddress'); var n = qs('#htFieldNote');
+    if (f) formValues.fullname = f.value;
+    if (p) formValues.phone = p.value;
+    if (a) formValues.address = a.value;
+    if (n) formValues.note = n.value;
+  }
+
+  function renderCheckoutForm(){
+    popupTitle.textContent = 'Xác nhận đặt hàng';
+    var totals = cartTotals();
+    var linesHtml = cart.map(function(line){
+      var detail = Object.keys(line.breakdown).map(function(k){ return line.breakdown[k] + ' ' + flavorLabel(line.tierKey, k); }).join(', ');
+      return '<div class="ht-cart-line"><span class="ht-cart-line-dot" style="background:' + line.colorHex + '"></span><div class="ht-cart-line-info"><div class="ht-cart-line-title">' + line.tierLabel + ' × ' + line.qty + ' hũ</div><div class="ht-cart-line-detail">' + detail + '</div></div><span class="ht-cart-line-price">' + fmtVnd(line.price + line.ship) + '</span></div>';
+    }).join('');
+
+    popupBody.innerHTML =
+      (errorMsg ? '<div class="ht-error-banner">' + errorMsg + '</div>' : '') +
+      '<div style="margin-bottom:14px;">' + linesHtml + '</div>' +
+      '<div class="ht-cart-total-row" style="margin-bottom:16px;"><span class="ht-cart-total-label">Tổng cộng (đã gồm ship nếu có)</span><span class="ht-cart-total-val">' + fmtVnd(totals.grand) + '</span></div>' +
+      '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
+      '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" id="htFieldPhone" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
+      '<div class="ht-field"><label>Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" rows="2">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
+      '<div class="ht-field"><label>Ghi chú (không bắt buộc)</label><textarea id="htFieldNote" rows="2">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
+      '<input type="text" class="ht-honeypot" id="htHoneypot" tabindex="-1" autocomplete="off">' +
+      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Xác nhận đặt hàng') + '</button>';
+
+    ['htFieldFullname','htFieldPhone','htFieldAddress','htFieldNote'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', captureFormValues);
+    });
+    qs('#htSubmitBtn').addEventListener('click', submitOrder);
+  }
+
+  function validatePhone(v){
+    v = v.replace(/\s+/g,'');
+    return /^(0\d{9}|\+84\d{9})$/.test(v);
+  }
+
+  function genOrderCode(){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var out = '';
+    for (var i=0;i<8;i++) out += chars[Math.floor(Math.random()*chars.length)];
+    return out;
+  }
+
+  function submitOrder(){
+    captureFormValues();
+    var honeypot = qs('#htHoneypot').value;
+    if (honeypot) return; // bot — im lặng bỏ qua
+
+    var okName = formValues.fullname.trim().length > 0;
+    var okPhone = validatePhone(formValues.phone);
+    var okAddress = formValues.address.trim().length > 0;
+    var okBlocked = CONFIG.blockedPhones.indexOf(formValues.phone.replace(/\s+/g,'')) === -1;
+
+    qs('#htErrFullname').textContent = okName ? '' : 'Vui lòng nhập họ tên';
+    qs('#htErrPhone').textContent = okPhone ? (okBlocked ? '' : 'Số điện thoại không hợp lệ') : 'Số điện thoại không đúng định dạng (VD: 0989249686)';
+    qs('#htErrAddress').textContent = okAddress ? '' : 'Vui lòng nhập địa chỉ nhận hàng';
+
+    if (!okName || !okPhone || !okAddress || !okBlocked) return;
+
+    submitting = true;
+    errorMsg = '';
+    renderCheckoutForm();
+
+    var totals = cartTotals();
+    var utm = getUtm();
+    var payload = {
+      order_code: genOrderCode(),
+      timestamp: new Date().toISOString(),
+      fullname: formValues.fullname.trim(),
+      phone: formValues.phone.replace(/\s+/g,''),
+      address: formValues.address.trim(),
+      note: formValues.note.trim(),
+      items: cart.map(function(line){
+        return {
+          tier: line.tierLabel,
+          qty: line.qty,
+          breakdown: line.breakdown,
+          price: line.price,
+          ship: line.ship
+        };
+      }),
+      subtotal: totals.subtotal,
+      shipping_fee: totals.ship,
+      grand_total: totals.grand,
+      currency: 'VND',
+      utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign, utm_content: utm.utm_content, utm_term: utm.utm_term,
+      page_url: window.location.href,
+      referrer: document.referrer,
+      session_duration: Math.round((Date.now() - sessionStart) / 1000),
+      client_user_agent: navigator.userAgent,
+      fbc: getCookie('_fbc'),
+      fbp: getCookie('_fbp')
+    };
+
+    if (!CONFIG.webhookUrl) {
+      console.log('[DEMO MODE — chưa có webhookUrl] Đơn hàng:', payload);
+      submitting = false;
+      showSuccess(payload);
+      return;
+    }
+
+    fetch(CONFIG.webhookUrl, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify(payload)
+    }).then(function(){
+      submitting = false;
+      showSuccess(payload);
+    }).catch(function(){
+      submitting = false;
+      errorMsg = 'Có lỗi kết nối mạng. Vui lòng thử lại — thông tin bạn đã nhập vẫn được giữ nguyên.';
+      renderCheckoutForm();
+    });
+  }
+
+  function showSuccess(payload){
+    popupTitle.textContent = 'Đặt hàng thành công';
+    popupBody.innerHTML =
+      '<div class="ht-success">' +
+        '<div class="ht-success-ic">✓</div>' +
+        '<div class="ht-success-t">Cảm ơn ' + payload.fullname + '!</div>' +
+        '<div class="ht-success-s">Hoàng Triều đã nhận đơn, đội ngũ sẽ liên hệ xác nhận sớm.</div>' +
+        '<div class="ht-success-code">Mã đơn: ' + payload.order_code + ' · Tổng: ' + fmtVnd(payload.grand_total) + '</div>' +
+      '</div>';
+    cart = [];
+    renderCart();
+    formValues = {fullname:'', phone:'', address:'', note:''};
+  }
+
+})();
+</script>
+</body>
+</html>
