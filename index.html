@@ -25,7 +25,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 
 <!-- Facebook Pixel: chưa gắn theo yêu cầu hiện tại. Khi cần chạy ads, thêm snippet chuẩn +
      fbq('track','PageView') ngay sau <head>, ViewContent khi load xong,
@@ -75,7 +75,7 @@ body{
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   padding-bottom:96px;
 }
-h1,h2,h3,.ht-display{font-family:'Be Vietnam Pro';letter-spacing:0;}
+h1,h2,h3,.ht-display{font-family:'Lora',serif;letter-spacing:0;}
 img{max-width:100%;display:block;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2.5px solid var(--ht-gold-deep);outline-offset:2px;}
@@ -117,7 +117,7 @@ a{color:inherit;text-decoration:none;}
 }
 .ht-brand-dot img{width:100%;height:100%;object-fit:cover;}
 .ht-brand-txt{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
-.ht-brand-name{font-family:'Be Vietnam Pro';font-size:17.5px;font-weight:700;color:var(--ht-brown);letter-spacing:.02em;white-space:nowrap;}
+.ht-brand-name{font-family:'Lora',serif;font-size:18.5px;font-weight:700;color:var(--ht-brown);letter-spacing:.01em;white-space:nowrap;}
 .ht-brand-sub{font-size:13.5px;color:var(--ht-muted);white-space:nowrap;}
 .ht-header-cta{
   flex-shrink:0;padding:11px 18px;border-radius:var(--ht-r-pill);
@@ -178,16 +178,24 @@ a{color:inherit;text-decoration:none;}
 .ht-tstrip-ic svg{width:20px;height:20px;stroke:var(--ht-brown);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 .ht-tstrip-t{font-family:'Be Vietnam Pro';font-size:15.5px;font-weight:700;color:var(--ht-brown);line-height:1.32;}
 
-/* Comparison cards (So sánh 3 dòng) */
-.ht-pcards{display:flex;flex-direction:column;gap:12px;}
-.ht-pcard{background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);padding:18px;border:2px solid transparent;}
+/* Comparison cards (So sánh 3 dòng) — carousel */
+.ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
+.ht-pcards::-webkit-scrollbar{display:none;}
+.ht-pcard{flex:0 0 84%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);padding:16px;border:2px solid transparent;position:relative;}
 .ht-pcard.hl{border-color:var(--ht-gold);}
-.ht-pcard-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.ht-pcard-photo-wrap{position:relative;margin:-16px -16px 14px;overflow:hidden;border-radius:var(--ht-r-lg) var(--ht-r-lg) 0 0;}
+.ht-pcard-photo{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.ht-pcard-badge{position:absolute;top:12px;left:12px;background:var(--ht-plus);color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-sm);}
+.ht-pcard-fav{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.92);color:var(--ht-gold-deep);font-size:12.5px;font-weight:700;padding:5px 11px;border-radius:var(--ht-r-pill);}
+.ht-pcard-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .ht-pcard-dot{width:15px;height:15px;border-radius:50%;flex-shrink:0;}
-.ht-pcard-name{font-family:'Be Vietnam Pro';font-size:21.5px;font-weight:700;color:var(--ht-brown);}
+.ht-pcard-name{font-family:'Lora',serif;font-size:23px;font-weight:700;color:var(--ht-brown);}
+.ht-pcard-trustrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.ht-pcard-trust{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:#1E7A5A;background:var(--ht-mint);padding:4px 10px;border-radius:var(--ht-r-pill);}
 .ht-pcard-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
 .ht-pcard-chip{padding:5px 12px;border-radius:var(--ht-r-pill);background:var(--ht-line-soft);font-size:15px;font-weight:600;color:var(--ht-ink);}
-.ht-pcard-price{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.ht-pcard-price{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+.ht-pcard-was{font-size:15.5px;color:var(--ht-muted);text-decoration:line-through;}
 .ht-pcard-price b{font-family:'Be Vietnam Pro';font-size:23.5px;font-weight:700;color:var(--ht-brown);}
 .ht-pcard-price span{font-size:15px;color:var(--ht-muted);}
 .ht-pcard-combo{font-size:15px;color:var(--ht-muted);margin-bottom:14px;}
@@ -207,6 +215,20 @@ a{color:inherit;text-decoration:none;}
 
 /* Inline CTA */
 .ht-inline-cta{display:flex;gap:10px;padding:16px 12px 4px;}
+
+/* Countdown tư vấn trong ngày (thật — không phải giảm giá/hết hàng ảo) */
+.ht-countdown{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 12px 0;padding:11px 14px;background:linear-gradient(100deg,#FBF2DD,#F8E7BE);border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-sm);}
+.ht-countdown-t{font-size:14.5px;font-weight:600;color:var(--ht-brown);}
+.ht-countdown-clock{font-family:'Be Vietnam Pro';font-weight:700;font-size:15.5px;color:var(--ht-gold-deep);background:#fff;padding:4px 10px;border-radius:var(--ht-r-pill);min-width:64px;text-align:center;}
+
+/* Toast gợi ý xem feedback thật (không phải đơn hàng giả) */
+.ht-toast{position:fixed;left:50%;bottom:78px;transform:translate(-50%,20px);width:calc(100% - 32px);max-width:calc(var(--ht-container) - 32px);z-index:70;background:#fff;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);padding:13px 14px;display:flex;align-items:center;gap:11px;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;}
+.ht-toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+.ht-toast-ic{width:38px;height:38px;border-radius:11px;flex-shrink:0;overflow:hidden;box-shadow:var(--ht-sh-sm);}
+.ht-toast-ic img{width:100%;height:100%;object-fit:cover;}
+.ht-toast-txt{flex:1;font-size:14.5px;color:var(--ht-ink);line-height:1.4;}
+.ht-toast-txt b{color:var(--ht-brown);}
+.ht-toast-close{width:26px;height:26px;border-radius:50%;background:var(--ht-line-soft);color:var(--ht-muted);font-size:14px;flex-shrink:0;}
 
 /* ---- Chọn dòng / giỏ hàng (phần lõi) ---- */
 .ht-tier-row{display:flex;gap:8px;margin-bottom:18px;}
@@ -295,6 +317,13 @@ a{color:inherit;text-decoration:none;}
 .ht-spec-l{flex:0 0 128px;font-family:'Be Vietnam Pro';font-weight:700;color:var(--ht-muted);}
 .ht-spec-v{flex:1;color:var(--ht-ink);font-weight:500;}
 
+/* Cert gallery */
+.ht-cert-grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 2px 6px;scrollbar-width:none;}
+.ht-cert-grid::-webkit-scrollbar{display:none;}
+.ht-cert-card{flex:0 0 46%;scroll-snap-align:start;}
+.ht-cert-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-md);cursor:zoom-in;background:#fff;}
+.ht-cert-cap{font-size:14px;color:var(--ht-muted);line-height:1.4;margin-top:8px;text-align:center;}
+
 /* Feedback thật */
 .ht-feed-grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 6px;scrollbar-width:none;}
 .ht-feed-grid::-webkit-scrollbar{display:none;}
@@ -304,21 +333,21 @@ a{color:inherit;text-decoration:none;}
 
 /* CTA block */
 .ht-ctablock{text-align:center;padding:4px 0;}
-.ht-ctablock-t{font-family:'Be Vietnam Pro';font-size:20.5px;font-weight:700;color:var(--ht-brown);margin-bottom:7px;line-height:1.38;}
+.ht-ctablock-t{font-family:'Lora',serif;font-size:21.5px;font-weight:700;color:var(--ht-brown);margin-bottom:7px;line-height:1.38;}
 .ht-ctablock-s{font-size:15.5px;color:var(--ht-muted);margin-bottom:16px;}
 .ht-ctablock-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 34px;background:linear-gradient(100deg,var(--ht-gold),var(--ht-gold-deep));color:#fff;font-family:'Be Vietnam Pro';font-size:17.5px;font-weight:700;border-radius:var(--ht-r-pill);box-shadow:var(--ht-sh-gold);min-height:48px;}
 
 /* Closing band */
 .ht-closing{margin:16px 10px;border-radius:var(--ht-r-xl);background:linear-gradient(150deg,var(--ht-brown),#6B4A22);padding:32px 18px;text-align:center;position:relative;overflow:hidden;}
 .ht-closing::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(201,151,31,.4),transparent 70%);top:-60px;right:-40px;}
-.ht-closing-t{font-family:'Be Vietnam Pro';font-size:21.5px;font-weight:700;color:#fff;margin-bottom:8px;position:relative;line-height:1.38;}
+.ht-closing-t{font-family:'Lora',serif;font-size:22.5px;font-weight:700;color:#fff;margin-bottom:8px;position:relative;line-height:1.38;}
 .ht-closing-t b{color:#F3D48A;}
 .ht-closing-s{font-size:15.5px;color:rgba(255,255,255,.78);margin-bottom:20px;position:relative;}
 .ht-closing-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 30px;background:#fff;color:var(--ht-brown);font-family:'Be Vietnam Pro';font-size:17px;font-weight:700;border-radius:var(--ht-r-pill);position:relative;min-height:48px;}
 
 /* Footer */
 .ht-foot{padding:28px 16px;text-align:center;}
-.ht-foot-name{font-family:'Be Vietnam Pro';font-size:22.5px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;}
+.ht-foot-name{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;}
 .ht-foot-tag{font-family:'Be Vietnam Pro';font-size:14px;font-weight:700;color:var(--ht-gold-deep);text-transform:uppercase;letter-spacing:.14em;margin-bottom:13px;}
 .ht-foot-text{font-size:15.5px;color:var(--ht-muted);line-height:1.6;max-width:380px;margin:0 auto 15px;}
 .ht-foot-certs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
@@ -377,7 +406,7 @@ a{color:inherit;text-decoration:none;}
 .ht-submit-btn:disabled{opacity:.55;}
 .ht-success{text-align:center;padding:30px 20px;}
 .ht-success-ic{width:60px;height:60px;border-radius:50%;background:#EAF3EC;color:#1E7A5A;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:31.5px;}
-.ht-success-t{font-family:'Be Vietnam Pro';font-size:20.5px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;}
+.ht-success-t{font-family:'Lora',serif;font-size:21.5px;font-weight:700;color:var(--ht-brown);margin-bottom:6px;}
 .ht-success-s{font-size:16px;color:var(--ht-muted);margin-bottom:4px;}
 .ht-success-code{font-size:15px;color:var(--ht-muted);}
 
@@ -430,12 +459,19 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-price-row">
       <span class="ht-price-label">Từ</span>
       <span class="ht-price-now">69.000đ/hũ</span>
-      <span class="ht-price-label">· Combo từ 169.000đ</span>
+      <span class="ht-price-label">· Combo từ 169.000đ · Miễn phí ship từ 3 hũ</span>
     </div>
     <div class="ht-hero-cta">
       <a class="ht-btn ghost" href="#nguongoc" id="htHeroOrigin">Xem nguồn gốc</a>
       <button class="ht-btn solid" id="htHeroCta" type="button">Chọn dòng &amp; combo</button>
     </div>
+  </div>
+
+  <!-- ============ COUNTDOWN TƯ VẤN TRONG NGÀY (thật, không phải giảm giá ảo) ============ -->
+  <div class="ht-countdown ht-reveal">
+    <span class="ht-countdown-t">💬 Nhắn Zalo trước</span>
+    <span class="ht-countdown-clock" id="htCountdownClock">--:--:--</span>
+    <span class="ht-countdown-t">hôm nay để được tư vấn ngay</span>
   </div>
 
   <!-- ============ 3. TRUST STRIP (dải bằng chứng nhanh) ============ -->
@@ -464,6 +500,7 @@ a{color:inherit;text-decoration:none;}
     <h2 class="ht-title">Chọn Dòng Phù Hợp<br>Với Nhu Cầu</h2>
     <p class="ht-sub">Không có dòng nào "tốt nhất" — chỉ có dòng phù hợp nhất với người bạn muốn chăm sóc.</p>
     <div class="ht-pcards" id="htPcards"></div>
+    <p class="ht-feed-hint">← Vuốt để xem cả 3 dòng →</p>
   </div>
 
   <!-- ============ 5. HƯỚNG DẪN CHỌN VỊ ============ -->
@@ -529,7 +566,13 @@ a{color:inherit;text-decoration:none;}
         </div>
       </div>
     </div>
-    <img class="ht-zoom" style="width:200px;margin:16px auto 0;display:block;border-radius:var(--ht-r-lg);box-shadow:var(--ht-sh-md);" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm">
+    <div class="ht-cert-grid">
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm"><div class="ht-cert-cap">ISO 22000:2018<br>An toàn thực phẩm</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-nhanhieu.jpg" alt="Giấy chứng nhận đăng ký nhãn hiệu Hoàng Triều"><div class="ht-cert-cap">Đăng ký nhãn hiệu<br>Cục Sở hữu trí tuệ</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-dkkd.jpg" alt="Giấy chứng nhận đăng ký doanh nghiệp Hoàng Triều"><div class="ht-cert-cap">Đăng ký doanh nghiệp<br>Sở KH&amp;ĐT Bắc Ninh</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" src="assets/images/cert-congbo.jpg" alt="Thông báo tiếp nhận công bố sản phẩm thực phẩm"><div class="ht-cert-cap">Tiếp nhận công bố SP<br>Sở NN&amp;MT Bắc Ninh</div></div>
+    </div>
+    <p class="ht-feed-hint">← Vuốt để xem đầy đủ giấy tờ →</p>
     <div class="ht-spec">
       <div class="ht-spec-row"><div class="ht-spec-l">Thể tích</div><div class="ht-spec-v">70ml/hũ</div></div>
       <div class="ht-spec-row"><div class="ht-spec-l">Hàm lượng yến</div><div class="ht-spec-v">2g / 6g / 10,2g tuỳ dòng</div></div>
@@ -603,6 +646,7 @@ a{color:inherit;text-decoration:none;}
     <p class="ht-foot-text">Hoàng Triều chuyên cung cấp yến sào và quà tặng sức khỏe cao cấp, sở hữu hệ thống nhà yến riêng tại Khánh Hòa, Ninh Thuận.</p>
     <div class="ht-foot-certs">
       <span class="ht-cert">Nhập trực tiếp nhà yến</span>
+      <span class="ht-cert">Freeship từ combo 3 hũ (mọi dòng)</span>
       <span class="ht-cert">Freeship khi mua lẻ 1 hũ Cao Cấp</span>
     </div>
   </div>
@@ -638,6 +682,13 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-drawer-item"><div class="ht-drawer-ic">4</div><div><div class="ht-drawer-t">Đặt hàng đơn giản, hỗ trợ nhanh</div><div class="ht-drawer-d">Điền thông tin, đội ngũ Hoàng Triều liên hệ xác nhận trong thời gian sớm nhất.</div></div></div>
     <button class="ht-drawer-close" id="htDrawerClose" type="button">Đóng</button>
   </div>
+</div>
+
+<!-- ============ TOAST GỢI Ý FEEDBACK THẬT ============ -->
+<div class="ht-toast" id="htToast">
+  <div class="ht-toast-ic"><img src="assets/images/feedback-01.jpeg" alt=""></div>
+  <div class="ht-toast-txt"><b>Khách hàng nói gì?</b><br>Xem phản hồi thật từ khách đã đặt Hoàng Triều.</div>
+  <button class="ht-toast-close" id="htToastClose" type="button" aria-label="Đóng">✕</button>
 </div>
 
 <!-- ============ LIGHTBOX ============ -->
@@ -766,6 +817,41 @@ a{color:inherit;text-decoration:none;}
     if (popupOverlay.classList.contains('open')) closePopup();
   });
 
+  /* ---------------- Countdown tư vấn trong ngày (giờ thật của khách, tự lặp lại mỗi ngày) ---------------- */
+  (function countdown(){
+    var clockEl = qs('#htCountdownClock');
+    if (!clockEl) return;
+    function tick(){
+      var now = new Date();
+      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+      var diff = Math.max(0, end - now);
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      function pad(n){ return (n < 10 ? '0' : '') + n; }
+      clockEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ---------------- Toast gợi ý feedback thật (1 lần/phiên, không phải đơn hàng giả) ---------------- */
+  (function feedbackToast(){
+    var toast = qs('#htToast');
+    if (!toast || sessionStorage.getItem('ht_toast_shown')) return;
+    var timer = setTimeout(function(){
+      toast.classList.add('show');
+      sessionStorage.setItem('ht_toast_shown', '1');
+      setTimeout(function(){ toast.classList.remove('show'); }, 7000);
+    }, 9000);
+    toast.addEventListener('click', function(e){
+      if (e.target.id === 'htToastClose') { toast.classList.remove('show'); clearTimeout(timer); return; }
+      toast.classList.remove('show');
+      var feedSec = qsa('.ht-sec-tint.ht-tint-c').pop();
+      if (feedSec) feedSec.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  })();
+
   /* ============================================================
      DỮ LIỆU SẢN PHẨM — 13 SKU, hàm lượng quy về gram, combo thật
      ============================================================ */
@@ -822,18 +908,28 @@ a{color:inherit;text-decoration:none;}
     }
   };
   var TIER_ORDER = ['saving','plus','caocap'];
+  var TIER_IMG = { saving:'macro-saving.jpg', plus:'macro-plus.jpg', caocap:'macro-caocap.jpg' };
 
-  /* ---------------- So sánh 3 dòng (cards) ---------------- */
+  /* ---------------- So sánh 3 dòng (carousel cards, ảnh thật + tiết kiệm tính đúng theo giá) ---------------- */
   (function renderPcards(){
     var wrap = qs('#htPcards');
     wrap.innerHTML = TIER_ORDER.map(function(key){
       var t = TIERS[key];
-      var minCombo = t.offers[1]; // combo nhỏ nhất sau hũ lẻ
+      var singleUnit = t.offers[0]; // hũ lẻ, dùng làm giá gốc tham chiếu
+      var bestOffer = t.offers[t.offers.length - 1]; // combo lớn nhất = giá/hũ tốt nhất
+      var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
+      var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
+      var minCombo = t.offers[1];
       return '<div class="ht-pcard' + (key==='plus' ? ' hl' : '') + '">' +
+        '<div class="ht-pcard-photo-wrap"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + TIER_IMG[key] + '" alt="Yến hũ Hoàng Triều dòng ' + t.label + '">' +
+        (savePct > 0 ? '<span class="ht-pcard-badge">Tiết kiệm tới ' + savePct + '%</span>' : '') +
+        (key==='plus' ? '<span class="ht-pcard-fav">Được chọn nhiều nhất</span>' : '') +
+        '</div>' +
         '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + t.label + '</span></div>' +
+        '<div class="ht-pcard-trustrow"><span class="ht-pcard-trust">ISO 22000:2018</span><span class="ht-pcard-trust">Nhà yến riêng</span></div>' +
         '<div class="ht-pcard-meta"><span class="ht-pcard-chip">' + t.gram + ' yến/hũ</span><span class="ht-pcard-chip">' + t.flavorKeys.length + ' vị</span></div>' +
-        '<div class="ht-pcard-price"><b>' + fmtVnd(t.offers[0].price) + '</b><span>/hũ</span></div>' +
-        '<div class="ht-pcard-combo">Combo từ ' + fmtVnd(minCombo.price) + ' (' + minCombo.paidQty + ' hũ)</div>' +
+        '<div class="ht-pcard-price"><span class="ht-pcard-was">' + fmtVnd(singleUnit.price) + '</span><b>' + fmtVnd(Math.round(bestUnitPrice)) + '</b><span>/hũ khi mua combo ' + (bestOffer.paidQty + bestOffer.bonusQty) + '</span></div>' +
+        '<div class="ht-pcard-combo">Combo nhỏ từ ' + fmtVnd(minCombo.price) + ' (' + minCombo.paidQty + ' hũ) · Freeship</div>' +
         '<button type="button" class="ht-pcard-btn" data-tier="' + key + '">Chọn ' + t.label + '</button>' +
       '</div>';
     }).join('');
@@ -865,8 +961,7 @@ a{color:inherit;text-decoration:none;}
   /* ============================================================
      ĐẶT HÀNG — popup đơn giản: Chọn dòng → Chọn số lượng → Ghi chú vị → Thông tin nhận hàng
      ============================================================ */
-  var TIER_IMG = { saving:'macro-saving.jpg', plus:'macro-plus.jpg', caocap:'macro-caocap.jpg' };
-  var popupState = { tierKey:'saving', offerIndex:0 };
+  var popupState = { tierKey:'saving', offerIndex:0, flavorQty:{} };
   var formValues = {fullname:'', phone:'', address:'', note:''};
   var submitting = false;
   var errorMsg = '';
@@ -881,6 +976,39 @@ a{color:inherit;text-decoration:none;}
     var o = currentOffer();
     return o.price + shipFeeFor(popupState.tierKey, o);
   }
+  function targetQty(){ var o = currentOffer(); return o.paidQty + o.bonusQty; }
+  function flavorTotalQty(){
+    var sum = 0;
+    Object.keys(popupState.flavorQty).forEach(function(k){ sum += popupState.flavorQty[k] || 0; });
+    return sum;
+  }
+  /* Giữ lựa chọn vị hợp lệ khi đổi dòng/số lượng: mặc định 1 vị duy nhất cho cả hũ
+     (dễ chọn nhanh), tự đồng bộ số lượng nếu khách chưa chuyển sang chọn nhiều vị. */
+  function syncFlavorToTarget(){
+    var tier = currentTier();
+    var q = {};
+    tier.flavorKeys.forEach(function(k){ q[k] = popupState.flavorQty[k] || 0; });
+    popupState.flavorQty = q;
+    var nonZero = tier.flavorKeys.filter(function(k){ return q[k] > 0; });
+    var target = targetQty();
+    if (nonZero.length === 0) {
+      popupState.flavorQty[tier.flavorKeys[0]] = target;
+    } else if (nonZero.length === 1) {
+      popupState.flavorQty[nonZero[0]] = target;
+    }
+  }
+  function quickFillFlavor(key){
+    var tier = currentTier();
+    var q = {};
+    tier.flavorKeys.forEach(function(k){ q[k] = 0; });
+    q[key] = targetQty();
+    popupState.flavorQty = q;
+  }
+  function adjustFlavor(key, delta){
+    var v = (popupState.flavorQty[key] || 0) + delta;
+    if (v < 0) v = 0;
+    popupState.flavorQty[key] = v;
+  }
 
   var popupOverlay = qs('#htPopupOverlay');
   var popupBody = qs('#htPopupBody');
@@ -890,6 +1018,8 @@ a{color:inherit;text-decoration:none;}
   function openBuyPopup(tierKey){
     popupState.tierKey = tierKey || popupState.tierKey || 'saving';
     popupState.offerIndex = 0;
+    popupState.flavorQty = {};
+    syncFlavorToTarget();
     errorMsg = '';
     submitting = false;
     popupLastFocus = document.activeElement;
@@ -920,6 +1050,10 @@ a{color:inherit;text-decoration:none;}
     var offer = currentOffer();
     var total = orderTotal();
     var ship = shipFeeFor(popupState.tierKey, offer);
+    var target = targetQty();
+    var chosen = flavorTotalQty();
+    var diff = target - chosen;
+    var breakdownOk = diff === 0;
 
     var tierBtns = TIER_ORDER.map(function(key){
       var t = TIERS[key];
@@ -938,6 +1072,31 @@ a{color:inherit;text-decoration:none;}
       '</button>';
     }).join('');
 
+    var quickChips = tier.flavorKeys.map(function(k){
+      var f = FLAVOR_GUIDE[k];
+      var isSingle = (popupState.flavorQty[k] === target) && (chosen === target);
+      return '<button type="button" class="ht-chip-select' + (isSingle?' active':'') + '" data-quick="' + k + '">Chỉ ' + f.label + '</button>';
+    }).join('');
+
+    var flavorRows = tier.flavorKeys.map(function(k){
+      var f = FLAVOR_GUIDE[k];
+      var img = tier.flavorImg[k];
+      var qty = popupState.flavorQty[k] || 0;
+      return '<div class="ht-flavor-row">' +
+        '<div class="ht-flavor-thumb"><img src="assets/images/' + img + '" alt="' + f.label + '"></div>' +
+        '<span class="ht-flavor-name">' + f.label + '</span>' +
+        '<div class="ht-stepper">' +
+          '<button type="button" data-fminus="' + k + '" aria-label="Giảm ' + f.label + '">−</button>' +
+          '<span>' + qty + '</span>' +
+          '<button type="button" data-fplus="' + k + '" aria-label="Tăng ' + f.label + '">+</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var statusText = breakdownOk
+      ? ('Đã chọn đủ ' + target + '/' + target + ' hũ ✓')
+      : (diff > 0 ? ('Còn thiếu ' + diff + ' hũ — chọn thêm vị bên dưới') : ('Dư ' + Math.abs(diff) + ' hũ — bớt vị bên dưới cho khớp'));
+
     popupBody.innerHTML =
       (errorMsg ? '<div class="ht-error-banner">' + errorMsg + '</div>' : '') +
       '<div class="ht-buypop-head">' +
@@ -949,20 +1108,24 @@ a{color:inherit;text-decoration:none;}
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
       '<div class="ht-buypop-section-label">Chọn số lượng</div>' +
       '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
-      '<div class="ht-field" style="margin-top:16px;"><label>Số lượng &amp; vị bạn muốn (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: 6 hũ Đường phèn, 4 hũ Nhân sâm">' + formValues.note.replace(/</g,'&lt;') + '</textarea>' +
-      '<div class="ht-summary-line2" style="margin-top:4px;">Để trống nếu muốn Hoàng Triều gọi điện tư vấn vị phù hợp.</div></div>' +
+      '<div class="ht-buypop-section-label">Chọn vị (mỗi vị 1 ô)</div>' +
+      '<div class="ht-chip-select-row">' + quickChips + '</div>' +
+      '<div class="ht-flavor-list">' + flavorRows + '</div>' +
+      '<div class="ht-breakdown-status ' + (breakdownOk?'ok':'warn') + '">' + statusText + '</div>' +
+      '<div class="ht-field"><label>Ghi chú thêm (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: giao giờ hành chính, gói quà tặng...">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
       '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" placeholder="Nguyễn Thị A" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
       '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" inputmode="tel" id="htFieldPhone" placeholder="0901234567 hoặc +84901234567" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
       '<div class="ht-field"><label>Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" rows="2" placeholder="Số nhà, đường, phường/xã, tỉnh/thành">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
       '<input type="text" class="ht-honeypot" id="htHoneypot" tabindex="-1" autocomplete="off">' +
       '<div class="ht-cart-total-row" style="margin:4px 0 16px;"><span class="ht-cart-total-label">Tổng cộng</span><span class="ht-cart-total-val">' + fmtVnd(total) + '</span></div>' +
-      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
+      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + ((submitting || !breakdownOk) ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
 
     qsa('.ht-buypop-tier-btn', popupBody).forEach(function(btn){
       btn.addEventListener('click', function(){
         captureFormValues();
         popupState.tierKey = btn.getAttribute('data-tier');
         popupState.offerIndex = 0;
+        syncFlavorToTarget();
         track('line_selected', {tier: popupState.tierKey, source:'popup'});
         renderBuyPopup();
       });
@@ -971,8 +1134,30 @@ a{color:inherit;text-decoration:none;}
       btn.addEventListener('click', function(){
         captureFormValues();
         popupState.offerIndex = parseInt(btn.getAttribute('data-offer'), 10);
+        syncFlavorToTarget();
         var o = currentOffer();
         track('offer_selected', {tier: popupState.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty});
+        renderBuyPopup();
+      });
+    });
+    qsa('[data-quick]', popupBody).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        captureFormValues();
+        quickFillFlavor(btn.getAttribute('data-quick'));
+        renderBuyPopup();
+      });
+    });
+    qsa('[data-fplus]', popupBody).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        captureFormValues();
+        adjustFlavor(btn.getAttribute('data-fplus'), 1);
+        renderBuyPopup();
+      });
+    });
+    qsa('[data-fminus]', popupBody).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        captureFormValues();
+        adjustFlavor(btn.getAttribute('data-fminus'), -1);
         renderBuyPopup();
       });
     });
@@ -980,7 +1165,8 @@ a{color:inherit;text-decoration:none;}
       var el = document.getElementById(id);
       if (el) el.addEventListener('input', captureFormValues);
     });
-    qs('#htSubmitBtn').addEventListener('click', submitOrder);
+    var submitBtn = qs('#htSubmitBtn');
+    if (submitBtn) submitBtn.addEventListener('click', submitOrder);
   }
 
   /* Mọi CTA mở thẳng popup đặt hàng, không cuộn trang */
@@ -1018,12 +1204,13 @@ a{color:inherit;text-decoration:none;}
     var okPhone = validatePhone(formValues.phone);
     var okAddress = formValues.address.trim().length > 0;
     var okBlocked = CONFIG.blockedPhones.indexOf(formValues.phone.replace(/\s+/g,'')) === -1;
+    var okBreakdown = flavorTotalQty() === targetQty();
 
     qs('#htErrFullname').textContent = okName ? '' : 'Vui lòng nhập họ tên';
     qs('#htErrPhone').textContent = okPhone ? (okBlocked ? '' : 'Số điện thoại không hợp lệ') : 'Số điện thoại không đúng định dạng (VD: 0989249686)';
     qs('#htErrAddress').textContent = okAddress ? '' : 'Vui lòng nhập địa chỉ nhận hàng';
 
-    if (!okName || !okPhone || !okAddress || !okBlocked) return;
+    if (!okName || !okPhone || !okAddress || !okBlocked || !okBreakdown) return;
 
     submitting = true;
     errorMsg = '';
@@ -1034,6 +1221,10 @@ a{color:inherit;text-decoration:none;}
     var ship = shipFeeFor(popupState.tierKey, offer);
     var total = offer.price + ship;
     var utm = getUtm();
+    var flavorBreakdown = tier.flavorKeys.filter(function(k){ return popupState.flavorQty[k] > 0; }).map(function(k){
+      return {flavor: k, label: FLAVOR_GUIDE[k].label, qty: popupState.flavorQty[k]};
+    });
+    var flavorSummary = flavorBreakdown.map(function(b){ return b.qty + ' hũ ' + b.label; }).join(', ');
     var payload = {
       order_code: genOrderCode(),
       timestamp: new Date().toISOString(),
@@ -1047,7 +1238,9 @@ a{color:inherit;text-decoration:none;}
         paidQty: offer.paidQty,
         bonusQty: offer.bonusQty,
         receivedQty: offer.paidQty + offer.bonusQty,
-        price: offer.price
+        price: offer.price,
+        flavor_summary: flavorSummary,
+        flavor_breakdown: flavorBreakdown
       },
       subtotal: offer.price,
       shipping_fee: ship,
