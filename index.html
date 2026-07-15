@@ -247,14 +247,6 @@ a{color:inherit;text-decoration:none;}
 .ht-tstrip-item:nth-child(2) .ht-tstrip-ic svg{stroke:var(--ht-mint);}
 .ht-tstrip-t{font-size:14.5px;font-weight:600;color:var(--ht-ink);line-height:1.32;}
 
-/* Persona bridge — "Bạn đang chọn yến cho ai?" — dải cuộn ngang thay vì
-   wrap-căn-giữa (trước đây xuống tới 3 dòng, kéo dài chiều cao section). */
-.ht-persona-label{text-align:center;font-size:15.5px;font-weight:700;color:var(--ht-ink);margin-bottom:9px;}
-.ht-persona-row{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;margin:0 -2px 20px;padding:2px 2px 4px;scroll-snap-type:x proximity;scrollbar-width:none;}
-.ht-persona-row::-webkit-scrollbar{display:none;}
-.ht-persona-chip{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;padding:11px 16px;border-radius:var(--ht-r-pill);background:#fff;font-size:15px;font-weight:600;color:var(--ht-ink);box-shadow:var(--ht-sh-card-sm);min-height:44px;display:inline-flex;align-items:center;}
-.ht-persona-chip:active{background:var(--ht-accent-soft);border-color:var(--ht-accent);transform:scale(.97);}
-
 /* Comparison cards (So sánh 3 dòng) — lookbook carousel */
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
@@ -316,6 +308,23 @@ a{color:inherit;text-decoration:none;}
 .ht-origin-card:nth-child(odd) .ht-origin-ic svg{stroke:var(--ht-accent);}
 .ht-origin-t{font-size:17.5px;font-weight:700;color:var(--ht-ink);margin-bottom:4px;}
 .ht-origin-d{font-size:15px;color:var(--ht-secondary);line-height:1.55;}
+
+/* Audience grid (2x2 icon cards) */
+.ht-audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.ht-audience-card{display:flex;flex-direction:column;gap:8px;padding:16px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);}
+.ht-audience-ic{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--ht-accent-soft);}
+.ht-audience-card:nth-child(2n) .ht-audience-ic{background:var(--ht-mint-soft);}
+.ht-audience-ic svg{width:21px;height:21px;stroke:var(--ht-accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.ht-audience-card:nth-child(2n) .ht-audience-ic svg{stroke:var(--ht-mint);}
+.ht-audience-t{font-size:15.5px;font-weight:700;color:var(--ht-ink);}
+.ht-audience-d{font-size:13px;color:var(--ht-secondary);line-height:1.5;}
+
+/* Video phỏng vấn */
+.ht-video-wrap{position:relative;border-radius:var(--ht-r-md);overflow:hidden;box-shadow:var(--ht-sh-card-sm);background:#000;aspect-ratio:16/9;}
+.ht-video-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
+.ht-video-mute{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.ht-video-src{margin-top:10px;font-size:13px;color:var(--ht-secondary);text-align:center;}
+
 .ht-spec{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);overflow:hidden;margin-top:14px;}
 .ht-spec-row{display:flex;padding:13px 16px;border-bottom:1px solid var(--ht-border);font-size:15px;}
 .ht-spec-row:last-child{border-bottom:none;}
@@ -358,6 +367,7 @@ a{color:inherit;text-decoration:none;}
 .ht-legal-links{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
 .ht-legal-link{font-size:14.5px;color:#fff;font-weight:600;min-height:32px;display:inline-flex;align-items:center;text-decoration:underline;}
 .ht-legal-sep{color:rgba(255,255,255,.3);}
+.ht-legal-addr{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:10px;}
 .ht-legal-copy{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.5;}
 
 /* Sticky CTA */
@@ -508,7 +518,76 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-eyebrow">Yến sào</div>
     <h2 class="ht-title">Món Quà Bồi Bổ Truyền Thống</h2>
     <img class="ht-yensao-img ht-zoom" loading="lazy" src="assets/images/nguyenlieu-yensoi.jpg" alt="Sợi yến sào trắng nguyên chất">
-    <p class="ht-sub" style="margin-bottom:0;">Yến sào từ lâu được xem là món quà bồi bổ sức khỏe truyền thống trong văn hóa Á Đông — giàu đạm tự nhiên, thường dùng làm quà biếu thể hiện sự quan tâm, chăm sóc.</p>
+    <div class="ht-steps" style="text-align:left;">
+      <div class="ht-step"><div class="ht-step-num">✦</div><div><div class="ht-step-t">Truyền thống Á Đông</div><div style="font-size:14px;font-weight:500;color:var(--ht-secondary);margin-top:2px;">Từ lâu được xem là món quà bồi bổ sức khỏe truyền thống.</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">✦</div><div><div class="ht-step-t">Giàu đạm tự nhiên</div><div style="font-size:14px;font-weight:500;color:var(--ht-secondary);margin-top:2px;">Thành phần giàu đạm tự nhiên từ tổ yến.</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">✦</div><div><div class="ht-step-t">Quà biếu ý nghĩa</div><div style="font-size:14px;font-weight:500;color:var(--ht-secondary);margin-top:2px;">Thường dùng làm quà biếu thể hiện sự quan tâm, chăm sóc.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ============ ƯU ĐIỂM YẾN HŨ HOÀNG TRIỀU ============ -->
+  <div class="ht-sec-tint ht-tint-mint ht-sec-tightbottom ht-reveal">
+    <div class="ht-eyebrow">Vì sao chọn Hoàng Triều</div>
+    <h2 class="ht-title">Ưu Điểm Yến Hũ<br>Hoàng Triều</h2>
+    <div class="ht-origin-list">
+      <div class="ht-origin-card">
+        <div class="ht-origin-ic"><svg viewBox="0 0 24 24"><path d="M3 12l2-8h14l2 8M5 12v8h14v-8M9 21v-5h6v5"/></svg></div>
+        <div>
+          <div class="ht-origin-t">Nhà yến riêng, kiểm soát từ gốc</div>
+          <div class="ht-origin-d">Không thu mua trôi nổi — Hoàng Triều tự khai thác tại Khánh Hòa, Ninh Thuận, Bình Thuận.</div>
+        </div>
+      </div>
+      <div class="ht-origin-card">
+        <div class="ht-origin-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div>
+          <div class="ht-origin-t">Hàm lượng yến minh bạch</div>
+          <div class="ht-origin-d">Ghi rõ số gram yến tươi trên từng hũ — 2g, 6g hay 10,2g, không mập mờ.</div>
+        </div>
+      </div>
+      <div class="ht-origin-card">
+        <div class="ht-origin-ic"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/></svg></div>
+        <div>
+          <div class="ht-origin-t">Quy trình đạt ISO 22000:2018</div>
+          <div class="ht-origin-d">Hệ thống quản lý an toàn thực phẩm áp dụng xuyên suốt khâu sơ chế, chế biến.</div>
+        </div>
+      </div>
+      <div class="ht-origin-card">
+        <div class="ht-origin-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <div>
+          <div class="ht-origin-t">Dùng ngay, không cần chưng lại</div>
+          <div class="ht-origin-d">Mở nắp là dùng được — phù hợp cả ngày bận rộn lẫn khi cần chuẩn bị quà gấp.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DÀNH CHO AI (thay cho persona-chip đã bỏ) ============ -->
+  <div class="ht-sec-tint ht-tint-pink ht-sec-tightbottom ht-reveal">
+    <div class="ht-eyebrow">Dành cho ai</div>
+    <h2 class="ht-title">Món Quà Phù Hợp<br>Với Nhiều Người Thân</h2>
+    <p class="ht-sub">Mỗi dòng, mỗi vị đều có thể là lựa chọn phù hợp cho một người bạn muốn chăm sóc.</p>
+    <div class="ht-audience-grid">
+      <div class="ht-audience-card">
+        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <div class="ht-audience-t">Trẻ nhỏ</div>
+        <div class="ht-audience-d">Dòng Kids có công thức hướng tới khẩu vị dễ dùng cho trẻ em.</div>
+      </div>
+      <div class="ht-audience-card">
+        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 8 2 4 6 4c2 0 4 1.5 6 4 2-2.5 4-4 6-4 4 0 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg></div>
+        <div class="ht-audience-t">Cha mẹ, ông bà</div>
+        <div class="ht-audience-d">Món quà chăm sóc truyền thống, thể hiện sự quan tâm dành cho người lớn tuổi.</div>
+      </div>
+      <div class="ht-audience-card">
+        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+        <div class="ht-audience-t">Người bận rộn</div>
+        <div class="ht-audience-d">Dùng ngay không cần chưng, tiện cho ngày làm việc bận hoặc cần bồi dưỡng đều đặn.</div>
+      </div>
+      <div class="ht-audience-card">
+        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="9" rx="1"/><path d="M12 8v13M12 8c-1.5-3-6-3-6 0M12 8c1.5-3 6-3 6 0"/></svg></div>
+        <div class="ht-audience-t">Đối tác, cấp trên</div>
+        <div class="ht-audience-d">Lựa chọn quà biếu tinh tế, trang trọng cho dịp lễ, Tết hoặc thăm hỏi đối tác.</div>
+      </div>
+    </div>
   </div>
 
   <!-- ============ 4. SO SÁNH 3 DÒNG ============ -->
@@ -516,29 +595,20 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-eyebrow">So sánh</div>
     <h2 class="ht-title">Chọn Dòng Phù Hợp<br>Với Nhu Cầu</h2>
     <p class="ht-sub">Không có dòng nào "tốt nhất" — chỉ có dòng phù hợp nhất với người bạn muốn chăm sóc.</p>
-    <div class="ht-persona-row" id="htPersonaRow"></div>
     <div class="ht-pcards" id="htPcards"></div>
     <div class="ht-pcards-dots" id="htPcardsDots"></div>
     <p class="ht-feed-hint">← Vuốt để xem cả 13 vị →</p>
   </div>
 
-  <!-- ============ CÁCH DÙNG ============ -->
+  <!-- ============ VIDEO PHỎNG VẤN BTV HD ============ -->
   <div class="ht-sec-tint ht-tint-mint ht-sec-tightbottom ht-reveal">
-    <div class="ht-eyebrow">Cách dùng</div>
-    <h2 class="ht-title">Dùng Ngay, Tiện Lợi Mỗi Ngày</h2>
-    <p class="ht-sub">Không cần chưng lại — mở nắp là dùng được ngay.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:18px;">
-      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-lachu.jpg" alt="Lắc nhẹ hũ yến trước khi dùng">
-      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-monap.jpg" alt="Bảo quản lạnh yến hũ Hoàng Triều">
-      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-rotly.jpg" alt="Dùng trực tiếp yến hũ Hoàng Triều">
+    <div class="ht-eyebrow">Truyền thông</div>
+    <h2 class="ht-title">BTV HD Phỏng Vấn<br>Cửa Hàng Hoàng Triều</h2>
+    <div class="ht-video-wrap">
+      <video id="htBtvVideo" src="assets/video/btv-interview.mp4" poster="assets/images/btv-poster.jpg" muted playsinline preload="metadata"></video>
+      <button type="button" class="ht-video-mute" id="htBtvMuteBtn" aria-label="Bật/tắt tiếng">🔇</button>
     </div>
-    <div class="ht-steps">
-      <div class="ht-step"><div class="ht-step-num">1</div><div><div class="ht-step-t">Lắc nhẹ hũ trước khi dùng</div></div></div>
-      <div class="ht-step"><div class="ht-step-num">2</div><div><div class="ht-step-t">Mở nắp, dùng trực tiếp</div></div></div>
-      <div class="ht-step"><div class="ht-step-num">3</div><div><div class="ht-step-t">Ngon hơn khi làm lạnh vừa phải</div></div></div>
-      <div class="ht-step"><div class="ht-step-num">4</div><div><div class="ht-step-t">Sau khi mở nắp nên dùng ngay</div></div></div>
-    </div>
-    <div class="ht-note">Không dùng khi sản phẩm hết hạn, nắp/niêm phong hở hoặc hũ có mùi, màu sắc bất thường. Hạn dùng cụ thể xem trên nắp từng hũ.</div>
+    <p class="ht-video-src">Video tự phát khi lướt tới, tạm dừng khi lướt qua — chạm biểu tượng loa để bật tiếng.</p>
   </div>
 
   <!-- ============ ĐẶT HÀNG: mọi nút CTA mở popup "Đặt hàng" (chọn dòng + gói ngay trong popup), xem script cuối trang ============ -->
@@ -594,6 +664,25 @@ a{color:inherit;text-decoration:none;}
     </div>
   </div>
 
+  <!-- ============ CÁCH DÙNG (đã dời xuống dưới Uy tín) ============ -->
+  <div class="ht-sec-tint ht-tint-mint ht-sec-tightbottom ht-reveal">
+    <div class="ht-eyebrow">Cách dùng</div>
+    <h2 class="ht-title">Dùng Ngay, Tiện Lợi Mỗi Ngày</h2>
+    <p class="ht-sub">Không cần chưng lại — mở nắp là dùng được ngay.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:18px;">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-lachu.jpg" alt="Lắc nhẹ hũ yến trước khi dùng">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-monap.jpg" alt="Bảo quản lạnh yến hũ Hoàng Triều">
+      <img class="ht-zoom" loading="lazy" style="border-radius:var(--ht-r-sm);border:1px solid var(--ht-border);aspect-ratio:4/5;object-fit:cover;" src="assets/images/cachdung-rotly.jpg" alt="Dùng trực tiếp yến hũ Hoàng Triều">
+    </div>
+    <div class="ht-steps">
+      <div class="ht-step"><div class="ht-step-num">1</div><div><div class="ht-step-t">Lắc nhẹ hũ trước khi dùng</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">2</div><div><div class="ht-step-t">Mở nắp, dùng trực tiếp</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">3</div><div><div class="ht-step-t">Ngon hơn khi làm lạnh vừa phải</div></div></div>
+      <div class="ht-step"><div class="ht-step-num">4</div><div><div class="ht-step-t">Sau khi mở nắp nên dùng ngay</div></div></div>
+    </div>
+    <div class="ht-note">Không dùng khi sản phẩm hết hạn, nắp/niêm phong hở hoặc hũ có mùi, màu sắc bất thường. Hạn dùng cụ thể xem trên nắp từng hũ.</div>
+  </div>
+
   <!-- ============ NGUYÊN LIỆU ============ -->
   <div class="ht-sec-tint ht-tint-pink ht-sec-tightbottom ht-reveal">
     <div class="ht-eyebrow">Nguyên liệu</div>
@@ -609,15 +698,6 @@ a{color:inherit;text-decoration:none;}
     <p class="ht-feed-hint">← Vuốt để xem nguyên liệu →</p>
   </div>
 
-  <!-- ============ CTA GIỮA TRANG ============ -->
-  <div class="ht-sec-tint ht-tint-mint ht-sec-tightbottom ht-reveal">
-    <div class="ht-ctablock">
-      <div class="ht-ctablock-t">Chưa Chắc Chọn Dòng Nào?</div>
-      <div class="ht-ctablock-s">Nhắn tin Fanpage — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
-      <a class="ht-ctablock-btn" href="#" id="htMidCta">Nhắn tin tư vấn</a>
-    </div>
-  </div>
-
   <!-- ============ 9. FEEDBACK KHÁCH HÀNG THẬT ============ -->
   <div class="ht-sec-tint ht-tint-a ht-sec-tightbottom ht-reveal" id="htFeedbackSec">
     <div class="ht-eyebrow">Khách hàng nói gì</div>
@@ -629,6 +709,15 @@ a{color:inherit;text-decoration:none;}
       <div class="ht-feed-card"><img class="ht-zoom" loading="lazy" src="assets/images/feedback-04.jpeg" alt="Xác nhận đặt hàng và giao dịch yến chưng Hoàng Triều"></div>
     </div>
     <p class="ht-feed-hint">← Vuốt để xem thêm →</p>
+  </div>
+
+  <!-- ============ CTA GIỮA TRANG (đã dời xuống dưới feedback) ============ -->
+  <div class="ht-sec-tint ht-tint-mint ht-sec-tightbottom ht-reveal">
+    <div class="ht-ctablock">
+      <div class="ht-ctablock-t">Chưa Chắc Chọn Dòng Nào?</div>
+      <div class="ht-ctablock-s">Nhắn tin Fanpage — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
+      <a class="ht-ctablock-btn" href="#" id="htMidCta">Nhắn tin tư vấn</a>
+    </div>
   </div>
 
   <!-- ============ 10. PLACEHOLDER NHÃN/CÔNG BỐ — DEV ONLY, KHÔNG HIỂN THỊ LIVE ============
@@ -659,6 +748,13 @@ a{color:inherit;text-decoration:none;}
       <a class="ht-legal-link" href="#" id="htFootFanpage">Facebook</a>
       <span class="ht-legal-sep">·</span>
       <a class="ht-legal-link" id="htFootPhone" href="tel:+84989249686">+84 98 924 96 86</a>
+    </div>
+    <div class="ht-legal-addr">
+      <div>CS1: 16 Ngọc Hân Công Chúa, P. Kinh Bắc, Tỉnh Bắc Ninh</div>
+      <div>CS2: 38 phố Vũ, P. Võ Cường, Tỉnh Bắc Ninh</div>
+      <div>CS3: 556 Nguyễn Trãi, P. Võ Cường, Tỉnh Bắc Ninh</div>
+      <div>CS4: Phố Mới, P. Song Liễu, Tỉnh Bắc Ninh</div>
+      <div>CS5: Ngõ 15, Đường Tôn Đức Thắng, P. Vĩnh Phúc, Tỉnh Phú Thọ</div>
     </div>
     <p class="ht-legal-copy">© 2026 Quà Tặng Hoàng Triều · admin@quatanghoangtrieu.com</p>
   </div>
@@ -801,6 +897,26 @@ a{color:inherit;text-decoration:none;}
   } else {
     revealEls.forEach(revealNow);
   }
+
+  /* ---------------- Video BTV HD: tự phát khi lướt tới, tạm dừng khi lướt qua ---------------- */
+  (function btvVideo(){
+    var video = qs('#htBtvVideo');
+    var muteBtn = qs('#htBtvMuteBtn');
+    if (!video || !muteBtn) return;
+    muteBtn.addEventListener('click', function(){
+      video.muted = !video.muted;
+      muteBtn.textContent = video.muted ? '🔇' : '🔊';
+    });
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { video.play().catch(function(){}); }
+          else { video.pause(); }
+        });
+      }, {threshold:.4});
+      vio.observe(video);
+    }
+  })();
 
   /* ---------------- Hero gallery: tự động chuyển ảnh mỗi 3s, hết vòng lặp lại ---------------- */
   (function heroGallery(){
@@ -1087,32 +1203,6 @@ a{color:inherit;text-decoration:none;}
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-  })();
-
-  /* ---------------- Persona bridge: "Bạn đang chọn yến cho ai?" — gợi ý nhanh, không thay thế điều hướng theo dòng ---------------- */
-  var PERSONA = [
-    {label:'Bố mẹ, người lớn tuổi', tier:'plus', flavor:'tamvi'},
-    {label:'Trẻ nhỏ', tier:'saving', flavor:'kids'},
-    {label:'Dùng hằng ngày', tier:'saving', flavor:'duongphen'},
-    {label:'Cần hạn chế đường', tier:'plus', flavor:'duongkieng'},
-    {label:'Biếu tặng trang trọng', tier:'caocap', flavor:'nhansam'}
-  ];
-  (function renderPersonaRow(){
-    var wrap = qs('#htPersonaRow');
-    if (!wrap) return;
-    wrap.insertAdjacentHTML('beforebegin', '<div class="ht-persona-label">Bạn đang chọn yến cho ai?</div>');
-    wrap.innerHTML = PERSONA.map(function(p, i){
-        return '<button type="button" class="ht-persona-chip" data-persona="' + i + '">' + p.label + '</button>';
-      }).join('');
-    qsa('.ht-persona-chip', wrap).forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var p = PERSONA[parseInt(btn.getAttribute('data-persona'), 10)];
-        track('persona_selected', {label: p.label, tier: p.tier, flavor: p.flavor});
-        openBuyPopup(p.tier);
-        quickFillFlavor(p.flavor);
-        renderBuyPopup();
-      });
-    });
   })();
 
   /* ============================================================
