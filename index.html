@@ -1085,6 +1085,47 @@ a{color:inherit;text-decoration:none;}
     }
   })();
 
+  /* ---------------- Carousel So Sánh: tự trôi mượt khi khách không vuốt ----------------
+     Trôi liên tục bằng requestAnimationFrame (không nhảy theo từng thẻ) để mượt mà thật
+     sự, tắt scroll-snap trong lúc tự chạy (bật lại khi khách chạm vào) để không bị giật
+     do trình duyệt cố kéo về đúng mép thẻ giữa chừng animation. Dừng khi khách vuốt/chạm,
+     tự chạy lại sau một lúc không thao tác, và dừng hẳn khi carousel cuộn khỏi màn hình. */
+  (function pcardsAutoScroll(){
+    var wrap = qs('#htPcards');
+    if (!wrap) return;
+    var SPEED = 1.1; // px/khung hình (~66px/s ở 60fps)
+    var RESUME_DELAY = 4000;
+    var paused = false;
+    var inView = true;
+    var resumeTimer = null;
+    function pauseForAWhile(){
+      paused = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function(){ paused = false; }, RESUME_DELAY);
+    }
+    ['pointerdown','touchstart','wheel'].forEach(function(evt){
+      wrap.addEventListener(evt, pauseForAWhile, {passive:true});
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){
+        inView = entries[0].isIntersecting;
+      }, {threshold:.1}).observe(wrap);
+    }
+    function tick(){
+      var running = !paused && inView && !document.hidden;
+      wrap.style.scrollSnapType = running ? 'none' : '';
+      if (running) {
+        var max = wrap.scrollWidth - wrap.clientWidth;
+        if (max > 1) {
+          var next = wrap.scrollLeft + SPEED;
+          wrap.scrollLeft = next >= max ? 0 : next;
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
   /* ---------------- Persona bridge: "Bạn đang chọn yến cho ai?" — gợi ý nhanh, không thay thế điều hướng theo dòng ---------------- */
   var PERSONA = [
     {label:'Bố mẹ, người lớn tuổi', tier:'plus', flavor:'tamvi'},
