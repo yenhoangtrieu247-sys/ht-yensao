@@ -243,18 +243,24 @@ a{color:inherit;text-decoration:none;}
 .ht-tstrip-item:nth-child(2) .ht-tstrip-ic svg{stroke:var(--ht-mint);}
 .ht-tstrip-t{font-size:14.5px;font-weight:600;color:var(--ht-ink);line-height:1.32;}
 
-/* Persona bridge — "Bạn đang chọn yến cho ai?" */
-.ht-persona-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px;}
-.ht-persona-label{width:100%;text-align:center;font-size:15.5px;font-weight:700;color:var(--ht-ink);margin-bottom:9px;}
-.ht-persona-chip{padding:11px 16px;border-radius:var(--ht-r-pill);background:#fff;font-size:15px;font-weight:600;color:var(--ht-ink);box-shadow:var(--ht-sh-card-sm);min-height:44px;display:inline-flex;align-items:center;}
+/* Persona bridge — "Bạn đang chọn yến cho ai?" — dải cuộn ngang thay vì
+   wrap-căn-giữa (trước đây xuống tới 3 dòng, kéo dài chiều cao section). */
+.ht-persona-label{text-align:center;font-size:15.5px;font-weight:700;color:var(--ht-ink);margin-bottom:9px;}
+.ht-persona-row{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;margin:0 -2px 20px;padding:2px 2px 4px;scroll-snap-type:x proximity;scrollbar-width:none;}
+.ht-persona-row::-webkit-scrollbar{display:none;}
+.ht-persona-chip{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;padding:11px 16px;border-radius:var(--ht-r-pill);background:#fff;font-size:15px;font-weight:600;color:var(--ht-ink);box-shadow:var(--ht-sh-card-sm);min-height:44px;display:inline-flex;align-items:center;}
 .ht-persona-chip:active{background:var(--ht-accent-soft);border-color:var(--ht-accent);transform:scale(.97);}
 
 /* Comparison cards (So sánh 3 dòng) — lookbook carousel */
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
 .ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);padding:16px;border-top:4px solid var(--tier-color,var(--ht-accent));position:relative;}
-.ht-pcard-photo-wrap{position:relative;margin:-16px -16px 14px;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
-.ht-pcard-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 58%;transform:scale(1.55);transform-origin:center 58%;display:block;}
+.ht-pcard-photo-wrap{position:relative;margin:-16px -16px 0;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
+.ht-pcard-photostrip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.ht-pcard-photostrip::-webkit-scrollbar{display:none;}
+.ht-pcard-photoslide{flex:0 0 100%;scroll-snap-align:start;}
+.ht-pcard-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 55%;display:block;}
+.ht-pcard-photo-hint{text-align:center;font-size:12.5px;color:var(--ht-muted);padding:7px 0 0;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
 .ht-pcard-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
 .ht-pcard-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tier-color,var(--ht-accent));margin-right:2px;}
@@ -290,7 +296,8 @@ a{color:inherit;text-decoration:none;}
 /* Inline CTA */
 
 /* Countdown tư vấn trong ngày */
-.ht-countdown{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;padding:12px var(--page-pad);background:var(--ht-bg);}
+.ht-countdown{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;padding:12px var(--page-pad);background:var(--ht-bg);width:100%;border:none;border-top:1px solid var(--ht-border);cursor:pointer;font-family:inherit;}
+.ht-countdown:active{background:var(--ht-bg-soft);}
 .ht-countdown-t{font-size:14.5px;font-weight:600;color:var(--ht-secondary);}
 .ht-countdown-clock{font-weight:700;font-size:15px;color:var(--ht-accent);background:var(--ht-accent-soft);border:1px solid var(--ht-accent-border);padding:4px 10px;border-radius:var(--ht-r-sm);min-width:64px;text-align:center;}
 
@@ -498,7 +505,7 @@ a{color:inherit;text-decoration:none;}
   </section>
   <div class="ht-hero-head ht-reveal">
     <h1 class="ht-hero-title">Yến Hũ Chưng Sẵn Hoàng Triều</h1>
-    <p class="ht-hero-sub">Yến chưng sẵn với 3 dòng hàm lượng 2g, 6g và 10,2g yến mỗi hũ. Dễ chọn theo khẩu vị, nhu cầu và ngân sách của từng người thân.</p>
+    <p class="ht-hero-sub">3 dòng hàm lượng 2g, 6g, 10,2g yến mỗi hũ — dễ chọn theo khẩu vị, nhu cầu và ngân sách từng người thân.</p>
     <div class="ht-price-row">
       <span class="ht-price-label">Từ</span>
       <span class="ht-price-now">69.000đ/hũ</span>
@@ -511,12 +518,12 @@ a{color:inherit;text-decoration:none;}
   </div>
   </div>
 
-  <!-- ============ COUNTDOWN TƯ VẤN TRONG NGÀY (thật, không phải giảm giá ảo) ============ -->
-  <div class="ht-countdown ht-reveal" id="htCountdownWrap">
-    <span class="ht-countdown-t">💬 Nhắn tin Fanpage trước</span>
+  <!-- ============ COUNTDOWN ĐẶT HÀNG TRONG NGÀY (thật, không phải giảm giá ảo) ============ -->
+  <button type="button" class="ht-countdown ht-reveal" id="htCountdownWrap">
+    <span class="ht-countdown-t">🛒 Đặt hàng trước</span>
     <span class="ht-countdown-clock" id="htCountdownClock">--:--:--</span>
-    <span class="ht-countdown-t" id="htCountdownSuffix">hôm nay để được tư vấn ngay</span>
-  </div>
+    <span class="ht-countdown-t" id="htCountdownSuffix">hôm nay để được hỗ trợ ngay</span>
+  </button>
 
   <!-- ============ 3. TRUST STRIP (dải bằng chứng nhanh) ============ -->
   <div class="ht-tstrip ht-reveal">
@@ -883,31 +890,38 @@ a{color:inherit;text-decoration:none;}
     if (popupOverlay.classList.contains('open')) closePopup();
   });
 
-  /* ---------------- Countdown tư vấn trong ngày (giờ thật của khách, tự lặp lại mỗi ngày) ---------------- */
+  /* ---------------- Countdown đặt hàng trong ngày (giờ thật của khách, tự lặp lại mỗi ngày) ---------------- */
   (function countdown(){
-    var CUTOFF_HOUR = 21; // 21:00 — giờ chốt tư vấn trong ngày, không phải giờ hết khuyến mãi
+    var CUTOFF_HOUR = 21; // 21:00 — giờ chốt hỗ trợ trong ngày, không phải giờ hết khuyến mãi
+    var wrapEl = qs('#htCountdownWrap');
     var clockEl = qs('#htCountdownClock');
     var suffixEl = qs('#htCountdownSuffix');
-    var prefixEl = qs('#htCountdownWrap') ? qs('#htCountdownWrap').children[0] : null;
+    var prefixEl = wrapEl ? wrapEl.children[0] : null;
     if (!clockEl) return;
     function pad(n){ return (n < 10 ? '0' : '') + n; }
     function tick(){
       var now = new Date();
       var cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate(), CUTOFF_HOUR, 0, 0);
       if (now >= cutoff) {
-        if (prefixEl) prefixEl.textContent = '💬 Đã qua giờ tư vấn hôm nay —';
+        if (prefixEl) prefixEl.textContent = '🛒 Đã qua giờ hỗ trợ nhanh hôm nay —';
         clockEl.style.display = 'none';
-        suffixEl.textContent = 'tin nhắn Fanpage sẽ được ưu tiên phản hồi vào sáng mai.';
+        suffixEl.textContent = 'đặt hàng ngay, đội ngũ sẽ xử lý và phản hồi vào sáng mai.';
         return;
       }
-      if (prefixEl) prefixEl.textContent = '💬 Nhắn tin Fanpage trước';
+      if (prefixEl) prefixEl.textContent = '🛒 Đặt hàng trước';
       clockEl.style.display = '';
-      suffixEl.textContent = 'hôm nay (' + CUTOFF_HOUR + ':00) để được tư vấn ngay';
+      suffixEl.textContent = 'hôm nay (' + CUTOFF_HOUR + ':00) để được hỗ trợ ngay';
       var diff = cutoff - now;
       var h = Math.floor(diff / 3600000);
       var m = Math.floor((diff % 3600000) / 60000);
       var s = Math.floor((diff % 60000) / 1000);
       clockEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+    if (wrapEl) {
+      wrapEl.addEventListener('click', function(){
+        track('cta_click', {source: 'countdown'});
+        openBuyPopup();
+      });
     }
     tick();
     setInterval(tick, 1000);
@@ -1028,8 +1042,13 @@ a{color:inherit;text-decoration:none;}
       var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
       var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
       var minCombo = t.offers[1];
+      var photoSlides = t.flavorKeys.map(function(fk){
+        var fLabel = FLAVOR_GUIDE[fk] ? FLAVOR_GUIDE[fk].label : t.label;
+        return '<div class="ht-pcard-photoslide"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + t.flavorImg[fk] + '" alt="Yến hũ Hoàng Triều dòng ' + t.label + ' - vị ' + fLabel + '"></div>';
+      }).join('');
       return '<div class="ht-pcard' + (key==='plus' ? ' hl' : '') + '" style="--tier-color:' + t.colorHex + '">' +
-        '<div class="ht-pcard-photo-wrap"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + TIER_IMG[key] + '" alt="Yến hũ Hoàng Triều dòng ' + t.label + '"></div>' +
+        '<div class="ht-pcard-photo-wrap"><div class="ht-pcard-photostrip">' + photoSlides + '</div></div>' +
+        '<p class="ht-pcard-photo-hint">← Vuốt xem ' + t.flavorKeys.length + ' vị của dòng ' + t.label + ' →</p>' +
         '<div class="ht-pcard-index">0' + (idx+1) + ' / 0' + TIER_ORDER.length + '</div>' +
         '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + t.label + '</span>' + (key==='plus' ? '<span class="ht-pcard-save">Được chọn nhiều nhất</span>' : '') + '</div>' +
         '<div class="ht-pcard-meta"><span class="ht-pcard-chip">' + t.gram + ' yến/hũ</span><span class="ht-pcard-chip">' + t.flavorKeys.length + ' vị</span></div>' +
@@ -1096,8 +1115,8 @@ a{color:inherit;text-decoration:none;}
   (function renderPersonaRow(){
     var wrap = qs('#htPersonaRow');
     if (!wrap) return;
-    wrap.innerHTML = '<div class="ht-persona-label">Bạn đang chọn yến cho ai?</div>' +
-      PERSONA.map(function(p, i){
+    wrap.insertAdjacentHTML('beforebegin', '<div class="ht-persona-label">Bạn đang chọn yến cho ai?</div>');
+    wrap.innerHTML = PERSONA.map(function(p, i){
         return '<button type="button" class="ht-persona-chip" data-persona="' + i + '">' + p.label + '</button>';
       }).join('');
     qsa('.ht-persona-chip', wrap).forEach(function(btn){
