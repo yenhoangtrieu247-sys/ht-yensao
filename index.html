@@ -280,20 +280,6 @@ a{color:inherit;text-decoration:none;}
 .ht-pcards-dots span{width:26px;height:2px;border-radius:0;background:var(--ht-border-strong);transition:background .2s;}
 .ht-pcards-dots span.active{background:var(--ht-accent);transform:none;}
 
-/* Flavor guide cards */
-.ht-fguide{display:flex;flex-direction:column;gap:11px;}
-.ht-fgcard{display:flex;gap:13px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;}
-.ht-fgcard-thumb{width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--ht-bg-soft);}
-.ht-fgcard-thumb img{width:100%;height:100%;object-fit:contain;}
-.ht-fgcard-body{flex:1;min-width:0;}
-.ht-fgcard-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;}
-.ht-fgcard-name{font-size:18px;font-weight:700;color:var(--ht-ink);}
-.ht-fgcard-sub{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ht-accent);white-space:nowrap;}
-.ht-fgcard-desc{font-size:15.5px;color:var(--ht-secondary);line-height:1.6;margin-bottom:10px;}
-.ht-fgcard-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.ht-fgcard-avail{font-size:14px;color:var(--ht-muted);}
-.ht-fgcard-link{font-size:14.5px;font-weight:700;color:var(--ht-accent);text-decoration:underline;min-height:44px;display:inline-flex;align-items:center;}
-
 /* Inline CTA */
 
 /* Countdown tư vấn trong ngày */
@@ -564,14 +550,6 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-pcards" id="htPcards"></div>
     <div class="ht-pcards-dots" id="htPcardsDots"></div>
     <p class="ht-feed-hint">← Vuốt để xem cả 3 dòng →</p>
-  </div>
-
-  <!-- ============ 5. HƯỚNG DẪN CHỌN VỊ ============ -->
-  <div class="ht-sec ht-sec-tightbottom ht-reveal">
-    <div class="ht-eyebrow">Hương vị</div>
-    <h2 class="ht-title">Chọn Vị Theo<br>Khẩu Vị Và Thành Phần</h2>
-    <p class="ht-sub">Mỗi vị có thành phần và sắc vị riêng. Đọc kỹ thông tin trên nhãn nếu người dùng có chế độ dinh dưỡng hoặc cơ địa đặc biệt.</p>
-    <div class="ht-fguide" id="htFlavorGuide"></div>
   </div>
 
   <!-- ============ CÁCH DÙNG ============ -->
@@ -1102,25 +1080,6 @@ a{color:inherit;text-decoration:none;}
         cards.forEach(function(c){ dotsObs.observe(c); });
       }
     }
-  })();
-
-  /* ---------------- Hướng dẫn chọn vị (nội dung tham khảo, khách tự ghi vào ô ghi chú khi đặt hàng) ---------------- */
-  (function renderFlavorGuide(){
-    var wrap = qs('#htFlavorGuide');
-    var keys = ['duongphen','tamvi','nhansam','duongkieng','kids'];
-    wrap.innerHTML = keys.map(function(k){
-      var f = FLAVOR_GUIDE[k];
-      var availTiers = TIER_ORDER.filter(function(tk){ return TIERS[tk].flavorKeys.indexOf(k) !== -1; });
-      var availLabel = availTiers.map(function(tk){ return TIERS[tk].label; }).join(', ');
-      return '<div class="ht-fgcard">' +
-        '<div class="ht-fgcard-thumb"><img class="ht-zoom" loading="lazy" src="assets/images/jar-saving-' + k + '.jpg" alt="Hũ yến chưng vị ' + f.label + '"></div>' +
-        '<div class="ht-fgcard-body">' +
-        '<div class="ht-fgcard-head"><span class="ht-fgcard-name">' + f.label + '</span><span class="ht-fgcard-sub">' + f.sub + '</span></div>' +
-        '<div class="ht-fgcard-desc">' + f.desc + '</div>' +
-        '<div class="ht-fgcard-foot"><span class="ht-fgcard-avail">Có ở: ' + availLabel + '</span></div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
   })();
 
   /* ---------------- Persona bridge: "Bạn đang chọn yến cho ai?" — gợi ý nhanh, không thay thế điều hướng theo dòng ---------------- */
