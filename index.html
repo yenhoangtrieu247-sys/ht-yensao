@@ -250,7 +250,7 @@ a{color:inherit;text-decoration:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
 .ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);padding:16px;border-top:4px solid var(--tier-color,var(--ht-accent));position:relative;}
 .ht-pcard-photo-wrap{position:relative;margin:-16px -16px 14px;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
-.ht-pcard-photo{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;}
+.ht-pcard-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 58%;transform:scale(1.55);transform-origin:center 58%;display:block;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
 .ht-pcard-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
 .ht-pcard-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tier-color,var(--ht-accent));margin-right:2px;}
@@ -271,7 +271,10 @@ a{color:inherit;text-decoration:none;}
 
 /* Flavor guide cards */
 .ht-fguide{display:flex;flex-direction:column;gap:11px;}
-.ht-fgcard{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;}
+.ht-fgcard{display:flex;gap:13px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);padding:16px;}
+.ht-fgcard-thumb{width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--ht-bg-soft);}
+.ht-fgcard-thumb img{width:100%;height:100%;object-fit:contain;}
+.ht-fgcard-body{flex:1;min-width:0;}
 .ht-fgcard-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;}
 .ht-fgcard-name{font-size:18px;font-weight:700;color:var(--ht-ink);}
 .ht-fgcard-sub{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ht-accent);white-space:nowrap;}
@@ -281,7 +284,6 @@ a{color:inherit;text-decoration:none;}
 .ht-fgcard-link{font-size:14.5px;font-weight:700;color:var(--ht-accent);text-decoration:underline;min-height:44px;display:inline-flex;align-items:center;}
 
 /* Inline CTA */
-.ht-inline-cta{display:flex;gap:10px;padding:16px var(--page-pad) 24px;background:var(--ht-bg);}
 
 /* Countdown tư vấn trong ngày */
 .ht-countdown{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;padding:12px var(--page-pad);background:var(--ht-bg);}
@@ -527,10 +529,6 @@ a{color:inherit;text-decoration:none;}
       <div class="ht-tstrip-ic"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/></svg></div>
       <span class="ht-tstrip-t">Quy trình đạt ISO 22000</span>
     </a>
-  </div>
-
-  <div class="ht-inline-cta ht-reveal">
-    <button class="ht-btn solid" id="htInlineCta" type="button" style="flex:1;">Chọn dòng &amp; combo</button>
   </div>
 
   <!-- ============ 4. SO SÁNH 3 DÒNG ============ -->
@@ -912,19 +910,47 @@ a{color:inherit;text-decoration:none;}
     setInterval(tick, 1000);
   })();
 
-  /* ---------------- Toast gợi ý feedback thật (1 lần/phiên, không phải đơn hàng giả) ---------------- */
+  /* ---------------- Toast gợi ý feedback thật ----------------
+     Trước đây hiện cứng sau 9s — dễ đè lên hero khi khách còn chưa đọc xong
+     value proposition. Giờ chỉ hiện khi khách đã thực sự lướt qua ~30% trang
+     VÀ đã ở lại tối thiểu ~20s VÀ chưa tự mở popup đặt hàng (đang bận thao
+     tác thì không làm phiền) VÀ chưa cuộn tới đúng phần feedback thật rồi
+     (không cần nhắc lại cái đang thấy). */
   (function feedbackToast(){
     var toast = qs('#htToast');
+    var feedSec = qsa('.ht-sec-tint.ht-tint-c').pop();
     if (!toast || sessionStorage.getItem('ht_toast_shown')) return;
-    var timer = setTimeout(function(){
+    var pageStart = Date.now();
+    var feedSeen = false;
+    var stopped = false;
+    if (feedSec && 'IntersectionObserver' in window) {
+      var feedObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting) feedSeen = true; });
+      }, {threshold:.2});
+      feedObs.observe(feedSec);
+    }
+    function scrollDepthPct(){
+      var h = document.documentElement;
+      var scrolled = h.scrollTop || document.body.scrollTop;
+      var height = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+      return height > 0 ? (scrolled / height) * 100 : 0;
+    }
+    function maybeShow(){
+      if (stopped || feedSeen || popupOverlay.classList.contains('open')) return;
+      if (Date.now() - pageStart < 20000) return;
+      if (scrollDepthPct() < 30) return;
+      stopped = true;
+      window.removeEventListener('scroll', onScroll);
       toast.classList.add('show');
       sessionStorage.setItem('ht_toast_shown', '1');
       setTimeout(function(){ toast.classList.remove('show'); }, 7000);
-    }, 9000);
+    }
+    function onScroll(){ maybeShow(); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    setTimeout(maybeShow, 20500);
     toast.addEventListener('click', function(e){
-      if (e.target.id === 'htToastClose') { toast.classList.remove('show'); clearTimeout(timer); return; }
+      if (e.target.id === 'htToastClose') { toast.classList.remove('show'); stopped = true; return; }
       toast.classList.remove('show');
-      var feedSec = qsa('.ht-sec-tint.ht-tint-c').pop();
       if (feedSec) feedSec.scrollIntoView({behavior:'smooth', block:'start'});
     });
   })();
@@ -1046,9 +1072,12 @@ a{color:inherit;text-decoration:none;}
       var availTiers = TIER_ORDER.filter(function(tk){ return TIERS[tk].flavorKeys.indexOf(k) !== -1; });
       var availLabel = availTiers.map(function(tk){ return TIERS[tk].label; }).join(', ');
       return '<div class="ht-fgcard">' +
+        '<div class="ht-fgcard-thumb"><img class="ht-zoom" loading="lazy" src="assets/images/jar-saving-' + k + '.jpg" alt="Hũ yến chưng vị ' + f.label + '"></div>' +
+        '<div class="ht-fgcard-body">' +
         '<div class="ht-fgcard-head"><span class="ht-fgcard-name">' + f.label + '</span><span class="ht-fgcard-sub">' + f.sub + '</span></div>' +
         '<div class="ht-fgcard-desc">' + f.desc + '</div>' +
         '<div class="ht-fgcard-foot"><span class="ht-fgcard-avail">Có ở: ' + availLabel + '</span></div>' +
+        '</div>' +
       '</div>';
     }).join('');
   })();
@@ -1295,7 +1324,7 @@ a{color:inherit;text-decoration:none;}
   }
 
   /* Mọi CTA mở thẳng popup đặt hàng, không cuộn trang */
-  ['htHeaderCta','htHeroCta','htInlineCta'].forEach(function(id){
+  ['htHeaderCta','htHeroCta'].forEach(function(id){
     var el = qs('#' + id);
     if (el) el.addEventListener('click', function(){
       track('hero_cta_click', {source:id});
