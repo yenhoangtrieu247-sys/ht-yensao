@@ -7,9 +7,10 @@
   LANDING PAGE — YẾN HŨ HOÀNG TRIỀU (Saving / Plus / Cao Cấp)
   Kiến trúc: single-file, mobile-first 480px, design tokens CSS variables.
   HỆ THIẾT KẾ (chốt với chủ shop): TRẮNG hiện đại — nền trắng chủ đạo, chữ đen
-  than #161823, accent duy nhất burgundy #9D1F34, phẳng (không gradient/sweep/
-  shadow đại trà), bo góc 4-12px, footer là vùng tối duy nhất. Tham chiếu:
-  hoanghuyen.beauty/rejuvella3 (lấy độ trắng/phẳng, KHÔNG lấy mật độ badge).
+  than #161823, accent duy nhất coral #F06472 (font + màu đỏ lấy theo
+  seohal-dew-thuythanhnguyen.vercel.app: Manrope heading 800 + Be Vietnam Pro),
+  phẳng (không gradient/sweep/shadow đại trà), bo góc 4-12px, footer là vùng
+  tối duy nhất. Bố cục trắng/phẳng tham chiếu hoanghuyen.beauty/rejuvella3.
 
   TRẠNG THÁI (cập nhật): ảnh sản phẩm/nguyên liệu/cách dùng/nhãn là ẢNH THẬT.
   Webhook Google Apps Script THẬT (đã hoạt động, không còn demo mode).
@@ -28,7 +29,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
 <!-- Meta (Facebook) Pixel — PageView tự động, CompleteRegistration bắn khi đặt hàng thành công (xem submitOrder). -->
 <script>
@@ -71,12 +72,12 @@ src="https://www.facebook.com/tr?id=1032364466110468&ev=PageView&noscript=1"
   --ht-on-accent:#FFFFFF;
 
   /* Brand accent — burgundy */
-  --ht-accent:#9D1F34;
-  --ht-accent-hover:#801629;
-  --ht-accent-active:#68101F;
-  --ht-accent-soft:#FFF0F3;
-  --ht-accent-border:#F2CDD5;
-  --ht-focus:rgba(157,31,52,.22);
+  --ht-accent:#F06472;
+  --ht-accent-hover:#E24A63;
+  --ht-accent-active:#C93A52;
+  --ht-accent-soft:#FCECEF;
+  --ht-accent-border:#F8C9CF;
+  --ht-focus:rgba(240,100,114,.25);
 
   /* Semantic only */
   --ht-success:#237A4B;
@@ -104,7 +105,7 @@ src="https://www.facebook.com/tr?id=1032364466110468&ev=PageView&noscript=1"
   --ht-overlay:rgba(22,24,35,.46);
 
   /* Fonts */
-  --font-display:'Lora',Georgia,serif;
+  --font-display:'Manrope',-apple-system,sans-serif;
   --font-body:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
 
   /* Radius */
@@ -135,7 +136,7 @@ body{
   padding-bottom:96px;
 }
 h1,h2,h3{color:var(--ht-ink);}
-h1,.ht-display{font-family:var(--font-display);letter-spacing:0;}
+h1,.ht-display{font-family:var(--font-display);letter-spacing:-.01em;}
 h2,h3{font-family:var(--font-body);}
 img{max-width:100%;display:block;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
@@ -200,7 +201,7 @@ a{color:inherit;text-decoration:none;}
 }
 .ht-hero-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--ht-accent);display:inline-block;}
 .ht-hero-kicker{font-size:14.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ht-accent);margin-bottom:8px;}
-.ht-hero-title{font-family:var(--font-display);font-size:38px;font-weight:600;line-height:1.14;color:var(--ht-ink);margin-bottom:10px;}
+.ht-hero-title{font-family:var(--font-display);font-size:34px;font-weight:800;line-height:1.18;color:var(--ht-ink);margin-bottom:10px;}
 .ht-hero-sub{font-size:16.5px;color:var(--ht-text);margin-bottom:16px;line-height:1.6;}
 .ht-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-top:12px;border-top:1px solid var(--ht-border);}
 .ht-price-label{font-size:15px;color:var(--ht-secondary);}
@@ -375,7 +376,7 @@ a{color:inherit;text-decoration:none;}
 /* Closing band — accent soft, KHÔNG dùng mảng tối */
 .ht-closing{margin:0;border-radius:0;background:var(--ht-accent-soft);border-top:1px solid var(--ht-accent-border);padding:var(--section-y) var(--page-pad);text-align:center;position:relative;overflow:hidden;}
 .ht-closing::before{display:none;}
-.ht-closing-t{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--ht-ink);margin-bottom:8px;position:relative;line-height:1.3;}
+.ht-closing-t{font-family:var(--font-display);font-size:25px;font-weight:800;color:var(--ht-ink);margin-bottom:8px;position:relative;line-height:1.3;}
 .ht-closing-t b{color:var(--ht-accent);}
 .ht-closing-s{font-size:15.5px;color:var(--ht-secondary);margin-bottom:20px;position:relative;}
 .ht-closing-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 30px;background:var(--ht-accent);color:var(--ht-on-accent);font-size:16.5px;font-weight:600;border-radius:var(--ht-r-sm);position:relative;min-height:52px;}
@@ -383,7 +384,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Footer — vùng tối duy nhất */
 .ht-foot{padding:32px var(--page-pad) 20px;text-align:center;background:var(--ht-ink);color:rgba(255,255,255,.85);}
-.ht-foot-name{font-family:var(--font-display);font-size:23px;font-weight:600;color:#fff;margin-bottom:6px;}
+.ht-foot-name{font-family:var(--font-display);font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;}
 .ht-foot-tag{font-size:13.5px;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.14em;margin-bottom:13px;}
 .ht-foot-text{font-size:15px;color:rgba(255,255,255,.7);line-height:1.6;max-width:380px;margin:0 auto 15px;}
 .ht-foot-certs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
@@ -493,8 +494,7 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-hero-eyebrow"><i></i> YẾN HŨ HOÀNG TRIỀU</div>
   </section>
   <div class="ht-hero-head ht-reveal">
-    <div class="ht-hero-kicker">Quà tặng sức khỏe cao cấp</div>
-    <h1 class="ht-hero-title">Một Món Quà Sức Khỏe Chỉn Chu Dành Cho Cha Mẹ</h1>
+    <h1 class="ht-hero-title">Yến Hũ Chưng Sẵn Hoàng Triều</h1>
     <p class="ht-hero-sub">Yến chưng sẵn với 3 dòng hàm lượng 2g, 6g và 10,2g yến mỗi hũ. Dễ chọn theo khẩu vị, nhu cầu và ngân sách của từng người thân.</p>
     <div class="ht-price-row">
       <span class="ht-price-label">Từ</span>
