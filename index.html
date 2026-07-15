@@ -255,7 +255,7 @@ a{color:inherit;text-decoration:none;}
 /* Comparison cards (So sánh 3 dòng) — lookbook carousel */
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
-.ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);padding:16px;border-top:4px solid var(--tier-color,var(--ht-accent));position:relative;}
+.ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:0 2px 4px rgba(22,24,35,.06),0 16px 32px rgba(22,24,35,.13);padding:16px;border:1px solid var(--ht-border);position:relative;}
 .ht-pcard-photo-wrap{position:relative;margin:-16px -16px 12px;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
 .ht-pcard-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 55%;display:block;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
@@ -270,8 +270,7 @@ a{color:inherit;text-decoration:none;}
 .ht-pcard-price span{font-size:14.5px;color:var(--ht-secondary);}
 .ht-pcard-save{font-size:14.5px;font-weight:600;color:var(--ht-accent);margin-bottom:4px;}
 .ht-pcard-combo{font-size:14.5px;color:var(--ht-secondary);margin-bottom:14px;}
-.ht-pcard-btn{width:100%;padding:14px;border-radius:var(--ht-r-sm);background:#fff;color:var(--ht-ink);border:1px solid var(--ht-border-strong);font-weight:600;font-size:16px;min-height:52px;}
-.ht-pcard.hl .ht-pcard-btn{background:var(--ht-accent);color:var(--ht-on-accent);border-color:var(--ht-accent);}
+.ht-pcard-btn{width:100%;padding:14px;border-radius:var(--ht-r-sm);background:var(--tier-color,var(--ht-accent));color:#fff;border:1px solid var(--tier-color,var(--ht-accent));font-weight:600;font-size:16px;min-height:52px;}
 .ht-pcards-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-top:2px;}
 .ht-pcards-dots span{width:6px;height:6px;border-radius:50%;background:var(--ht-border-strong);transition:background .2s,transform .2s;}
 .ht-pcards-dots span.active{background:var(--ht-accent);transform:scale(1.3);}
@@ -294,24 +293,6 @@ a{color:inherit;text-decoration:none;}
 .ht-toast-close{width:26px;height:26px;border-radius:50%;background:var(--ht-bg-soft);color:var(--ht-muted);font-size:14px;flex-shrink:0;}
 
 /* ---- Popup selectors (dùng chung) ---- */
-.ht-flavor-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
-.ht-flavor-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-radius:var(--ht-r-sm);box-shadow:var(--ht-sh-card-sm);}
-.ht-flavor-thumb{width:52px;height:52px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#fff;border:1px solid var(--ht-border);}
-.ht-flavor-thumb img{width:100%;height:100%;object-fit:contain;cursor:zoom-in;}
-.ht-flavor-name{flex:1;font-size:15.5px;font-weight:600;color:var(--ht-ink);}
-.ht-stepper{display:flex;align-items:center;gap:8px;}
-.ht-stepper button{width:32px;height:32px;border-radius:6px;background:var(--ht-bg-soft);border:1px solid var(--ht-border-strong);color:var(--ht-ink);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;}
-.ht-stepper button:active{transform:scale(.92);background:var(--ht-accent-soft);border-color:var(--ht-accent);}
-.ht-stepper span{min-width:20px;text-align:center;font-weight:700;font-size:16px;color:var(--ht-ink);}
-.ht-flavor-fill{font-size:13px;color:var(--ht-accent);font-weight:700;padding:6px 8px;border-radius:6px;background:var(--ht-accent-soft);min-height:32px;display:flex;align-items:center;}
-
-.ht-chip-select-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
-.ht-chip-select{padding:11px 15px;border-radius:var(--ht-r-sm);background:#fff;border:1px solid var(--ht-border-strong);font-size:15px;font-weight:600;color:var(--ht-text);min-height:44px;}
-.ht-chip-select.active{border:2px solid var(--ht-accent);background:var(--ht-accent-soft);color:var(--ht-ink);}
-
-.ht-breakdown-status{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border-radius:var(--ht-r-sm);text-align:center;font-size:15px;font-weight:600;margin-bottom:12px;}
-.ht-breakdown-status.ok{background:var(--ht-success-soft);color:var(--ht-success);border:1px solid var(--ht-success);}
-.ht-breakdown-status.warn{background:var(--ht-danger-soft);color:var(--ht-danger);border:1px solid var(--ht-danger);}
 
 .ht-cart-total-row{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;margin-top:6px;border-top:1px dashed var(--ht-border-strong);}
 .ht-cart-total-label{font-size:15.5px;color:var(--ht-secondary);}
@@ -370,8 +351,6 @@ a{color:inherit;text-decoration:none;}
 .ht-foot-name{font-family:var(--font-display);font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;}
 .ht-foot-tag{font-size:13.5px;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.14em;margin-bottom:13px;}
 .ht-foot-text{font-size:15px;color:rgba(255,255,255,.7);line-height:1.6;max-width:380px;margin:0 auto 15px;}
-.ht-foot-certs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
-.ht-cert{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:var(--ht-r-xs);font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);}
 .ht-legal{padding:18px var(--page-pad) 26px;text-align:center;border-top:1px solid rgba(255,255,255,.12);background:var(--ht-ink);color:rgba(255,255,255,.7);}
 .ht-legal-l{font-size:13.5px;color:rgba(255,255,255,.55);margin-bottom:3px;}
 .ht-legal-co{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;}
@@ -399,7 +378,7 @@ a{color:inherit;text-decoration:none;}
 .ht-popup-title{font-size:18px;font-weight:700;color:var(--ht-ink);}
 .ht-popup-close{width:34px;height:34px;border-radius:50%;background:var(--ht-bg-soft);border:1px solid var(--ht-border);color:var(--ht-ink);font-size:17px;flex-shrink:0;}
 .ht-popup-body{padding:16px;overflow-y:auto;flex:1;}
-.ht-field{margin-bottom:13px;}
+.ht-field{margin-bottom:9px;}
 .ht-field label{display:block;font-size:14.5px;font-weight:700;color:var(--ht-ink);margin-bottom:6px;}
 .ht-field input,.ht-field textarea{width:100%;padding:13px;border:1px solid var(--ht-border-strong);border-radius:var(--ht-r-sm);font-family:inherit;font-size:16px;color:var(--ht-ink);background:#fff;min-height:48px;}
 .ht-field input:focus,.ht-field textarea:focus{outline:none;border-color:var(--ht-accent);box-shadow:0 0 0 3px var(--ht-focus);}
@@ -675,11 +654,6 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-foot-name">Yến Sào – Quà Tặng Hoàng Triều</div>
     <div class="ht-foot-tag">Quà tặng sức khỏe cao cấp</div>
     <p class="ht-foot-text">Hoàng Triều chuyên cung cấp yến sào và quà tặng sức khỏe cao cấp, sở hữu hệ thống nhà yến riêng tại Khánh Hòa, Ninh Thuận.</p>
-    <div class="ht-foot-certs">
-      <span class="ht-cert">Nhập trực tiếp nhà yến</span>
-      <span class="ht-cert">Freeship từ combo 3 hũ (mọi dòng)</span>
-      <span class="ht-cert">Freeship khi mua lẻ 1 hũ Cao Cấp</span>
-    </div>
   </div>
   <div class="ht-legal">
     <div class="ht-legal-l">Phân phối bởi</div>
@@ -1003,7 +977,7 @@ a{color:inherit;text-decoration:none;}
       ],
       shipFeeSingle:19000,
       flavorKeys:['duongphen','tamvi','nhansam','duongkieng','kids'],
-      flavorImg:{duongkieng:'jar-plus-duongkieng.jpg', tamvi:'jar-plus-tamvi.jpg', nhansam:'jar-plus-nhansam.jpg', duongphen:'jar-plus-duongphen.jpg', kids:'jar-plus-kids.jpg'}
+      flavorImg:{duongkieng:'hero-gallery-09.jpg', tamvi:'hero-gallery-08.jpg', nhansam:'hero-gallery-13.jpg', duongphen:'hero-gallery-06.jpg', kids:'hero-gallery-07.jpg'}
     },
     caocap: {
       key:'caocap', label:'Cao Cấp', gram:'10,2g', sub:'10,2g yến/hũ', color:'var(--ht-caocap)', colorHex:'#2C3A5C',
@@ -1017,13 +991,13 @@ a{color:inherit;text-decoration:none;}
       ],
       shipFeeSingle:0,
       flavorKeys:['duongkieng','duongphen','nhansam'],
-      flavorImg:{duongkieng:'jar-caocap-duongkieng.jpg', duongphen:'jar-caocap-duongphen.jpg', nhansam:'jar-caocap-nhansam.jpg'}
+      flavorImg:{duongkieng:'hero-gallery-10.jpg', duongphen:'hero-gallery-11.jpg', nhansam:'hero-gallery-12.jpg'}
     }
   };
   var TIER_ORDER = ['saving','plus','caocap'];
   /* Ảnh đại diện dòng: dùng ảnh studio nhãn chính diện (KHÔNG lộ bảng dinh dưỡng).
      Ảnh macro-*.jpg (mặt nhãn thành phần) chỉ dành cho khu minh bạch, không dùng marketing. */
-  var TIER_IMG = { saving:'jar-saving-duongphen.jpg', plus:'jar-plus-duongphen.jpg', caocap:'jar-caocap-duongphen.jpg' };
+  var TIER_IMG = { saving:'hero-gallery-02.jpg', plus:'hero-gallery-06.jpg', caocap:'hero-gallery-11.jpg' };
 
   /* ---------------- So sánh 3 dòng (carousel cards, ảnh thật + tiết kiệm tính đúng theo giá) ---------------- */
   (function renderPcards(){
@@ -1044,7 +1018,7 @@ a{color:inherit;text-decoration:none;}
       var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
       var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
       var minCombo = t.offers[1];
-      return '<div class="ht-pcard' + (c.tierKey==='plus' ? ' hl' : '') + '" style="--tier-color:' + t.colorHex + '">' +
+      return '<div class="ht-pcard" style="--tier-color:' + t.colorHex + '">' +
         '<div class="ht-pcard-photo-wrap"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + t.flavorImg[c.flavorKey] + '" alt="Yến hũ Hoàng Triều vị ' + f.label + ' ' + t.label + '"></div>' +
         '<div class="ht-pcard-index">' + String(idx+1).padStart(2,'0') + ' / ' + cards.length + '</div>' +
         '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + f.label + ' ' + t.label + '</span>' + (c.tierKey==='plus' ? '<span class="ht-pcard-save">Được chọn nhiều nhất</span>' : '') + '</div>' +
@@ -1093,7 +1067,7 @@ a{color:inherit;text-decoration:none;}
   (function pcardsAutoScroll(){
     var wrap = qs('#htPcards');
     if (!wrap) return;
-    var SPEED = 1.1; // px/khung hình (~66px/s ở 60fps)
+    var SPEED = 0.45; // px/khung hình (~27px/s ở 60fps) — chậm lại theo yêu cầu
     var RESUME_DELAY = 4000;
     var paused = false;
     var inView = true;
@@ -1155,7 +1129,7 @@ a{color:inherit;text-decoration:none;}
   /* ============================================================
      ĐẶT HÀNG — popup đơn giản: Chọn dòng → Chọn số lượng → Ghi chú vị → Thông tin nhận hàng
      ============================================================ */
-  var popupState = { tierKey:'saving', offerIndex:0, flavorQty:{} };
+  var popupState = { tierKey:'saving', offerIndex:0 };
   var formValues = {fullname:'', phone:'', address:'', note:''};
   var submitting = false;
   var errorMsg = '';
@@ -1170,38 +1144,12 @@ a{color:inherit;text-decoration:none;}
     var o = currentOffer();
     return o.price + shipFeeFor(popupState.tierKey, o);
   }
-  function targetQty(){ var o = currentOffer(); return o.paidQty + o.bonusQty; }
-  function flavorTotalQty(){
-    var sum = 0;
-    Object.keys(popupState.flavorQty).forEach(function(k){ sum += popupState.flavorQty[k] || 0; });
-    return sum;
-  }
-  /* Giữ lựa chọn vị hợp lệ khi đổi dòng/số lượng: mặc định 1 vị duy nhất cho cả hũ
-     (dễ chọn nhanh), tự đồng bộ số lượng nếu khách chưa chuyển sang chọn nhiều vị. */
-  function syncFlavorToTarget(){
-    var tier = currentTier();
-    var q = {};
-    tier.flavorKeys.forEach(function(k){ q[k] = popupState.flavorQty[k] || 0; });
-    popupState.flavorQty = q;
-    var nonZero = tier.flavorKeys.filter(function(k){ return q[k] > 0; });
-    var target = targetQty();
-    if (nonZero.length === 0) {
-      popupState.flavorQty[tier.flavorKeys[0]] = target;
-    } else if (nonZero.length === 1) {
-      popupState.flavorQty[nonZero[0]] = target;
-    }
-  }
+  /* Vị giờ do khách tự ghi vào ô ghi chú (không còn chọn số lượng theo từng vị) —
+     bấm 1 thẻ vị cụ thể (persona chip / thẻ so sánh) chỉ điền sẵn tên vị vào ô
+     ghi chú cho khách, không ép chọn cứng như trước. */
   function quickFillFlavor(key){
-    var tier = currentTier();
-    var q = {};
-    tier.flavorKeys.forEach(function(k){ q[k] = 0; });
-    q[key] = targetQty();
-    popupState.flavorQty = q;
-  }
-  function adjustFlavor(key, delta){
-    var v = (popupState.flavorQty[key] || 0) + delta;
-    if (v < 0) v = 0;
-    popupState.flavorQty[key] = v;
+    var label = FLAVOR_GUIDE[key] ? FLAVOR_GUIDE[key].label : '';
+    if (label) formValues.note = 'Vị: ' + label;
   }
 
   var popupOverlay = qs('#htPopupOverlay');
@@ -1212,8 +1160,6 @@ a{color:inherit;text-decoration:none;}
   function openBuyPopup(tierKey){
     popupState.tierKey = tierKey || popupState.tierKey || 'saving';
     popupState.offerIndex = 0;
-    popupState.flavorQty = {};
-    syncFlavorToTarget();
     errorMsg = '';
     submitting = false;
     popupLastFocus = document.activeElement;
@@ -1248,10 +1194,6 @@ a{color:inherit;text-decoration:none;}
     var offer = currentOffer();
     var total = orderTotal();
     var ship = shipFeeFor(popupState.tierKey, offer);
-    var target = targetQty();
-    var chosen = flavorTotalQty();
-    var diff = target - chosen;
-    var breakdownOk = diff === 0;
 
     var tierBtns = TIER_ORDER.map(function(key){
       var t = TIERS[key];
@@ -1270,31 +1212,6 @@ a{color:inherit;text-decoration:none;}
       '</button>';
     }).join('');
 
-    var quickChips = tier.flavorKeys.map(function(k){
-      var f = FLAVOR_GUIDE[k];
-      var isSingle = (popupState.flavorQty[k] === target) && (chosen === target);
-      return '<button type="button" class="ht-chip-select' + (isSingle?' active':'') + '" data-quick="' + k + '">Chỉ ' + f.label + '</button>';
-    }).join('');
-
-    var flavorRows = tier.flavorKeys.map(function(k){
-      var f = FLAVOR_GUIDE[k];
-      var img = tier.flavorImg[k];
-      var qty = popupState.flavorQty[k] || 0;
-      return '<div class="ht-flavor-row">' +
-        '<div class="ht-flavor-thumb"><img class="ht-zoom" src="assets/images/' + img + '" alt="Hũ yến chưng vị ' + f.label + '"></div>' +
-        '<span class="ht-flavor-name">' + f.label + '</span>' +
-        '<div class="ht-stepper">' +
-          '<button type="button" data-fminus="' + k + '" aria-label="Giảm ' + f.label + '">−</button>' +
-          '<span>' + qty + '</span>' +
-          '<button type="button" data-fplus="' + k + '" aria-label="Tăng ' + f.label + '">+</button>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-
-    var statusText = breakdownOk
-      ? ('Đã chọn đủ ' + target + '/' + target + ' hũ ✓')
-      : (diff > 0 ? ('Còn thiếu ' + diff + ' hũ — chọn thêm vị bên dưới') : ('Dư ' + Math.abs(diff) + ' hũ — bớt vị bên dưới cho khớp'));
-
     popupBody.innerHTML =
       (errorMsg ? '<div class="ht-error-banner">' + errorMsg + '</div>' : '') +
       '<div class="ht-buypop-head">' +
@@ -1306,24 +1223,19 @@ a{color:inherit;text-decoration:none;}
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
       '<div class="ht-buypop-section-label">Chọn số lượng</div>' +
       '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
-      '<div class="ht-buypop-section-label">Chọn vị (mỗi vị 1 ô)</div>' +
-      '<div class="ht-chip-select-row">' + quickChips + '</div>' +
-      '<div class="ht-flavor-list">' + flavorRows + '</div>' +
-      '<div class="ht-breakdown-status ' + (breakdownOk?'ok':'warn') + '">' + statusText + '</div>' +
-      '<div class="ht-field"><label>Ghi chú thêm (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: giao giờ hành chính, gói quà tặng...">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
+      '<div class="ht-field"><label>Vị mong muốn &amp; ghi chú thêm (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: 2 hũ Đường phèn, 1 hũ Kids; giao giờ hành chính...">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
       '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" placeholder="Nguyễn Thị A" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
       '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" inputmode="tel" id="htFieldPhone" placeholder="0901234567 hoặc +84901234567" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
       '<div class="ht-field"><label>Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" rows="2" placeholder="Số nhà, đường, phường/xã, tỉnh/thành">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
       '<input type="text" class="ht-honeypot" id="htHoneypot" tabindex="-1" autocomplete="off">' +
       '<div class="ht-cart-total-row" style="margin:4px 0 16px;"><span class="ht-cart-total-label">Tổng cộng</span><span class="ht-cart-total-val">' + fmtVnd(total) + '</span></div>' +
-      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + ((submitting || !breakdownOk) ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
+      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
 
     qsa('.ht-buypop-tier-btn', popupBody).forEach(function(btn){
       btn.addEventListener('click', function(){
         captureFormValues();
         popupState.tierKey = btn.getAttribute('data-tier');
         popupState.offerIndex = 0;
-        syncFlavorToTarget();
         track('line_selected', {tier: popupState.tierKey, source:'popup'});
         renderBuyPopup();
       });
@@ -1332,30 +1244,8 @@ a{color:inherit;text-decoration:none;}
       btn.addEventListener('click', function(){
         captureFormValues();
         popupState.offerIndex = parseInt(btn.getAttribute('data-offer'), 10);
-        syncFlavorToTarget();
         var o = currentOffer();
         track('offer_selected', {tier: popupState.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty});
-        renderBuyPopup();
-      });
-    });
-    qsa('[data-quick]', popupBody).forEach(function(btn){
-      btn.addEventListener('click', function(){
-        captureFormValues();
-        quickFillFlavor(btn.getAttribute('data-quick'));
-        renderBuyPopup();
-      });
-    });
-    qsa('[data-fplus]', popupBody).forEach(function(btn){
-      btn.addEventListener('click', function(){
-        captureFormValues();
-        adjustFlavor(btn.getAttribute('data-fplus'), 1);
-        renderBuyPopup();
-      });
-    });
-    qsa('[data-fminus]', popupBody).forEach(function(btn){
-      btn.addEventListener('click', function(){
-        captureFormValues();
-        adjustFlavor(btn.getAttribute('data-fminus'), -1);
         renderBuyPopup();
       });
     });
@@ -1402,13 +1292,12 @@ a{color:inherit;text-decoration:none;}
     var okPhone = validatePhone(formValues.phone);
     var okAddress = formValues.address.trim().length > 0;
     var okBlocked = CONFIG.blockedPhones.indexOf(formValues.phone.replace(/\s+/g,'')) === -1;
-    var okBreakdown = flavorTotalQty() === targetQty();
 
     qs('#htErrFullname').textContent = okName ? '' : 'Vui lòng nhập họ tên';
     qs('#htErrPhone').textContent = okPhone ? (okBlocked ? '' : 'Số điện thoại không hợp lệ') : 'Số điện thoại không đúng định dạng (VD: 0989249686)';
     qs('#htErrAddress').textContent = okAddress ? '' : 'Vui lòng nhập địa chỉ nhận hàng';
 
-    if (!okName || !okPhone || !okAddress || !okBlocked || !okBreakdown) return;
+    if (!okName || !okPhone || !okAddress || !okBlocked) return;
 
     submitting = true;
     errorMsg = '';
@@ -1419,10 +1308,8 @@ a{color:inherit;text-decoration:none;}
     var ship = shipFeeFor(popupState.tierKey, offer);
     var total = offer.price + ship;
     var utm = getUtm();
-    var flavorBreakdown = tier.flavorKeys.filter(function(k){ return popupState.flavorQty[k] > 0; }).map(function(k){
-      return {flavor: k, label: FLAVOR_GUIDE[k].label, qty: popupState.flavorQty[k]};
-    });
-    var flavorSummary = flavorBreakdown.map(function(b){ return b.qty + ' hũ ' + b.label; }).join(', ');
+    // Vị do khách tự ghi trong "note" (không còn breakdown theo từng vị) —
+    // người nhận đơn đọc note để biết vị khách muốn.
     var payload = {
       order_code: genOrderCode(),
       timestamp: new Date().toISOString(),
@@ -1436,9 +1323,7 @@ a{color:inherit;text-decoration:none;}
         paidQty: offer.paidQty,
         bonusQty: offer.bonusQty,
         receivedQty: offer.paidQty + offer.bonusQty,
-        price: offer.price,
-        flavor_summary: flavorSummary,
-        flavor_breakdown: flavorBreakdown
+        price: offer.price
       },
       subtotal: offer.price,
       shipping_fee: ship,
