@@ -190,7 +190,11 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- HERO — trắng, ảnh trên plate xám nhạt ---- */
 .ht-hero{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--ht-bg-soft);}
-.ht-hero-img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;}
+.ht-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;opacity:0;z-index:1;transition:opacity .7s ease;}
+.ht-hero-img.active{opacity:1;z-index:2;}
+.ht-hero-dots{position:absolute;left:0;right:0;bottom:12px;z-index:3;display:flex;justify-content:center;gap:5px;padding:6px 10px;margin:0 auto;width:fit-content;background:rgba(0,0,0,.28);border-radius:var(--ht-r-pill);}
+.ht-hero-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);transition:background .2s,transform .2s;}
+.ht-hero-dots span.active{background:#fff;transform:scale(1.3);}
 .ht-hero-head{position:relative;z-index:2;margin:-28px 14px 0;padding:24px var(--page-pad) 20px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);}
 .ht-hero-eyebrow{
   position:absolute;top:16px;left:16px;z-index:3;display:inline-flex;align-items:center;gap:6px;
@@ -491,10 +495,21 @@ a{color:inherit;text-decoration:none;}
     <button class="ht-header-cta" id="htHeaderCta" type="button">Đặt hàng</button>
   </div>
 
-  <!-- ============ 2. HERO ============ -->
+  <!-- ============ 2. HERO (gallery tự động chuyển ảnh mỗi 3s, lặp lại) ============ -->
   <div class="ht-hero-wrap">
-  <section class="ht-hero">
-    <img class="ht-hero-img ht-zoom" src="assets/images/hero-3tang.jpg" alt="Yến hũ Hoàng Triều 3 dòng Saving Plus Cao Cấp">
+  <section class="ht-hero" id="htHeroGallery">
+    <img class="ht-hero-img ht-zoom active" src="assets/images/hero-3tang.jpg" alt="Yến hũ Hoàng Triều 3 dòng Saving Plus Cao Cấp">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-01.jpg" alt="Yến hũ Hoàng Triều vị Tam Vị Saving">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-02.jpg" alt="Yến hũ Hoàng Triều vị Đường Phèn Saving">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-03.jpg" alt="Yến hũ Hoàng Triều vị Đường Kiêng Saving">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-04.jpg" alt="Yến hũ Hoàng Triều vị Kids Saving">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-05.jpg" alt="Yến hũ Hoàng Triều vị Nhân Sâm Saving">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-06.jpg" alt="Yến hũ Hoàng Triều vị Đường Phèn Plus">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-07.jpg" alt="Yến hũ Hoàng Triều vị Kids Plus">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-08.jpg" alt="Yến hũ Hoàng Triều vị Tam Vị Plus">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-09.jpg" alt="Yến hũ Hoàng Triều vị Đường Kiêng Plus">
+    <img class="ht-hero-img ht-zoom" src="assets/images/hero-gallery-10.jpg" alt="Yến hũ Hoàng Triều vị Đường Kiêng Cao Cấp">
+    <div class="ht-hero-dots" id="htHeroDots"></div>
     <div class="ht-hero-eyebrow"><i></i> YẾN HŨ HOÀNG TRIỀU</div>
   </section>
   <div class="ht-hero-head ht-reveal">
@@ -546,7 +561,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ 4. SO SÁNH 3 DÒNG ============ -->
-  <div class="ht-sec-tint ht-tint-a ht-reveal">
+  <div class="ht-sec-tint ht-tint-a ht-sec-tightbottom ht-reveal">
     <div class="ht-eyebrow">So sánh</div>
     <h2 class="ht-title">Chọn Dòng Phù Hợp<br>Với Nhu Cầu</h2>
     <p class="ht-sub">Không có dòng nào "tốt nhất" — chỉ có dòng phù hợp nhất với người bạn muốn chăm sóc.</p>
@@ -557,7 +572,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ 5. HƯỚNG DẪN CHỌN VỊ ============ -->
-  <div class="ht-sec ht-reveal">
+  <div class="ht-sec ht-sec-tightbottom ht-reveal">
     <div class="ht-eyebrow">Hương vị</div>
     <h2 class="ht-title">Chọn Vị Theo<br>Khẩu Vị Và Thành Phần</h2>
     <p class="ht-sub">Mỗi vị có thành phần và sắc vị riêng. Đọc kỹ thông tin trên nhãn nếu người dùng có chế độ dinh dưỡng hoặc cơ địa đặc biệt.</p>
@@ -637,7 +652,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ NGUYÊN LIỆU ============ -->
-  <div class="ht-sec ht-reveal">
+  <div class="ht-sec ht-sec-tightbottom ht-reveal">
     <div class="ht-eyebrow">Nguyên liệu</div>
     <h2 class="ht-title">Nguyên Liệu Tự Nhiên,<br>Tuyển Chọn Kỹ Càng</h2>
     <p class="ht-sub">Mỗi hương vị Hoàng Triều bắt đầu từ nguyên liệu thật, không hương liệu giả.</p>
@@ -661,7 +676,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ 9. FEEDBACK KHÁCH HÀNG THẬT ============ -->
-  <div class="ht-sec-tint ht-tint-a ht-reveal" id="htFeedbackSec">
+  <div class="ht-sec-tint ht-tint-a ht-sec-tightbottom ht-reveal" id="htFeedbackSec">
     <div class="ht-eyebrow">Khách hàng nói gì</div>
     <h2 class="ht-title">Khách Hàng Đã Chọn Hoàng Triều<br>Để Gửi Lời Chăm Sóc</h2>
     <div class="ht-feed-grid">
@@ -848,6 +863,28 @@ a{color:inherit;text-decoration:none;}
   } else {
     revealEls.forEach(revealNow);
   }
+
+  /* ---------------- Hero gallery: tự động chuyển ảnh mỗi 3s, hết vòng lặp lại ---------------- */
+  (function heroGallery(){
+    var wrap = qs('#htHeroGallery');
+    if (!wrap) return;
+    var slides = qsa('.ht-hero-img', wrap);
+    var dotsWrap = qs('#htHeroDots');
+    if (slides.length < 2) return;
+    var idx = 0;
+    if (dotsWrap) {
+      dotsWrap.innerHTML = slides.map(function(_, i){ return '<span' + (i===0?' class="active"':'') + '></span>'; }).join('');
+    }
+    var dots = dotsWrap ? qsa('span', dotsWrap) : [];
+    function show(i){
+      slides[idx].classList.remove('active');
+      if (dots[idx]) dots[idx].classList.remove('active');
+      idx = i;
+      slides[idx].classList.add('active');
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+    setInterval(function(){ show((idx + 1) % slides.length); }, 3000);
+  })();
 
   /* ---------------- Lightbox ---------------- */
   var lightbox = qs('#htLightbox');
