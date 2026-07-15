@@ -217,12 +217,15 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Common section ---- */
 .ht-sec{padding:var(--section-y) var(--page-pad);position:relative;background:var(--ht-bg);}
-/* Hai section trắng liền kề (không có tint phân tách) cộng dồn padding 2 lần
-   thành khoảng trắng quá lớn, mất nhịp so với chỗ có tint — giảm padding nối
-   tiếp để khoảng cách đều nhau trực quan trên toàn trang. */
+/* Hai section liền kề bất kỳ (trắng-trắng, trắng-tint, tint-tint, hay nối
+   sang closing/footer) đều cộng dồn padding-bottom + padding-top = 2 lần
+   --section-y (tới ~152px) nếu không xử lý — dù có màu phân tách hay không,
+   khoảng đó vẫn đọc là "khoảng trắng thừa". Giảm padding nối tiếp cho MỌI
+   cặp section để nhịp khoảng cách đều nhau trên toàn trang. */
 .ht-sec + .ht-sec{padding-top:0;margin-top:var(--section-y-tight);}
+:is(.ht-sec,.ht-sec-tint,.ht-closing,.ht-foot) + :is(.ht-sec-tint,.ht-closing,.ht-foot){padding-top:0;margin-top:var(--section-y-tight);}
 .ht-sec-tint{padding:var(--section-y) var(--page-pad);margin:0;border-radius:0;background:var(--ht-bg-soft);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
-.ht-tint-a{background:var(--ht-accent-soft);border-top:1px solid var(--ht-accent-border);border-bottom:1px solid var(--ht-accent-border);}
+.ht-tint-a{background:var(--ht-bg);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-b{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
 .ht-tint-c{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
 .ht-eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ht-accent);margin-bottom:9px;}
@@ -355,8 +358,8 @@ a{color:inherit;text-decoration:none;}
 .ht-cert-list{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);overflow:hidden;margin-top:12px;}
 .ht-cert-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--ht-border);width:100%;text-align:left;min-height:48px;}
 .ht-cert-item:last-child{border-bottom:none;}
-.ht-cert-item-t{font-size:15.5px;font-weight:600;color:var(--ht-ink);}
-.ht-cert-item-d{font-size:13.5px;color:var(--ht-muted);margin-top:1px;}
+.ht-cert-item-t{display:block;font-size:15.5px;font-weight:600;color:var(--ht-ink);}
+.ht-cert-item-d{display:block;font-size:13.5px;color:var(--ht-muted);margin-top:1px;}
 .ht-cert-item-view{font-size:14.5px;font-weight:700;color:var(--ht-accent);white-space:nowrap;flex-shrink:0;}
 
 /* Feedback thật */
@@ -572,7 +575,7 @@ a{color:inherit;text-decoration:none;}
   <!-- ============ ĐẶT HÀNG: mọi nút CTA mở popup "Đặt hàng" (chọn dòng + gói ngay trong popup), xem script cuối trang ============ -->
 
   <!-- ============ 8. NGUỒN GỐC VÀ CHỨNG NHẬN ============ -->
-  <div class="ht-sec-tint ht-tint-c ht-reveal" id="nguongoc">
+  <div class="ht-sec-tint ht-tint-a ht-reveal" id="nguongoc">
     <div class="ht-eyebrow">Uy tín</div>
     <h2 class="ht-title">An Tâm Từ Thông Tin<br>Có Thể Kiểm Tra</h2>
     <div class="ht-origin-list">
