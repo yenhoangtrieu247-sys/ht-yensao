@@ -87,7 +87,6 @@ src="https://www.facebook.com/tr?id=1032364466110468&ev=PageView&noscript=1"
 
   /* Tint thứ 2 — sage, tạo nhịp điệu xen kẽ với hồng burgundy, không dùng vàng/nâu */
   --ht-mint-soft:#EEF6F1;
-  --ht-mint-border:#D2E8DC;
   --ht-mint:#4F7A63;
 
   /* 3 màu dòng sản phẩm — tông đá quý, không vàng/nâu. Plus dùng chung màu accent (coral) vì là dòng "được chọn nhiều nhất" */
@@ -217,20 +216,20 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Common section ---- */
 .ht-sec{padding:var(--section-y) var(--page-pad);position:relative;background:var(--ht-bg);}
-/* Hai section liền kề bất kỳ (trắng-trắng, trắng-tint, tint-tint, hay nối
-   sang closing/footer) đều cộng dồn padding-bottom + padding-top = 2 lần
-   --section-y (tới ~152px) nếu không xử lý — dù có màu phân tách hay không,
-   khoảng đó vẫn đọc là "khoảng trắng thừa". Giảm padding nối tiếp cho MỌI
-   cặp section để nhịp khoảng cách đều nhau trên toàn trang. */
-.ht-sec + .ht-sec{padding-top:0;margin-top:var(--section-y-tight);}
-/* Section kết bằng khối ghi chú/disclaimer (không phải text mở đầu) không
-   cần đệm dưới rộng bằng section thường — dùng cho "Cách dùng". */
+/* Hai section liền kề bất kỳ đều cộng dồn padding-bottom + padding-top = 2
+   lần --section-y (tới ~152px) nếu không xử lý — giảm padding nối tiếp cho
+   MỌI cặp section để nhịp khoảng cách đều nhau trên toàn trang. Section
+   trắng (.ht-sec) không có viền/màu phân tách nên zero padding-top là mượt;
+   section có tint/footer thì CÓ viền/màu phân tách — zero padding-top làm
+   nội dung dí sát đường viền, nên thay bằng đệm nhẹ --section-y-tight bên
+   trong + margin-top:0 (không đệm ngoài) thay vì ngược lại. */
+:is(.ht-sec,.ht-sec-tint) + .ht-sec{padding-top:0;margin-top:var(--section-y-tight);}
+:is(.ht-sec,.ht-sec-tint) + :is(.ht-sec-tint,.ht-foot){padding-top:var(--section-y-tight);margin-top:0;}
+/* Section kết bằng khối ghi chú/disclaimer hoặc chỉ 1 khối CTA nhỏ (không
+   phải text mở đầu) không cần đệm dưới rộng bằng section thường. */
 .ht-sec-tightbottom{padding-bottom:var(--section-y-tight);}
-:is(.ht-sec,.ht-sec-tint,.ht-foot) + :is(.ht-sec-tint,.ht-foot){padding-top:0;margin-top:var(--section-y-tight);}
 .ht-sec-tint{padding:var(--section-y) var(--page-pad);margin:0;border-radius:0;background:var(--ht-bg-soft);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-a{background:var(--ht-bg);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
-.ht-tint-b{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
-.ht-tint-c{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
 .ht-eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ht-accent);margin-bottom:9px;}
 .ht-eyebrow::before,.ht-eyebrow::after{content:'';width:20px;height:1px;background:var(--ht-accent-border);}
 .ht-title{font-family:var(--font-display);font-size:27px;font-weight:600;color:var(--ht-ink);text-align:center;line-height:1.3;margin-bottom:10px;}
@@ -651,7 +650,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ CTA GIỮA TRANG ============ -->
-  <div class="ht-sec ht-reveal">
+  <div class="ht-sec ht-sec-tightbottom ht-reveal">
     <div class="ht-ctablock">
       <div class="ht-ctablock-t">Chưa Chắc Chọn Dòng Nào?</div>
       <div class="ht-ctablock-s">Nhắn tin Fanpage — Hoàng Triều tư vấn miễn phí theo đúng nhu cầu của bạn.</div>
@@ -660,7 +659,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ 9. FEEDBACK KHÁCH HÀNG THẬT ============ -->
-  <div class="ht-sec-tint ht-tint-c ht-reveal">
+  <div class="ht-sec-tint ht-tint-a ht-reveal" id="htFeedbackSec">
     <div class="ht-eyebrow">Khách hàng nói gì</div>
     <h2 class="ht-title">Khách Hàng Đã Chọn Hoàng Triều<br>Để Gửi Lời Chăm Sóc</h2>
     <div class="ht-feed-grid">
@@ -921,7 +920,7 @@ a{color:inherit;text-decoration:none;}
      (không cần nhắc lại cái đang thấy). */
   (function feedbackToast(){
     var toast = qs('#htToast');
-    var feedSec = qsa('.ht-sec-tint.ht-tint-c').pop();
+    var feedSec = qs('#htFeedbackSec');
     if (!toast || sessionStorage.getItem('ht_toast_shown')) return;
     var pageStart = Date.now();
     var feedSeen = false;
