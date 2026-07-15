@@ -223,7 +223,10 @@ a{color:inherit;text-decoration:none;}
    khoảng đó vẫn đọc là "khoảng trắng thừa". Giảm padding nối tiếp cho MỌI
    cặp section để nhịp khoảng cách đều nhau trên toàn trang. */
 .ht-sec + .ht-sec{padding-top:0;margin-top:var(--section-y-tight);}
-:is(.ht-sec,.ht-sec-tint,.ht-closing,.ht-foot) + :is(.ht-sec-tint,.ht-closing,.ht-foot){padding-top:0;margin-top:var(--section-y-tight);}
+/* Section kết bằng khối ghi chú/disclaimer (không phải text mở đầu) không
+   cần đệm dưới rộng bằng section thường — dùng cho "Cách dùng". */
+.ht-sec-tightbottom{padding-bottom:var(--section-y-tight);}
+:is(.ht-sec,.ht-sec-tint,.ht-foot) + :is(.ht-sec-tint,.ht-foot){padding-top:0;margin-top:var(--section-y-tight);}
 .ht-sec-tint{padding:var(--section-y) var(--page-pad);margin:0;border-radius:0;background:var(--ht-bg-soft);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-a{background:var(--ht-bg);border-top:1px solid var(--ht-border);border-bottom:1px solid var(--ht-border);}
 .ht-tint-b{background:var(--ht-mint-soft);border-top:1px solid var(--ht-mint-border);border-bottom:1px solid var(--ht-mint-border);}
@@ -335,7 +338,7 @@ a{color:inherit;text-decoration:none;}
 .ht-cart-total-val{font-size:22px;font-weight:700;color:var(--ht-accent);}
 
 /* Steps (cách dùng) */
-.ht-steps{display:flex;flex-direction:column;gap:9px;}
+.ht-steps{display:flex;flex-direction:column;gap:12px;}
 .ht-step{display:flex;gap:13px;align-items:center;padding:13px 15px;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);}
 .ht-step-num{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--ht-accent-soft);color:var(--ht-accent);font-weight:700;font-size:15.5px;}
 .ht-step-t{font-size:16px;font-weight:600;color:var(--ht-ink);}
@@ -357,17 +360,13 @@ a{color:inherit;text-decoration:none;}
 .ht-spec-l{flex:0 0 128px;font-weight:700;color:var(--ht-muted);}
 .ht-spec-v{flex:1;color:var(--ht-text);font-weight:500;}
 
-/* Cert gallery — ISO nổi bật + danh mục */
-.ht-cert-hero{margin:16px 0 12px;}
-.ht-cert-hero img{width:220px;aspect-ratio:0.707;object-fit:cover;margin:0 auto;display:block;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);cursor:zoom-in;background:#fff;}
-.ht-cert-hero-cap{font-size:14.5px;color:var(--ht-secondary);line-height:1.5;margin-top:10px;text-align:center;}
-.ht-cert-hero-cap b{color:var(--ht-ink);}
-.ht-cert-list{background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card-sm);overflow:hidden;margin-top:12px;}
-.ht-cert-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--ht-border);width:100%;text-align:left;min-height:48px;}
-.ht-cert-item:last-child{border-bottom:none;}
-.ht-cert-item-t{display:block;font-size:15.5px;font-weight:600;color:var(--ht-ink);}
-.ht-cert-item-d{display:block;font-size:13.5px;color:var(--ht-muted);margin-top:1px;}
-.ht-cert-item-view{font-size:14.5px;font-weight:700;color:var(--ht-accent);white-space:nowrap;flex-shrink:0;}
+/* Cert gallery — băng chuyền nhiều giấy chứng nhận (khôi phục theo yêu cầu) */
+.ht-cert-grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 2px 6px;scrollbar-width:none;}
+.ht-cert-grid::-webkit-scrollbar{display:none;}
+.ht-cert-card{flex:0 0 46%;scroll-snap-align:start;}
+.ht-cert-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);cursor:zoom-in;background:#fff;}
+.ht-cert-cap{font-size:13.5px;color:var(--ht-muted);line-height:1.4;margin-top:8px;text-align:center;}
+.ht-cert-cap b{color:var(--ht-ink);}
 
 /* Feedback thật */
 .ht-feed-grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 6px;scrollbar-width:none;}
@@ -382,15 +381,6 @@ a{color:inherit;text-decoration:none;}
 .ht-ctablock-s{font-size:15px;color:var(--ht-secondary);margin-bottom:16px;}
 .ht-ctablock-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 34px;background:var(--ht-accent);color:var(--ht-on-accent);font-size:16.5px;font-weight:600;border-radius:var(--ht-r-sm);min-height:52px;}
 .ht-ctablock-btn:active{background:var(--ht-accent-active);}
-
-/* Closing band — accent soft, KHÔNG dùng mảng tối */
-.ht-closing{margin:0;border-radius:0;background:var(--ht-accent-soft);border-top:1px solid var(--ht-accent-border);padding:var(--section-y) var(--page-pad);text-align:center;position:relative;overflow:hidden;}
-.ht-closing::before{display:none;}
-.ht-closing-t{font-family:var(--font-display);font-size:25px;font-weight:800;color:var(--ht-ink);margin-bottom:8px;position:relative;line-height:1.3;}
-.ht-closing-t b{color:var(--ht-accent);}
-.ht-closing-s{font-size:15.5px;color:var(--ht-secondary);margin-bottom:20px;position:relative;}
-.ht-closing-btn{display:inline-flex;align-items:center;gap:7px;padding:15px 30px;background:var(--ht-accent);color:var(--ht-on-accent);font-size:16.5px;font-weight:600;border-radius:var(--ht-r-sm);position:relative;min-height:52px;}
-.ht-closing-btn:active{background:var(--ht-accent-active);}
 
 /* Footer — vùng tối duy nhất */
 .ht-foot{padding:32px var(--page-pad) 20px;text-align:center;background:var(--ht-ink);color:rgba(255,255,255,.85);}
@@ -541,6 +531,15 @@ a{color:inherit;text-decoration:none;}
     </a>
   </div>
 
+  <!-- ============ CÔNG DỤNG YẾN SÀO — chỉ góc độ văn hoá/thành phần đã biết,
+       KHÔNG nêu công dụng y tế cụ thể (chờ hồ sơ tự công bố mới viết chi tiết,
+       xem ghi chú quy định quảng cáo thực phẩm ở phần FAQ ẩn phía dưới) ============ -->
+  <div class="ht-sec ht-reveal" style="text-align:center;">
+    <div class="ht-eyebrow">Yến sào</div>
+    <h2 class="ht-title">Món Quà Bồi Bổ Truyền Thống</h2>
+    <p class="ht-sub" style="margin-bottom:0;">Yến sào từ lâu được xem là món quà bồi bổ sức khỏe truyền thống trong văn hóa Á Đông — giàu đạm tự nhiên, thường dùng làm quà biếu thể hiện sự quan tâm, chăm sóc.</p>
+  </div>
+
   <!-- ============ 4. SO SÁNH 3 DÒNG ============ -->
   <div class="ht-sec-tint ht-tint-a ht-reveal">
     <div class="ht-eyebrow">So sánh</div>
@@ -561,7 +560,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 
   <!-- ============ CÁCH DÙNG ============ -->
-  <div class="ht-sec ht-reveal">
+  <div class="ht-sec ht-sec-tightbottom ht-reveal">
     <div class="ht-eyebrow">Cách dùng</div>
     <h2 class="ht-title">Dùng Ngay, Tiện Lợi Mỗi Ngày</h2>
     <p class="ht-sub">Không cần chưng lại — mở nắp là dùng được ngay.</p>
@@ -615,15 +614,13 @@ a{color:inherit;text-decoration:none;}
         </div>
       </div>
     </div>
-    <div class="ht-cert-hero">
-      <img class="ht-zoom" loading="lazy" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm">
-      <div class="ht-cert-hero-cap"><b>ISO 22000:2018</b> — Chứng nhận hệ thống quản lý an toàn thực phẩm cho quy trình sơ chế, chế biến.</div>
+    <div class="ht-cert-grid">
+      <div class="ht-cert-card"><img class="ht-zoom" loading="lazy" src="assets/images/giay-attp.jpg" alt="Giấy chứng nhận ISO 22000:2018 an toàn thực phẩm"><div class="ht-cert-cap"><b>ISO 22000:2018</b><br>Chứng nhận hệ thống quản lý an toàn thực phẩm cho quy trình sơ chế, chế biến.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" loading="lazy" src="assets/images/cert-nhanhieu.jpg" alt="Giấy chứng nhận đăng ký nhãn hiệu Hoàng Triều"><div class="ht-cert-cap"><b>Đăng ký nhãn hiệu</b><br>Cấp bởi Cục Sở hữu trí tuệ.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" loading="lazy" src="assets/images/cert-dkkd.jpg" alt="Giấy chứng nhận đăng ký doanh nghiệp Hoàng Triều"><div class="ht-cert-cap"><b>Đăng ký doanh nghiệp</b><br>Đơn vị kinh doanh hợp pháp, mã số thuế rõ ràng.</div></div>
+      <div class="ht-cert-card"><img class="ht-zoom" loading="lazy" src="assets/images/cert-congbo.jpg" alt="Thông báo tiếp nhận công bố sản phẩm thực phẩm"><div class="ht-cert-cap"><b>Tiếp nhận công bố SP</b><br>Đã hoàn tất thủ tục tự công bố với cơ quan quản lý.</div></div>
     </div>
-    <div class="ht-cert-list">
-      <button type="button" class="ht-cert-item" data-cert="assets/images/cert-nhanhieu.jpg"><span><span class="ht-cert-item-t">Đăng ký nhãn hiệu</span><span class="ht-cert-item-d">Cấp bởi Cục Sở hữu trí tuệ</span></span><span class="ht-cert-item-view">Xem →</span></button>
-      <button type="button" class="ht-cert-item" data-cert="assets/images/cert-dkkd.jpg"><span><span class="ht-cert-item-t">Đăng ký doanh nghiệp</span><span class="ht-cert-item-d">Đơn vị kinh doanh hợp pháp, mã số thuế rõ ràng</span></span><span class="ht-cert-item-view">Xem →</span></button>
-      <button type="button" class="ht-cert-item" data-cert="assets/images/cert-congbo.jpg"><span><span class="ht-cert-item-t">Tiếp nhận công bố sản phẩm</span><span class="ht-cert-item-d">Đã hoàn tất thủ tục tự công bố với cơ quan quản lý</span></span><span class="ht-cert-item-view">Xem →</span></button>
-    </div>
+    <p class="ht-feed-hint">← Vuốt để xem đủ giấy chứng nhận →</p>
     <p class="ht-feed-hint" style="margin-top:10px;">Các giấy tờ trên chứng minh tư cách pháp lý và quy trình — không thay thế tư vấn y tế hay cam kết công dụng điều trị.</p>
     <div class="ht-spec">
       <div class="ht-spec-row"><div class="ht-spec-l">Thể tích</div><div class="ht-spec-v">70ml/hũ</div></div>
@@ -683,13 +680,6 @@ a{color:inherit;text-decoration:none;}
   ============================================================================= -->
 
   <!-- ============ CHỨNG NHẬN CHẤT LƯỢNG (đã gộp vào phần 8 — Nguồn gốc) ============ -->
-
-  <!-- ============ CLOSING CTA ============ -->
-  <div class="ht-closing ht-reveal">
-    <div class="ht-closing-t">Sẵn Sàng Chọn Đúng <b>Món Quà Sức Khỏe?</b></div>
-    <div class="ht-closing-s">Hoàng Triều đồng hành cùng bạn chọn đúng dòng yến cho từng người thân.</div>
-    <a class="ht-closing-btn" href="#" id="htClosingCta">Nhắn tin đặt hàng</a>
-  </div>
 
   <!-- ============ 12. FOOTER ============ -->
   <div class="ht-foot">
@@ -807,7 +797,7 @@ a{color:inherit;text-decoration:none;}
     phoneHref: 'tel:+84989249686',
     blockedPhones: []
   };
-  ['htMidCta','htClosingCta'].forEach(function(id){
+  ['htMidCta'].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.addEventListener('click', function(e){ e.preventDefault(); track('messenger_clicked', {source:id}); window.open(CONFIG.messengerLink, '_blank', 'noopener'); });
   });
@@ -868,14 +858,6 @@ a{color:inherit;text-decoration:none;}
   function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
   qs('#htLightboxClose').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
-  qsa('.ht-cert-item').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      lightboxImg.src = btn.getAttribute('data-cert');
-      lightboxImg.alt = btn.querySelector('.ht-cert-item-t') ? btn.querySelector('.ht-cert-item-t').textContent : '';
-      lightbox.classList.add('open');
-    });
-  });
-
   /* ---------------- Trust drawer (giữ lại cho FAQ nhanh, không dùng trong flow chính) ---------------- */
   var drawerOverlay = qs('#htDrawerOverlay');
   function closeDrawer(){ drawerOverlay.classList.remove('open'); document.body.style.overflow=''; }
@@ -976,11 +958,11 @@ a{color:inherit;text-decoration:none;}
      DỮ LIỆU SẢN PHẨM — 13 SKU, hàm lượng quy về gram, combo thật
      ============================================================ */
   var FLAVOR_GUIDE = {
-    duongphen:  {label:'Đường phèn',    sub:'Vị dễ làm quen',           desc:'Vị ngọt thanh, gần với khẩu vị truyền thống và ngon hơn khi dùng lạnh. Phù hợp người mới dùng yến, người trưởng thành, người lớn tuổi và gia đình dùng hằng ngày.'},
-    tamvi:      {label:'Tam Vị',        sub:'Sắc vị thảo mộc',          desc:'Kết hợp đông trùng hạ thảo, kỷ tử và táo đỏ cùng yến chưng đường phèn. Hương thơm dịu, có sắc vị thảo mộc rõ hơn dòng truyền thống — thường được chọn để biếu cha mẹ, người thân, cấp trên hoặc đối tác.'},
-    nhansam:    {label:'Nhân sâm',      sub:'Dành cho người trưởng thành', desc:'Có sắc vị nhân sâm rõ hơn, phù hợp người trưởng thành, hợp làm quà biếu trang trọng. Trẻ nhỏ, phụ nữ mang thai và người có cơ địa đặc biệt cần xem kỹ thành phần trước khi dùng.'},
-    duongkieng: {label:'Đường ăn kiêng', sub:'Vị nhẹ',                   desc:'Dành cho người không thích vị quá ngọt, dùng chất tạo ngọt theo thành phần công bố. Không phải giải pháp xử lý bệnh lý — người cần kiểm soát đường huyết vẫn nên đọc kỹ nhãn và hỏi chuyên gia.'},
-    kids:       {label:'Kids',          sub:'Khẩu vị trẻ em',           desc:'Công thức hướng tới khẩu vị dễ dùng cho trẻ em. Độ tuổi và cách dùng cần theo đúng hướng dẫn trên nhãn — không khuyến nghị cho trẻ dưới 12 tháng.'}
+    duongphen:  {label:'Đường phèn',    sub:'Vị dễ làm quen',           desc:'Phù hợp người mới dùng yến, người trưởng thành, người lớn tuổi và gia đình dùng hằng ngày.'},
+    tamvi:      {label:'Tam Vị',        sub:'Sắc vị thảo mộc',          desc:'Phù hợp biếu cha mẹ, người thân, cấp trên hoặc đối tác.'},
+    nhansam:    {label:'Nhân sâm',      sub:'Dành cho người trưởng thành', desc:'Phù hợp người trưởng thành, làm quà biếu trang trọng. Trẻ nhỏ, phụ nữ mang thai cần xem kỹ thành phần trước khi dùng.'},
+    duongkieng: {label:'Đường ăn kiêng', sub:'Vị nhẹ',                   desc:'Phù hợp người không thích vị quá ngọt. Người cần kiểm soát đường huyết nên hỏi chuyên gia trước khi dùng.'},
+    kids:       {label:'Kids',          sub:'Khẩu vị trẻ em',           desc:'Phù hợp khẩu vị trẻ em theo đúng hướng dẫn trên nhãn — không khuyến nghị cho trẻ dưới 12 tháng.'}
   };
 
   var TIERS = {
