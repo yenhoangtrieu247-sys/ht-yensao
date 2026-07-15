@@ -256,12 +256,8 @@ a{color:inherit;text-decoration:none;}
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
 .ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:var(--ht-sh-card);padding:16px;border-top:4px solid var(--tier-color,var(--ht-accent));position:relative;}
-.ht-pcard-photo-wrap{position:relative;margin:-16px -16px 0;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
-.ht-pcard-photostrip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;}
-.ht-pcard-photostrip::-webkit-scrollbar{display:none;}
-.ht-pcard-photoslide{flex:0 0 100%;scroll-snap-align:start;}
+.ht-pcard-photo-wrap{position:relative;margin:-16px -16px 12px;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
 .ht-pcard-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 55%;display:block;}
-.ht-pcard-photo-hint{text-align:center;font-size:12.5px;color:var(--ht-muted);padding:7px 0 0;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
 .ht-pcard-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
 .ht-pcard-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tier-color,var(--ht-accent));margin-right:2px;}
@@ -276,9 +272,9 @@ a{color:inherit;text-decoration:none;}
 .ht-pcard-combo{font-size:14.5px;color:var(--ht-secondary);margin-bottom:14px;}
 .ht-pcard-btn{width:100%;padding:14px;border-radius:var(--ht-r-sm);background:#fff;color:var(--ht-ink);border:1px solid var(--ht-border-strong);font-weight:600;font-size:16px;min-height:52px;}
 .ht-pcard.hl .ht-pcard-btn{background:var(--ht-accent);color:var(--ht-on-accent);border-color:var(--ht-accent);}
-.ht-pcards-dots{display:flex;justify-content:center;gap:8px;margin-top:2px;}
-.ht-pcards-dots span{width:26px;height:2px;border-radius:0;background:var(--ht-border-strong);transition:background .2s;}
-.ht-pcards-dots span.active{background:var(--ht-accent);transform:none;}
+.ht-pcards-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-top:2px;}
+.ht-pcards-dots span{width:6px;height:6px;border-radius:50%;background:var(--ht-border-strong);transition:background .2s,transform .2s;}
+.ht-pcards-dots span.active{background:var(--ht-accent);transform:scale(1.3);}
 
 /* Inline CTA */
 
@@ -549,7 +545,7 @@ a{color:inherit;text-decoration:none;}
     <div class="ht-persona-row" id="htPersonaRow"></div>
     <div class="ht-pcards" id="htPcards"></div>
     <div class="ht-pcards-dots" id="htPcardsDots"></div>
-    <p class="ht-feed-hint">← Vuốt để xem cả 3 dòng →</p>
+    <p class="ht-feed-hint">← Vuốt để xem cả 13 vị →</p>
   </div>
 
   <!-- ============ CÁCH DÙNG ============ -->
@@ -1032,52 +1028,59 @@ a{color:inherit;text-decoration:none;}
   /* ---------------- So sánh 3 dòng (carousel cards, ảnh thật + tiết kiệm tính đúng theo giá) ---------------- */
   (function renderPcards(){
     var wrap = qs('#htPcards');
-    wrap.innerHTML = TIER_ORDER.map(function(key, idx){
-      var t = TIERS[key];
+    // Mỗi thẻ = 1 vị cụ thể (không phải 1 dòng) — theo yêu cầu, để khách thấy
+    // đúng hũ mình sẽ nhận thay vì 1 ảnh đại diện chung cho cả dòng.
+    var cards = [];
+    TIER_ORDER.forEach(function(key){
+      TIERS[key].flavorKeys.forEach(function(fk){
+        cards.push({tierKey: key, flavorKey: fk});
+      });
+    });
+    wrap.innerHTML = cards.map(function(c, idx){
+      var t = TIERS[c.tierKey];
+      var f = FLAVOR_GUIDE[c.flavorKey];
       var singleUnit = t.offers[0]; // hũ lẻ, dùng làm giá gốc tham chiếu
       var bestOffer = t.offers[3]; // combo 10+1 — mức phổ biến, không lấy combo 30 (bulk hiếm gặp) làm mốc "tiết kiệm"
       var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
       var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
       var minCombo = t.offers[1];
-      var photoSlides = t.flavorKeys.map(function(fk){
-        var fLabel = FLAVOR_GUIDE[fk] ? FLAVOR_GUIDE[fk].label : t.label;
-        return '<div class="ht-pcard-photoslide"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + t.flavorImg[fk] + '" alt="Yến hũ Hoàng Triều dòng ' + t.label + ' - vị ' + fLabel + '"></div>';
-      }).join('');
-      return '<div class="ht-pcard' + (key==='plus' ? ' hl' : '') + '" style="--tier-color:' + t.colorHex + '">' +
-        '<div class="ht-pcard-photo-wrap"><div class="ht-pcard-photostrip">' + photoSlides + '</div></div>' +
-        '<p class="ht-pcard-photo-hint">← Vuốt xem ' + t.flavorKeys.length + ' vị của dòng ' + t.label + ' →</p>' +
-        '<div class="ht-pcard-index">0' + (idx+1) + ' / 0' + TIER_ORDER.length + '</div>' +
-        '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + t.label + '</span>' + (key==='plus' ? '<span class="ht-pcard-save">Được chọn nhiều nhất</span>' : '') + '</div>' +
+      return '<div class="ht-pcard' + (c.tierKey==='plus' ? ' hl' : '') + '" style="--tier-color:' + t.colorHex + '">' +
+        '<div class="ht-pcard-photo-wrap"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + t.flavorImg[c.flavorKey] + '" alt="Yến hũ Hoàng Triều vị ' + f.label + ' ' + t.label + '"></div>' +
+        '<div class="ht-pcard-index">' + String(idx+1).padStart(2,'0') + ' / ' + cards.length + '</div>' +
+        '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + f.label + ' ' + t.label + '</span>' + (c.tierKey==='plus' ? '<span class="ht-pcard-save">Được chọn nhiều nhất</span>' : '') + '</div>' +
         '<div class="ht-pcard-meta"><span class="ht-pcard-chip">' + t.gram + ' yến/hũ</span><span class="ht-pcard-chip">' + t.flavorKeys.length + ' vị</span></div>' +
         '<div class="ht-pcard-price"><span class="ht-pcard-was">' + fmtVnd(singleUnit.price) + '</span><b>' + fmtVnd(Math.round(bestUnitPrice)) + '</b><span>/hũ khi mua combo ' + (bestOffer.paidQty + bestOffer.bonusQty) + '</span></div>' +
         (savePct > 0 ? '<div class="ht-pcard-save">Tiết kiệm ' + savePct + '% so với mua lẻ</div>' : '') +
         '<div class="ht-pcard-combo">Combo nhỏ từ ' + fmtVnd(minCombo.price) + ' (' + minCombo.paidQty + ' hũ) · Freeship</div>' +
-        '<button type="button" class="ht-pcard-btn" data-tier="' + key + '">Chọn ' + t.label + '</button>' +
+        '<button type="button" class="ht-pcard-btn" data-tier="' + c.tierKey + '" data-flavor="' + c.flavorKey + '">Chọn ' + t.label + '</button>' +
       '</div>';
     }).join('');
     qsa('.ht-pcard-btn', wrap).forEach(function(btn){
       btn.addEventListener('click', function(){
         var key = btn.getAttribute('data-tier');
-        track('line_selected', {tier: key, source:'compare_card'});
+        var flavor = btn.getAttribute('data-flavor');
+        track('line_selected', {tier: key, flavor: flavor, source:'compare_card'});
         openBuyPopup(key);
+        quickFillFlavor(flavor);
+        renderBuyPopup();
       });
     });
 
     var dotsWrap = qs('#htPcardsDots');
     if (dotsWrap) {
-      dotsWrap.innerHTML = TIER_ORDER.map(function(_, i){ return '<span' + (i===0?' class="active"':'') + '></span>'; }).join('');
+      dotsWrap.innerHTML = cards.map(function(_, i){ return '<span' + (i===0?' class="active"':'') + '></span>'; }).join('');
       var dots = qsa('span', dotsWrap);
-      var cards = qsa('.ht-pcard', wrap);
-      if ('IntersectionObserver' in window && cards.length) {
+      var cardEls = qsa('.ht-pcard', wrap);
+      if ('IntersectionObserver' in window && cardEls.length) {
         var dotsObs = new IntersectionObserver(function(entries){
           entries.forEach(function(e){
             if (e.isIntersecting) {
-              var idx = cards.indexOf(e.target);
+              var idx = cardEls.indexOf(e.target);
               dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
             }
           });
         }, {root: wrap, threshold: .6});
-        cards.forEach(function(c){ dotsObs.observe(c); });
+        cardEls.forEach(function(c){ dotsObs.observe(c); });
       }
     }
   })();
