@@ -278,6 +278,8 @@ a{color:inherit;text-decoration:none;}
 .ht-pcards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;scrollbar-width:none;}
 .ht-pcards::-webkit-scrollbar{display:none;}
 .ht-pcard{flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:var(--ht-r-md);box-shadow:0 2px 4px rgba(22,24,35,.06),0 16px 32px rgba(22,24,35,.13);padding:16px;border:1px solid var(--ht-border);position:relative;}
+.ht-pcard.ht-pcard-pulse{animation:htPcardPulse 1.4s ease 2;}
+@keyframes htPcardPulse{0%,100%{box-shadow:0 2px 4px rgba(22,24,35,.06),0 16px 32px rgba(22,24,35,.13);}50%{box-shadow:0 0 0 4px var(--tier-color,var(--ht-accent)),0 16px 32px rgba(22,24,35,.13);}}
 .ht-pcard-photo-wrap{position:relative;margin:-16px -16px 12px;overflow:hidden;border-radius:var(--ht-r-md) var(--ht-r-md) 0 0;background:var(--ht-bg-soft);}
 .ht-pcard-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 55%;display:block;}
 .ht-pcard-index{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ht-muted);margin-bottom:4px;letter-spacing:.06em;}
@@ -286,6 +288,7 @@ a{color:inherit;text-decoration:none;}
 .ht-pcard-name{font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--ht-ink);}
 .ht-pcard-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
 .ht-pcard-chip{padding:5px 12px;border-radius:var(--ht-r-xs);background:var(--ht-bg-soft);border:1px solid var(--ht-border);font-size:14.5px;font-weight:600;color:var(--ht-text);}
+.ht-pcard-note{font-size:12.5px;color:var(--ht-secondary);line-height:1.45;margin-bottom:10px;}
 .ht-pcard-price{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
 .ht-pcard-was{font-size:15px;color:var(--ht-muted);text-decoration:line-through;}
 .ht-pcard-price b{font-size:24px;font-weight:700;color:var(--ht-accent);}
@@ -604,15 +607,15 @@ a{color:inherit;text-decoration:none;}
         <div class="ht-audience-t">Cha mẹ, ông bà</div>
         <div class="ht-audience-d">Món quà chăm sóc truyền thống, thể hiện sự quan tâm dành cho người lớn tuổi.</div>
       </div>
-      <div class="ht-audience-card">
-        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
-        <div class="ht-audience-t">Người bận rộn</div>
-        <div class="ht-audience-d">Dùng ngay không cần chưng, tiện cho ngày làm việc bận hoặc cần bồi dưỡng đều đặn.</div>
-      </div>
+      <button type="button" class="ht-audience-card" id="htAudienceSugar" style="text-align:left;width:100%;">
+        <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><path d="M12 2v20M4 8h16M4 16h16"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <div class="ht-audience-t">Cần kiểm soát đường</div>
+        <div class="ht-audience-d">Có dòng Đường ăn kiêng — vị nhẹ hơn, dùng cho người cần chú ý đường huyết. Bấm để xem ngay →</div>
+      </button>
       <div class="ht-audience-card">
         <div class="ht-audience-ic"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="9" rx="1"/><path d="M12 8v13M12 8c-1.5-3-6-3-6 0M12 8c1.5-3 6-3 6 0"/></svg></div>
-        <div class="ht-audience-t">Đối tác, cấp trên</div>
-        <div class="ht-audience-d">Lựa chọn quà biếu tinh tế, trang trọng cho dịp lễ, Tết hoặc thăm hỏi đối tác.</div>
+        <div class="ht-audience-t">Biếu tặng, đối tác</div>
+        <div class="ht-audience-d">Quà biếu tinh tế cho dịp lễ, Tết — mỗi hũ niêm phong kín, có thể đặt combo nhiều hũ làm set quà theo ý bạn.</div>
       </div>
     </div>
   </div>
@@ -686,9 +689,10 @@ a{color:inherit;text-decoration:none;}
       <div class="ht-spec-row"><div class="ht-spec-l">Thể tích</div><div class="ht-spec-v">70ml/hũ</div></div>
       <div class="ht-spec-row"><div class="ht-spec-l">Hàm lượng yến</div><div class="ht-spec-v">2g / 6g / 10,2g tuỳ dòng</div></div>
       <div class="ht-spec-row"><div class="ht-spec-l">Xuất xứ</div><div class="ht-spec-v">Nhà yến Khánh Hòa, Ninh Thuận</div></div>
-      <div class="ht-spec-row"><div class="ht-spec-l">Bảo quản</div><div class="ht-spec-v">Nơi khô ráo, thoáng mát, tránh nắng trực tiếp</div></div>
+      <div class="ht-spec-row"><div class="ht-spec-l">Bảo quản</div><div class="ht-spec-v">Trước khi mở: nơi khô ráo, thoáng mát, tránh nắng trực tiếp. Có thể để ngăn mát tủ lạnh để dùng lạnh ngon hơn.</div></div>
       <div class="ht-spec-row"><div class="ht-spec-l">Hạn sử dụng</div><div class="ht-spec-v">Xem trên nắp hũ</div></div>
     </div>
+    <div class="ht-note">Nếu bạn có bệnh nền (tiểu đường, gout, thận, huyết áp...) hoặc đang trong chế độ ăn kiêng đặc biệt, vui lòng xem kỹ thành phần trên nhãn hoặc <a href="https://m.me/hoangtrieu556bn" target="_blank" rel="noopener" style="color:var(--ht-accent);font-weight:700;text-decoration:underline;">nhắn tin Hoàng Triều để được tư vấn</a> trước khi dùng.</div>
   </div>
 
   <!-- ============ CÁCH DÙNG (đã dời xuống dưới Uy tín) ============ -->
@@ -1166,11 +1170,12 @@ a{color:inherit;text-decoration:none;}
       var bestUnitPrice = bestOffer.price / (bestOffer.paidQty + bestOffer.bonusQty);
       var savePct = Math.round((1 - bestUnitPrice / singleUnit.price) * 100);
       var minCombo = t.offers[1];
-      return '<div class="ht-pcard" style="--tier-color:' + t.colorHex + '">' +
+      return '<div class="ht-pcard" data-flavor="' + c.flavorKey + '" data-tier="' + c.tierKey + '" style="--tier-color:' + t.colorHex + '">' +
         '<div class="ht-pcard-photo-wrap"><img class="ht-pcard-photo ht-zoom" src="assets/images/' + t.flavorImg[c.flavorKey] + '" alt="Yến hũ Hoàng Triều vị ' + f.label + ' ' + t.label + '"></div>' +
         '<div class="ht-pcard-index">' + String(idx+1).padStart(2,'0') + ' / ' + cards.length + '</div>' +
         '<div class="ht-pcard-head"><span class="ht-pcard-dot" style="background:' + t.colorHex + '"></span><span class="ht-pcard-name">' + f.label + ' ' + t.label + '</span>' + (c.tierKey==='plus' ? '<span class="ht-pcard-save">Được chọn nhiều nhất</span>' : '') + '</div>' +
         '<div class="ht-pcard-meta"><span class="ht-pcard-chip">' + t.gram + ' yến/hũ</span><span class="ht-pcard-chip">' + t.flavorKeys.length + ' vị</span></div>' +
+        '<div class="ht-pcard-note">' + escHtml(f.desc) + '</div>' +
         '<div class="ht-pcard-price"><span class="ht-pcard-was">' + fmtVnd(singleUnit.price) + '</span><b>' + fmtVnd(Math.round(bestUnitPrice)) + '</b><span>/hũ khi mua combo ' + (bestOffer.paidQty + bestOffer.bonusQty) + '</span></div>' +
         (savePct > 0 ? '<div class="ht-pcard-save">Tiết kiệm ' + savePct + '% so với mua lẻ</div>' : '') +
         '<div class="ht-pcard-combo">Combo nhỏ từ ' + fmtVnd(minCombo.price) + ' (' + minCombo.paidQty + ' hũ) · Freeship</div>' +
@@ -1205,6 +1210,22 @@ a{color:inherit;text-decoration:none;}
         cardEls.forEach(function(c){ dotsObs.observe(c); });
       }
     }
+  })();
+
+  /* ---------------- "Cần kiểm soát đường" (Dành cho ai) → cuộn tới thẻ Đường ăn kiêng đầu tiên ---------------- */
+  (function jumpToSugarFriendly(){
+    var btn = qs('#htAudienceSugar');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var target = qs('.ht-pcard[data-flavor="duongkieng"]');
+      if (!target) return;
+      track('audience_jump', {target:'duongkieng'});
+      var pcardsWrap = qs('#htPcards');
+      if (pcardsWrap) pcardsWrap.dispatchEvent(new Event('pointerdown')); // tạm dừng auto-scroll carousel để không giành cuộn với scrollIntoView
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+      target.classList.add('ht-pcard-pulse');
+      setTimeout(function(){ target.classList.remove('ht-pcard-pulse'); }, 2900);
+    });
   })();
 
   /* ---------------- Carousel So Sánh: tự trôi mượt khi khách không vuốt ----------------
