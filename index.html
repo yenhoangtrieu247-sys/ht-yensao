@@ -1371,7 +1371,7 @@ a{color:inherit;text-decoration:none;}
         '<div><div class="ht-buypop-price">' + fmtVnd(total) + '</div>' +
         '<div class="ht-buypop-meta">' + tier.label + ' · ' + tier.gram + ' yến/hũ' + (ship ? ' · +' + fmtVnd(ship) + ' ship' : ' · Miễn ship') + '</div></div>' +
       '</div>' +
-      '<a class="ht-buypop-ask" href="https://m.me/hoangtrieu556bn" target="_blank" rel="noopener" id="htBuypopAsk">Còn băn khoăn về thành phần, bệnh nền hay thời gian giao hàng? Nhắn hỏi trước khi đặt →</a>' +
+      '<a class="ht-buypop-ask" href="https://m.me/hoangtrieu556bn" target="_blank" rel="noopener" id="htBuypopAsk">Còn băn khoăn về thành phần, bệnh nền hay thời gian giao hàng? Nhắn hỏi ngay — hoặc cứ đặt trước, ghi rõ ở phần ghi chú, đội ngũ sẽ gọi tư vấn trước khi giao.</a>' +
       '<div class="ht-buypop-section-label">Chọn dòng</div>' +
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
       '<div class="ht-buypop-section-label" id="htStepQty">Chọn số lượng</div>' +
@@ -1383,7 +1383,8 @@ a{color:inherit;text-decoration:none;}
       '<div class="ht-field"><label for="htFieldAddress">Địa chỉ nhận hàng *</label><textarea id="htFieldAddress" autocomplete="street-address" rows="2" placeholder="Số nhà, đường, phường/xã, tỉnh/thành">' + formValues.address.replace(/</g,'&lt;') + '</textarea><div class="ht-field-err" id="htErrAddress"></div></div>' +
       '<input type="text" class="ht-honeypot" id="htHoneypot" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       '<div class="ht-cart-total-row" style="margin:4px 0 16px;"><span class="ht-cart-total-label">Tổng cộng</span><span class="ht-cart-total-val">' + fmtVnd(total) + '</span></div>' +
-      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>';
+      '<button class="ht-submit-btn" id="htSubmitBtn" type="button"' + (submitting ? ' disabled' : '') + '>' + (submitting ? 'Đang gửi...' : 'Đặt hàng') + '</button>' +
+      '<div class="ht-feed-hint" style="margin-top:10px;">Đội ngũ Hoàng Triều sẽ gọi xác nhận trước khi giao — bạn vẫn có thể hỏi thêm hoặc đổi ý lúc đó.</div>';
 
     qsa('.ht-buypop-tier-btn', popupBody).forEach(function(btn){
       btn.addEventListener('click', function(){
