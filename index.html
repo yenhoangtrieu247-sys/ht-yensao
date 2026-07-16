@@ -1266,6 +1266,14 @@ a{color:inherit;text-decoration:none;}
     if (n) formValues.note = n.value;
   }
 
+  function scrollPopupToStep(id){
+    requestAnimationFrame(function(){
+      var el = document.getElementById(id);
+      if (!el || !popupBody) return;
+      popupBody.scrollTo({ top: el.offsetTop - 8, behavior: 'smooth' });
+    });
+  }
+
   function renderBuyPopup(){
     var tier = currentTier();
     var offer = currentOffer();
@@ -1298,8 +1306,9 @@ a{color:inherit;text-decoration:none;}
       '</div>' +
       '<div class="ht-buypop-section-label">Chọn dòng</div>' +
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
-      '<div class="ht-buypop-section-label">Chọn số lượng</div>' +
+      '<div class="ht-buypop-section-label" id="htStepQty">Chọn số lượng</div>' +
       '<div class="ht-buypop-pkg-list">' + pkgRows + '</div>' +
+      '<div class="ht-buypop-section-label" id="htStepInfo">Thông tin nhận hàng</div>' +
       '<div class="ht-field"><label>Vị mong muốn &amp; ghi chú thêm (không bắt buộc)</label><textarea id="htFieldNote" rows="2" placeholder="VD: 2 hũ Đường phèn, 1 hũ Kids; giao giờ hành chính...">' + formValues.note.replace(/</g,'&lt;') + '</textarea></div>' +
       '<div class="ht-field"><label>Họ và tên *</label><input type="text" id="htFieldFullname" placeholder="Nguyễn Thị A" value="' + formValues.fullname.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrFullname"></div></div>' +
       '<div class="ht-field"><label>Số điện thoại *</label><input type="tel" inputmode="tel" id="htFieldPhone" placeholder="0901234567 hoặc +84901234567" value="' + formValues.phone.replace(/"/g,'&quot;') + '"><div class="ht-field-err" id="htErrPhone"></div></div>' +
@@ -1315,6 +1324,7 @@ a{color:inherit;text-decoration:none;}
         popupState.offerIndex = 0;
         track('line_selected', {tier: popupState.tierKey, source:'popup'});
         renderBuyPopup();
+        scrollPopupToStep('htStepQty');
       });
     });
     qsa('.ht-buypop-pkg-row', popupBody).forEach(function(btn){
@@ -1324,6 +1334,7 @@ a{color:inherit;text-decoration:none;}
         var o = currentOffer();
         track('offer_selected', {tier: popupState.tierKey, paidQty:o.paidQty, bonusQty:o.bonusQty});
         renderBuyPopup();
+        scrollPopupToStep('htStepInfo');
       });
     });
     ['htFieldFullname','htFieldPhone','htFieldAddress','htFieldNote'].forEach(function(id){
