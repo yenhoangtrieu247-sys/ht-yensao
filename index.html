@@ -428,6 +428,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Popup đặt hàng đơn giản */
 .ht-buypop-head{display:flex;gap:14px;align-items:flex-start;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--ht-border);}
+.ht-buypop-ask{display:block;text-align:center;font-size:13.5px;font-weight:600;color:var(--ht-accent);background:var(--ht-accent-soft);border:1px solid var(--ht-accent-border);border-radius:var(--ht-r-sm);padding:10px 12px;margin-bottom:16px;line-height:1.4;}
 .ht-buypop-img{width:76px;height:76px;border-radius:var(--ht-r-sm);object-fit:cover;flex-shrink:0;border:1px solid var(--ht-border);cursor:zoom-in;background:var(--ht-bg-soft);}
 .ht-buypop-price{font-size:26px;font-weight:700;color:var(--ht-accent);line-height:1.2;}
 .ht-buypop-meta{font-size:14.5px;color:var(--ht-secondary);margin-top:5px;}
@@ -1370,6 +1371,7 @@ a{color:inherit;text-decoration:none;}
         '<div><div class="ht-buypop-price">' + fmtVnd(total) + '</div>' +
         '<div class="ht-buypop-meta">' + tier.label + ' · ' + tier.gram + ' yến/hũ' + (ship ? ' · +' + fmtVnd(ship) + ' ship' : ' · Miễn ship') + '</div></div>' +
       '</div>' +
+      '<a class="ht-buypop-ask" href="https://m.me/hoangtrieu556bn" target="_blank" rel="noopener" id="htBuypopAsk">Còn băn khoăn về thành phần, bệnh nền hay thời gian giao hàng? Nhắn hỏi trước khi đặt →</a>' +
       '<div class="ht-buypop-section-label">Chọn dòng</div>' +
       '<div class="ht-buypop-tier-row">' + tierBtns + '</div>' +
       '<div class="ht-buypop-section-label" id="htStepQty">Chọn số lượng</div>' +
@@ -1409,6 +1411,8 @@ a{color:inherit;text-decoration:none;}
     });
     var submitBtn = qs('#htSubmitBtn');
     if (submitBtn) submitBtn.addEventListener('click', submitOrder);
+    var askBtn = qs('#htBuypopAsk');
+    if (askBtn) askBtn.addEventListener('click', function(){ track('ask_before_order_clicked', {tier: popupState.tierKey}); });
   }
 
   /* Mọi CTA mở thẳng popup đặt hàng, không cuộn trang */
