@@ -53,7 +53,7 @@
   "name": "Yến Sào – Quà Tặng Hoàng Triều",
   "url": "https://quatanghoangtrieu.com/",
   "logo": "https://quatanghoangtrieu.com/assets/images/logo-hoangtrieu.png",
-  "telephone": "+84989249686",
+  "telephone": "+84818163166",
   "sameAs": ["https://www.facebook.com/hoangtrieu556bn/"]
 }
 </script>
@@ -779,7 +779,7 @@ a{color:inherit;text-decoration:none;}
       <span class="ht-legal-sep">·</span>
       <a class="ht-legal-link" href="https://www.facebook.com/hoangtrieu556bn/" target="_blank" rel="noopener" id="htFootFanpage">Facebook</a>
       <span class="ht-legal-sep">·</span>
-      <a class="ht-legal-link" id="htFootPhone" href="tel:+84989249686">+84 98 924 96 86</a>
+      <a class="ht-legal-link" id="htFootPhone" href="tel:+84818163166">+84 81 816 31 66</a>
     </div>
     <div class="ht-legal-addr">
       <div>CS1: 16 Ngọc Hân Công Chúa, P. Kinh Bắc, Tỉnh Bắc Ninh</div>
@@ -795,7 +795,7 @@ a{color:inherit;text-decoration:none;}
 
 <!-- ============ 11. STICKY CTA ============ -->
 <div class="ht-sticky">
-  <a class="ht-sticky-ic" href="tel:+84989249686" id="htStickyPhone" aria-label="Gọi điện đặt hàng"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+  <a class="ht-sticky-ic" href="tel:+84818163166" id="htStickyPhone" aria-label="Gọi điện đặt hàng"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
   <button class="ht-sticky-order" id="htStickyOrder" type="button">Đặt hàng</button>
   <a class="ht-sticky-ic" href="#" id="htStickyMsg" aria-label="Nhắn tin đặt hàng" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10c-1.6 0-3.1-.4-4.4-1L2 22l1-5.6C2.4 15.1 2 13.6 2 12z"/></svg></a>
 </div>
@@ -880,8 +880,8 @@ a{color:inherit;text-decoration:none;}
     webhookUrl: 'https://script.google.com/macros/s/AKfycbwrRIuIVwM9GJbWd_GVa-RaCAYJALbIJp6HQgLSqAwx_2BPBLm7KwLXtGNB4HF7maHJ/exec',
     messengerLink: 'https://m.me/hoangtrieu556bn',
     fanpageLink: 'https://www.facebook.com/hoangtrieu556bn/',
-    phoneDisplay: '+84 98 924 96 86',
-    phoneHref: 'tel:+84989249686',
+    phoneDisplay: '+84 81 816 31 66',
+    phoneHref: 'tel:+84818163166',
     blockedPhones: []
   };
   ['htMidCta'].forEach(function(id){
@@ -1453,7 +1453,7 @@ a{color:inherit;text-decoration:none;}
     var okBlocked = CONFIG.blockedPhones.indexOf(formValues.phone.replace(/\s+/g,'')) === -1;
 
     qs('#htErrFullname').textContent = okName ? '' : 'Vui lòng nhập họ tên';
-    qs('#htErrPhone').textContent = okPhone ? (okBlocked ? '' : 'Số điện thoại không hợp lệ') : 'Số điện thoại không đúng định dạng (VD: 0989249686)';
+    qs('#htErrPhone').textContent = okPhone ? (okBlocked ? '' : 'Số điện thoại không hợp lệ') : 'Số điện thoại không đúng định dạng (VD: 0818163166)';
     qs('#htErrAddress').textContent = okAddress ? '' : 'Vui lòng nhập địa chỉ nhận hàng';
 
     if (!okName || !okPhone || !okAddress || !okBlocked) return;
